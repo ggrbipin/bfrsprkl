@@ -864,6 +864,20 @@
             color: var(--header-bg); 
             font-size: var(--icon-size); 
         } 
+        /* Auto-save indicator */ 
+        .auto-save-indicator { 
+            display: inline-block; 
+            width: 8px; 
+            height: 8px; 
+            border-radius: 50%; 
+            background-color: #4CAF50; 
+            margin-left: 5px; 
+            animation: pulse 1.5s infinite; 
+        } 
+        .auto-save-indicator.saving { 
+            background-color: #FF9800; 
+            animation: none; 
+        } 
         /* Shift row colors */ 
         .shift-a-row { 
             background-color: rgba(76, 175, 80, 0.1) !important; 
@@ -2105,12 +2119,15 @@
             <div class="status-message" id="status-message"> 
                 <i class="fas fa-sync-alt"></i> Ready - All calculations are dynamic and automatic 
                 <span class="calculation-indicator"></span> 
+                <span class="auto-save-indicator" id="auto-save-indicator"></span> 
             </div> 
         </div> 
     </div> 
     <script> 
         // Global variable to store the chart instance 
         let trendChart = null; 
+        // Auto-save timer 
+        let autoSaveTimer = null; 
         // Theme Management 
         function initializeTheme() { 
             // Check for saved theme preference or default to system preference 
@@ -2419,8 +2436,59 @@
             "DP", "Tuyere Velocity", "Raceway Flame Temp", "Hot Metal", "O2 %", "Silicon%",  
             "Furnace Resistance", "Furnace Permeability" 
         ]; 
+        // Auto-save functions 
+        function saveAppData() { 
+            try { 
+                localStorage.setItem('blastFurnaceAppData', JSON.stringify(appData)); 
+                updateAutoSaveIndicator('saved'); 
+            } catch (e) { 
+                console.error('Error saving data:', e); 
+                updateAutoSaveIndicator('error'); 
+            } 
+        } 
+        function loadAppData() { 
+            try { 
+                const savedData = localStorage.getItem('blastFurnaceAppData'); 
+                if (savedData) { 
+                    const parsedData = JSON.parse(savedData); 
+                    // Merge saved data with appData 
+                    Object.assign(appData.materials, parsedData.materials || {}); 
+                    Object.assign(appData.inputs, parsedData.inputs || {}); 
+                    Object.assign(appData.blastParams, parsedData.blastParams || {}); 
+                    Object.assign(appData.shiftMaterialProperties, parsedData.shiftMaterialProperties || {}); 
+                    Object.assign(appData.shiftData, parsedData.shiftData || {}); 
+                    Object.assign(appData.hearthData, parsedData.hearthData || {}); 
+                    updateStatus('Loaded previously saved data'); 
+                } 
+            } catch (e) { 
+                console.error('Error loading data:', e); 
+            } 
+        } 
+        function scheduleAutoSave() { 
+            // Clear any existing timer 
+            if (autoSaveTimer) { 
+                clearTimeout(autoSaveTimer); 
+            } 
+             
+            // Set a new timer to save after 2 seconds of inactivity 
+            autoSaveTimer = setTimeout(() => { 
+                saveAppData(); 
+            }, 2000); 
+        } 
+        function updateAutoSaveIndicator(status) { 
+            const indicator = document.getElementById('auto-save-indicator'); 
+            if (indicator) { 
+                indicator.className = 'auto-save-indicator'; 
+                if (status === 'saving') { 
+                    indicator.classList.add('saving'); 
+                } 
+            } 
+        } 
         // Initialize the application 
         function initializeApp() { 
+            // Load saved data before initializing 
+            loadAppData(); 
+             
             updateDateTime(); 
             setInterval(updateDateTime, 1000); 
              
@@ -2477,6 +2545,7 @@
             document.getElementById('status-message').innerHTML = `  
                 <i class="fas fa-sync-alt"></i> ${message}  
                 <span class="calculation-indicator"></span> 
+                <span class="auto-save-indicator" id="auto-save-indicator"></span> 
             `; 
         } 
         // Reset to default values 
@@ -2510,6 +2579,9 @@
                 updateTrendChart(); 
             } 
              
+            // Save the reset data 
+            saveAppData(); 
+             
             // Update status 
             updateStatus("All values have been reset to default"); 
         } 
@@ -2520,6 +2592,9 @@
             defaultData.inputs = JSON.parse(JSON.stringify(appData.inputs)); 
             defaultData.blastParams = JSON.parse(JSON.stringify(appData.blastParams)); 
             defaultData.hearthData = JSON.parse(JSON.stringify(appData.hearthData)); 
+             
+            // Save the updated defaults 
+            saveAppData(); 
              
             // Update status 
             updateStatus("Current values have been set as new default"); 
@@ -2550,6 +2625,7 @@
                     // Changed from blur to input for real-time calculation 
                     input.addEventListener('input', function() { 
                         updateMaterialProperty(material, prop, this.value); 
+                        scheduleAutoSave(); 
                     }); 
                     cell.appendChild(input); 
                     row.appendChild(cell); 
@@ -2597,6 +2673,7 @@
                 // Changed from blur to input for real-time calculation 
                 weightInput.addEventListener('input', function() { 
                     updateInputWeight(material, this.value); 
+                    scheduleAutoSave(); 
                 }); 
                 weightCell.appendChild(weightInput); 
                 row.appendChild(weightCell); 
@@ -2775,6 +2852,7 @@
                 // Changed from blur to input for real-time calculation 
                 input.addEventListener('input', function() { 
                     updateBlastParam(param, this.value); 
+                    scheduleAutoSave(); 
                 }); 
                  
                 item.appendChild(label); 
@@ -2908,6 +2986,7 @@
                             // Changed from blur to input for real-time calculation 
                             input.addEventListener('input', function() { 
                                 updateShiftEntry(key, col, this.value); 
+                                scheduleAutoSave(); 
                             }); 
                             cell.appendChild(input); 
                         } else {  // Calculated values 
@@ -3410,6 +3489,9 @@
             // Calculate time until liquid reaches tuyeres 
             const timeToTuyeres = storageCapacity / totalLiquidVolume; // minutes 
             document.getElementById('timeToTuyeres').value = timeToTuyeres.toFixed(0) + " minutes"; 
+             
+            // Schedule auto-save when hearth data changes 
+            scheduleAutoSave(); 
         } 
         // Safely parse float 
         function safeParseFloat(value) { 
