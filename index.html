@@ -1,0 +1,3713 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <title>BLAST FURNACE SYSTEM - ROURKELA STEEL PLANT</title> 
+    <!-- Font Awesome CDN --> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+    <!-- Chart.js CDN --> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <style> 
+        /* CSS Variables for Light Mode */ 
+        :root { 
+            /* Light Mode Colors */ 
+            --bg-primary: #ffffff; 
+            --bg-secondary: #f8f9fa; 
+            --bg-tertiary: #e9ecef; 
+            --bg-quaternary: #dee2e6; 
+            --bg-quinary: #ced4da; 
+            --bg-senary: #adb5bd; 
+            --bg-septenary: #6c757d; 
+            --bg-octonary: #495057; 
+            --bg-nonary: #343a40; 
+            --bg-denary: #000000; 
+            --text-primary: #000000; 
+            --text-secondary: #495057; 
+            --text-tertiary: #6c757d; 
+            --text-inverted: #ffffff; 
+            --header-bg: #08965b; 
+            --header-text: #ffffff; 
+            --button-bg: #08965b; 
+            --button-fg: #f8f9fa; 
+            --tab-bg: #f8f9fa; 
+            --tab-selected-bg: #495057; 
+            --statusbar-bg: #e9ecef; 
+            --statusbar-fg: #6c757d; 
+            --shift-a-color: #4CAF50; 
+            --shift-b-color: #2196F3; 
+            --shift-c-color: #FF9800; 
+            --entry-field-color: #0066cc; 
+            --calculated-field-color: #cc0000; 
+            --primary-color: #2c3e50; 
+            --secondary-color: #3498db; 
+            --accent-color: #e74c3c; 
+            --light-bg: #f9f9f9; 
+            --border-color: #ddd; 
+            --text-light: #777; 
+            --card-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); 
+            --input-shadow: 0 0 0 3px rgba(8, 150, 91, 0.25); 
+            --hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+             
+            /* Chart Colors */ 
+            --chart-hot-metal: #e74c3c; 
+            --chart-coke-rate: #3498db; 
+            --chart-nc-rate: #2ecc71; 
+            --chart-pci-rate: #f39c12; 
+            --chart-spo2-rate: #9b59b6; 
+             
+            /* Standard Sizes */ 
+            --desktop-font-size: 14px; 
+            --desktop-header-font: 16px; 
+            --desktop-title-font: 18px; 
+            --desktop-input-font: 14px; 
+            --desktop-table-font: 13px; 
+            --desktop-padding: 10px; 
+            --desktop-margin: 15px; 
+            --desktop-card-padding: 20px; 
+            --icon-size: 16px; 
+             
+            --mobile-font-size: 12px; 
+            --mobile-header-font: 14px; 
+            --mobile-title-font: 16px; 
+            --mobile-input-font: 12px; 
+            --mobile-table-font: 11px; 
+            --mobile-padding: 8px; 
+            --mobile-margin: 10px; 
+            --mobile-card-padding: 15px; 
+            --mobile-icon-size: 14px; 
+        } 
+        /* Dark Mode Colors */ 
+        [data-theme="dark"] { 
+            --bg-primary: #1a1a1a; 
+            --bg-secondary: #2d2d2d; 
+            --bg-tertiary: #3d3d3d; 
+            --bg-quaternary: #4d4d4d; 
+            --bg-quinary: #5d5d5d; 
+            --bg-senary: #6d6d6d; 
+            --bg-septenary: #7d7d7d; 
+            --bg-octonary: #8d8d8d; 
+            --bg-nonary: #9d9d9d; 
+            --bg-denary: #ffffff; 
+            --text-primary: #e0e0e0; 
+            --text-secondary: #b0b0b0; 
+            --text-tertiary: #909090; 
+            --text-inverted: #000000; 
+            --header-bg: #0a7a4a; 
+            --header-text: #ffffff; 
+            --button-bg: #0a7a4a; 
+            --button-fg: #e0e0e0; 
+            --tab-bg: #2d2d2d; 
+            --tab-selected-bg: #4d4d4d; 
+            --statusbar-bg: #3d3d3d; 
+            --statusbar-fg: #b0b0b0; 
+            --shift-a-color: #66BB6A; 
+            --shift-b-color: #42A5F5; 
+            --shift-c-color: #FFB74D; 
+            --entry-field-color: #42A5F5; 
+            --calculated-field-color: #EF5350; 
+            --primary-color: #3498db; 
+            --secondary-color: #2980b9; 
+            --accent-color: #e74c3c; 
+            --light-bg: #2d2d2d; 
+            --border-color: #4d4d4d; 
+            --text-light: #909090; 
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+            --input-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3); 
+            --hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
+             
+            /* Chart Colors */ 
+            --chart-hot-metal: #e57373; 
+            --chart-coke-rate: #64b5f6; 
+            --chart-nc-rate: #81c784; 
+            --chart-pci-rate: #ffb74d; 
+            --chart-spo2-rate: #ba68c8; 
+        } 
+        /* Global Styles */ 
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: Arial, sans-serif; 
+            font-size: var(--desktop-font-size); 
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+        } 
+        html, body { 
+            height: 100%; 
+            overflow: hidden; 
+        } 
+        body { 
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%); 
+            color: var(--text-primary); 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            -webkit-text-size-adjust: 100%; 
+            -webkit-tap-highlight-color: transparent; 
+        } 
+        /* Icon Styles */ 
+        .icon { 
+            margin-right: 8px; 
+            color: var(--secondary-color); 
+            font-size: var(--icon-size); 
+        } 
+        .icon-header { 
+            color: var(--header-text); 
+            font-size: var(--icon-size); 
+        } 
+        .icon-white { 
+            color: var(--text-inverted); 
+            font-size: var(--icon-size); 
+        } 
+        /* Theme Toggle Button */ 
+        .theme-toggle { 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%; 
+            background-color: rgba(255, 255, 255, 0.2); 
+            color: var(--header-text); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: calc(var(--icon-size) - 2px); 
+            flex-shrink: 0; 
+        } 
+        .theme-toggle:hover { 
+            background-color: rgba(255, 255, 255, 0.3); 
+            transform: scale(1.1); 
+        } 
+        /* Tooltip Styles */ 
+        .tooltip { 
+            position: relative; 
+            display: inline-block; 
+        } 
+        .tooltip .tooltiptext { 
+            visibility: hidden; 
+            width: 120px; 
+            background-color: var(--bg-octonary); 
+            color: var(--text-inverted); 
+            text-align: center; 
+            border-radius: 6px; 
+            padding: 5px; 
+            position: absolute; 
+            z-index: 1; 
+            bottom: 125%; 
+            left: 50%; 
+            margin-left: -60px; 
+            opacity: 0; 
+            transition: opacity 0.3s; 
+            font-size: 12px; 
+        } 
+        .tooltip .tooltiptext::after { 
+            content: ""; 
+            position: absolute; 
+            top: 100%; 
+            left: 50%; 
+            margin-left: -5px; 
+            border-width: 5px; 
+            border-style: solid; 
+            border-color: var(--bg-octonary) transparent transparent transparent; 
+        } 
+        .tooltip:hover .tooltiptext { 
+            visibility: visible; 
+            opacity: 1; 
+        } 
+        /* Auth Container */ 
+        .auth-container { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: var(--desktop-padding); 
+            width: 100%; 
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%); 
+        } 
+        .auth-card { 
+            background-color: var(--bg-primary); 
+            border-radius: 30px; 
+            box-shadow: var(--card-shadow); 
+            width: 100%; 
+            max-width: 320px; 
+            padding: var(--desktop-card-padding); 
+            transition: all 0.3s ease; 
+        } 
+        .auth-card.hidden { 
+            display: none; 
+        } 
+        .logo-container { 
+            display: flex; 
+            align-items: center; 
+            margin-bottom: var(--desktop-margin); 
+        } 
+        .logo-img { 
+            width: 60px; 
+            height: 60px; 
+            margin-right: 15px; 
+            border-radius: 8px; 
+            flex-shrink: 0; 
+        } 
+        .logo-text { 
+            flex: 1; 
+        } 
+        .auth-title { 
+            color: var(--header-bg); 
+            margin-bottom: var(--desktop-margin); 
+            font-size: var(--desktop-title-font); 
+            font-weight: bold; 
+            text-align: left; 
+        } 
+        .auth-subtitle { 
+            color: var(--text-tertiary); 
+            margin-bottom: 0; 
+            font-size: var(--desktop-font-size); 
+            text-align: left; 
+        } 
+        .form-group { 
+            margin-bottom: var(--desktop-margin); 
+            position: relative; 
+        } 
+        .form-group label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold; 
+            color: var(--text-secondary); 
+            font-size: var(--desktop-font-size); 
+        } 
+        .form-group .input-icon { 
+            position: absolute; 
+            left: 12px; 
+            top: 38px; 
+            color: var(--text-tertiary); 
+            font-size: var(--icon-size); 
+        } 
+        .form-group input { 
+            width: 100%; 
+            padding: 12px 15px 12px 40px; 
+            border: 1px solid var(--bg-quinary); 
+            border-radius: 6px; 
+            font-size: var(--desktop-input-font); 
+            background-color: var(--bg-primary); 
+            color: var(--text-primary); 
+            transition: border-color 0.3s, box-shadow 0.3s; 
+            min-width: 80px; 
+        } 
+        .form-group input:focus { 
+            border-color: var(--header-bg); 
+            outline: none; 
+            box-shadow: var(--input-shadow); 
+        } 
+        /* Auth Button */ 
+        .auth-button { 
+            width: 100%; 
+            padding: 14px; 
+            background-color: var(--header-bg); 
+            color: var(--header-text); 
+            border: none; 
+            border-radius: 20px; 
+            font-size: var(--desktop-input-font); 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: background-color 0.3s, transform 0.2s; 
+            margin-top: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        } 
+        .auth-button i { 
+            margin-right: 8px; 
+            font-size: var(--icon-size); 
+        } 
+        .auth-button:hover { 
+            background-color: #057040; 
+            transform: translateY(-2px); 
+        } 
+        .auth-button:active { 
+            transform: translateY(0); 
+        } 
+        .auth-links { 
+            text-align: center; 
+            margin-top: 25px; 
+            font-size: var(--desktop-font-size); 
+        } 
+        .auth-links a { 
+            color: var(--header-bg); 
+            text-decoration: none; 
+            font-weight: bold; 
+            display: inline-block; 
+            margin: 5px 10px; 
+        } 
+        .auth-links a:hover { 
+            text-decoration: underline; 
+        } 
+        .auth-links a i { 
+            font-size: var(--icon-size); 
+        } 
+        .alert { 
+            padding: 15px; 
+            margin-bottom: var(--desktop-margin); 
+            border-radius: 6px; 
+            display: none; 
+            font-size: var(--desktop-font-size); 
+            animation: fadeIn 0.3s; 
+        } 
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(-10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        } 
+        .alert-danger { 
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb; 
+        } 
+        .alert-success { 
+            background-color: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb; 
+        } 
+        .back-to-login { 
+            display: inline-block; 
+            margin-top: 15px; 
+            color: var(--text-tertiary); 
+            text-decoration: none; 
+            font-size: var(--desktop-font-size); 
+        } 
+        .back-to-login:hover { 
+            color: var(--header-bg); 
+            text-decoration: underline; 
+        } 
+        /* Dashboard Styles */ 
+        .dashboard { 
+            display: none; 
+            flex-direction: column; 
+            height: 100vh; 
+            overflow: hidden; 
+        } 
+        .dashboard.active { 
+            display: flex; 
+        } 
+        /* Header Styles */ 
+        .header { 
+            background-color: var(--header-bg); 
+            color: var(--header-text); 
+            padding: var(--desktop-padding); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            height: auto; 
+            min-height: 55px; 
+            flex-shrink: 0; 
+            flex-wrap: wrap; 
+        } 
+        .header .logo-container { 
+            display: flex; 
+            align-items: center; 
+            flex-shrink: 0; 
+        } 
+        .header .logo-img { 
+            width: 30px; 
+            height: 30px; 
+            margin-right: 10px; 
+            border-radius: 4%; 
+            object-fit: cover; 
+        } 
+        .title-container { 
+            display: flex; 
+            flex-direction: column; 
+        } 
+        .title { 
+            font-size: var(--desktop-header-font); 
+            font-weight: bold; 
+            line-height: 1.2; 
+        } 
+        .subtitle { 
+            font-size: calc(var(--desktop-font-size) - 2px); 
+            line-height: 1.2; 
+        } 
+        .user-info { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            flex-wrap: wrap; 
+            justify-content: flex-end; 
+        } 
+        .datetime { 
+            font-size: var(--desktop-font-size); 
+            text-align: right; 
+            display: flex; 
+            align-items: center; 
+            white-space: nowrap; 
+        } 
+        .datetime i { 
+            margin-right: 5px; 
+            font-size: var(--icon-size); 
+        } 
+        .user-name { 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+            white-space: nowrap; 
+        } 
+        .user-name i { 
+            margin-right: 5px; 
+            font-size: var(--icon-size); 
+        } 
+        /* Logout Button */ 
+        .logout-btn { 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%; 
+            background-color: rgba(255, 255, 255, 0.2); 
+            color: var(--header-text); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: var(--icon-size); 
+            padding: 0; 
+            flex-shrink: 0; 
+        } 
+        .logout-btn i { 
+            margin: 0; 
+        } 
+        .logout-btn:hover { 
+            background-color: rgba(255, 255, 255, 0.3); 
+            transform: scale(1.1); 
+        } 
+        /* Action Buttons in Header */ 
+        .header-actions { 
+            display: flex; 
+            gap: 8px; 
+            margin-left: 15px; 
+            flex-shrink: 0; 
+        } 
+        .header-action-btn { 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%; 
+            background-color: rgba(255, 255, 255, 0.2); 
+            color: var(--header-text); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: calc(var(--icon-size) - 2px); 
+            flex-shrink: 0; 
+        } 
+        .header-action-btn:hover { 
+            background-color: rgba(255, 255, 255, 0.3); 
+            transform: scale(1.1); 
+        } 
+        .header-action-btn.reset-btn { 
+            background-color: rgba(255, 255, 255, 0.15); 
+        } 
+        .header-action-btn.reset-btn:hover { 
+            background-color: rgba(255, 255, 255, 0.25); 
+        } 
+        .header-action-btn.save-btn { 
+            background-color: rgba(255, 255, 255, 0.15); 
+        } 
+        .header-action-btn.save-btn:hover { 
+            background-color: rgba(255, 255, 255, 0.25); 
+        } 
+        /* Navigation */ 
+        .nav { 
+            background-color: var(--bg-tertiary); 
+            display: flex; 
+            gap: 8px; 
+            padding: 8px; 
+            border-bottom: 1px solid var(--bg-quaternary); 
+            overflow-x: auto; 
+            white-space: nowrap; 
+            -webkit-overflow-scrolling: touch; 
+            scrollbar-width: none; 
+            -ms-overflow-style: none; 
+            flex-shrink: 0; 
+        } 
+        .nav::-webkit-scrollbar { 
+            display: none; 
+        } 
+        .nav-item { 
+            padding: 12px 15px; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            transition: background-color 0.3s; 
+            font-weight: bold; 
+            font-size: var(--desktop-font-size); 
+            display: inline-block; 
+            flex-shrink: 0; 
+            display: flex; 
+            align-items: center; 
+            color: var(--text-primary); 
+        } 
+        .nav-item i { 
+            margin-right: 8px; 
+            font-size: var(--icon-size); 
+        } 
+        .nav-item:hover { 
+            background-color: var(--bg-quaternary); 
+        } 
+        .nav-item.active { 
+            background-color: var(--tab-selected-bg); 
+            color: var(--header-text); 
+        } 
+        /* Content Area */ 
+        .content { 
+            flex: 1; 
+            padding: var(--desktop-padding); 
+            overflow-y: auto; 
+            width: 100%; 
+        } 
+        .view { 
+            display: none; 
+            width: 100%; 
+        } 
+        .view.active { 
+            display: block; 
+        } 
+        .view h2 { 
+            font-size: var(--desktop-title-font); 
+            margin-bottom: var(--desktop-margin); 
+            padding-bottom: 5px; 
+            border-bottom: 2px solid var(--header-bg); 
+            display: flex; 
+            align-items: center; 
+            color: var(--text-primary); 
+        } 
+        .view h2 i { 
+            margin-right: 10px; 
+            font-size: var(--icon-size); 
+        } 
+        /* Table Styles */ 
+        .data-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-bottom: var(--desktop-margin); 
+        } 
+        .data-table th { 
+            background-color: var(--bg-nonary); 
+            color: var(--header-text); 
+            padding: 8px 10px; 
+            text-align: left; 
+            font-weight: bold; 
+            font-size: var(--desktop-table-font); 
+            position: sticky; 
+            top: 0; 
+            z-index: 10; 
+        } 
+        .data-table td { 
+            padding: 8px 10px; 
+            border-bottom: 1px solid var(--bg-quaternary); 
+            font-size: var(--desktop-table-font); 
+        } 
+        .data-table tr:nth-child(even) { 
+            background-color: var(--bg-secondary); 
+        } 
+        .data-table input { 
+            width: 100%; 
+            padding: 6px; 
+            border: 1px solid var(--bg-quinary); 
+            border-radius: 4px; 
+            font-size: var(--desktop-table-font); 
+            font-weight: bold; 
+            color: var(--entry-field-color); 
+            background-color: var(--bg-primary); 
+            transition: border-color 0.3s, box-shadow 0.3s; 
+            min-width: 70px; 
+        } 
+        .data-table input:focus { 
+            border-color: var(--header-bg); 
+            outline: none; 
+            box-shadow: var(--input-shadow); 
+        } 
+        .data-table .calculated { 
+            background-color: var(--bg-tertiary); 
+            padding: 6px; 
+            border-radius: 4px; 
+            border: 1px solid var(--bg-quaternary); 
+            font-size: var(--desktop-table-font); 
+            font-weight: bold; 
+            color: var(--calculated-field-color); 
+        } 
+        /* Results Grid */ 
+        .results-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: var(--desktop-margin); 
+        } 
+        .results-section { 
+            background-color: var(--bg-secondary); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            box-shadow: var(--card-shadow); 
+            display: flex; 
+            flex-direction: column; 
+        } 
+        .results-header { 
+            background-color: var(--header-bg); 
+            color: var(--header-text); 
+            padding: 10px 15px; 
+            font-weight: bold; 
+            font-size: calc(var(--desktop-font-size) + 1px); 
+            flex-shrink: 0; 
+            display: flex; 
+            align-items: center; 
+        } 
+        .results-header i { 
+            margin-right: 10px; 
+            font-size: var(--icon-size); 
+        } 
+        .results-content { 
+            padding: 12px; 
+            overflow-y: auto; 
+            flex-grow: 1; 
+        } 
+        .result-item { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: var(--desktop-margin); 
+            padding-bottom: 8px; 
+            border-bottom: 1px solid var(--bg-quaternary); 
+            font-size: var(--desktop-font-size); 
+        } 
+        .result-item:last-child { 
+            border-bottom: none; 
+            margin-bottom: 0; 
+            padding-bottom: 0; 
+        } 
+        .result-label { 
+            font-weight: normal; 
+            flex: 1; 
+            display: flex; 
+            align-items: center; 
+            color: var(--text-primary); 
+        } 
+        .result-label i { 
+            margin-right: 8px; 
+            color: var(--secondary-color); 
+            font-size: calc(var(--icon-size) - 4px); 
+        } 
+        .result-value { 
+            background-color: var(--bg-tertiary); 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            min-width: 80px; 
+            text-align: right; 
+            font-size: var(--desktop-font-size); 
+            font-weight: bold; 
+            color: var(--calculated-field-color); 
+        } 
+        /* Blast Parameters */ 
+        .params-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: var(--desktop-margin); 
+        } 
+        .params-section { 
+            background-color: var(--bg-secondary); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            box-shadow: var(--card-shadow); 
+            display: flex; 
+            flex-direction: column; 
+        } 
+        .params-header { 
+            background-color: var(--header-bg); 
+            color: var(--header-text); 
+            padding: 10px 15px; 
+            font-weight: bold; 
+            font-size: calc(var(--desktop-font-size) + 1px); 
+            flex-shrink: 0; 
+            display: flex; 
+            align-items: center; 
+        } 
+        .params-header i { 
+            margin-right: 10px; 
+            font-size: var(--icon-size); 
+        } 
+        .params-content { 
+            padding: 12px; 
+            flex-grow: 1; 
+        } 
+        .param-item { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: var(--desktop-margin); 
+            align-items: center; 
+            font-size: var(--desktop-font-size); 
+        } 
+        .param-item:last-child { 
+            margin-bottom: 0; 
+        } 
+        .param-label { 
+            font-weight: normal; 
+            width: 150px; 
+            font-size: var(--desktop-font-size); 
+            display: flex; 
+            align-items: center; 
+            color: var(--text-primary); 
+        } 
+        .param-label i { 
+            margin-right: 8px; 
+            color: var(--secondary-color); 
+            font-size: calc(var(--icon-size) - 4px); 
+        } 
+        .param-input { 
+            flex: 1; 
+            padding: 6px; 
+            border: 1px solid var(--bg-quinary); 
+            border-radius: 4px; 
+            font-size: var(--desktop-font-size); 
+            font-weight: bold; 
+            color: var(--entry-field-color); 
+            background-color: var(--bg-primary); 
+            transition: border-color 0.3s, box-shadow 0.3s; 
+            min-width: 80px; 
+        } 
+        .param-input:focus { 
+            border-color: var(--header-bg); 
+            outline: none; 
+            box-shadow: var(--input-shadow); 
+        } 
+        .param-value { 
+            background-color: var(--bg-tertiary); 
+            padding: 6px; 
+            border-radius: 4px; 
+            border: 1px solid var(--bg-quaternary); 
+            width: 90px; 
+            text-align: right; 
+            font-size: var(--desktop-font-size); 
+            font-weight: bold; 
+            color: var(--calculated-field-color); 
+        } 
+        /* Shift Production */ 
+        .shift-controls { 
+            margin-bottom: var(--desktop-margin); 
+            display: flex; 
+            align-items: center; 
+            flex-wrap: wrap; 
+        } 
+        .shift-controls label { 
+            margin-right: 10px; 
+            font-weight: normal; 
+            font-size: var(--desktop-font-size); 
+            display: flex; 
+            align-items: center; 
+            color: var(--text-primary); 
+        } 
+        .shift-controls label i { 
+            margin-right: 5px; 
+            color: var(--secondary-color); 
+            font-size: var(--icon-size); 
+        } 
+        .shift-controls select { 
+            padding: 8px; 
+            border: 1px solid var(--bg-quinary); 
+            border-radius: 4px; 
+            width: 150px; 
+            font-size: var(--desktop-font-size); 
+            font-weight: bold; 
+            color: var(--entry-field-color); 
+            background-color: var(--bg-primary); 
+            min-width: 80px; 
+        } 
+        .shift-table-container { 
+            overflow-x: auto; 
+            margin-bottom: var(--desktop-margin); 
+            max-height: 400px; 
+            overflow-y: auto; 
+            -webkit-overflow-scrolling: touch; 
+            border-radius: 8px; 
+            border: 1px solid var(--bg-quaternary); 
+        } 
+        .shift-legend { 
+            display: flex; 
+            margin-top: 10px; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+        } 
+        .legend-item { 
+            display: flex; 
+            align-items: center; 
+            font-size: var(--desktop-font-size); 
+            color: var(--text-primary); 
+        } 
+        .legend-color { 
+            width: 18px; 
+            height: 18px; 
+            margin-right: 6px; 
+            border-radius: 4px; 
+        } 
+        /* Status Bar */ 
+        .status-bar { 
+            background-color: var(--statusbar-bg); 
+            color: var(--statusbar-fg); 
+            padding: 8px 15px; 
+            border-top: 1px solid var(--bg-quaternary); 
+            display: flex; 
+            align-items: center; 
+            flex-shrink: 0; 
+        } 
+        .status-message { 
+            font-size: calc(var(--desktop-font-size) - 1px); 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+        } 
+        .status-message i { 
+            margin-right: 5px; 
+            color: var(--header-bg); 
+            font-size: var(--icon-size); 
+        } 
+        /* Shift row colors */ 
+        .shift-a-row { 
+            background-color: rgba(76, 175, 80, 0.1) !important; 
+        } 
+        .shift-b-row { 
+            background-color: rgba(33, 150, 243, 0.1) !important; 
+        } 
+        .shift-c-row { 
+            background-color: rgba(255, 152, 0, 0.1) !important; 
+        } 
+        /* Shift Report Card Styles */ 
+        .shift-report-container { 
+            margin-top: 20px; 
+            width: 100%; 
+        } 
+        .shift-report-container h3 { 
+            font-size: var(--desktop-title-font); 
+            margin-bottom: var(--desktop-margin); 
+            padding-bottom: 5px; 
+            border-bottom: 2px solid var(--header-bg); 
+            display: flex; 
+            align-items: center; 
+            color: var(--text-primary); 
+        } 
+        .shift-report-container h3 i { 
+            margin-right: 10px; 
+            font-size: var(--icon-size); 
+        } 
+        .shift-report-table-container { 
+            overflow-x: auto; 
+            margin-bottom: var(--desktop-margin); 
+            border-radius: 8px; 
+            border: 1px solid var(--bg-quaternary); 
+        } 
+        .performance-indicator { 
+            display: inline-block; 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            margin-left: 5px; 
+        } 
+        .performance-good { 
+            background-color: #4CAF50; 
+        } 
+        .performance-average { 
+            background-color: #FFC107; 
+        } 
+        .performance-poor { 
+            background-color: #F44336; 
+        } 
+        /* Hearth Status Calculator Styles */ 
+        .hearth-calculator { 
+            background-color: var(--bg-primary); 
+            border-radius: 10px; 
+            box-shadow: var(--card-shadow); 
+            overflow: hidden; 
+            margin-bottom: 20px; 
+        } 
+        .calculator-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+            padding: 20px; 
+        } 
+        .hearth-section { 
+            margin-bottom: var(--desktop-margin); 
+        } 
+        .hearth-section-title { 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            color: var(--text-primary); 
+            margin-bottom: var(--desktop-margin); 
+            padding-bottom: 5px; 
+            border-bottom: 1px solid var(--border-color); 
+            display: flex; 
+            align-items: center; 
+        } 
+        .hearth-section-title i { 
+            margin-right: 8px; 
+            font-size: var(--icon-size); 
+        } 
+        .hearth-input-group { 
+            margin-bottom: var(--desktop-margin); 
+        } 
+        .hearth-input-group label { 
+            display: block; 
+            margin-bottom: 6px; 
+            font-weight: 500; 
+            color: var(--text-primary); 
+            font-size: 0.95rem; 
+        } 
+        .hearth-input-group input { 
+            width: 100%; 
+            padding: 10px 12px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 6px; 
+            font-size: 1rem; 
+            background-color: var(--bg-primary); 
+            color: var(--text-primary); 
+            transition: border 0.3s, box-shadow 0.3s; 
+            min-width: 80px; 
+        } 
+        .hearth-input-group input:focus { 
+            outline: none; 
+            border-color: var(--secondary-color); 
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); 
+        } 
+        .hearth-input-group input:disabled { 
+            background-color: var(--light-bg); 
+            color: var(--text-primary); 
+            border: 1px solid var(--border-color); 
+            cursor: not-allowed; 
+        } 
+        .formula-hint { 
+            font-size: 0.8rem; 
+            color: var(--text-light); 
+            margin-top: 4px; 
+            font-style: italic; 
+        } 
+        .result-highlight { 
+            font-weight: bold; 
+            color: var(--accent-color); 
+            font-size: 1.1rem; 
+        } 
+        /* Real-time calculation indicator */ 
+        .calculation-indicator { 
+            display: inline-block; 
+            width: 10px; 
+            height: 10px; 
+            border-radius: 50%; 
+            background-color: #4CAF50; 
+            margin-left: 5px; 
+            animation: pulse 1.5s infinite; 
+        } 
+        @keyframes pulse { 
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); } 
+            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); } 
+        } 
+        /* Chart Container Styles */ 
+        .chart-container { 
+            background-color: var(--bg-primary); 
+            border-radius: 10px; 
+            box-shadow: var(--card-shadow); 
+            padding: 20px; 
+            margin-bottom: var(--desktop-margin); 
+            height: 500px; 
+            position: relative; 
+        } 
+        .chart-controls { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 15px; 
+        } 
+        .chart-legend { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+        } 
+        .chart-legend-item { 
+            display: flex; 
+            align-items: center; 
+            font-size: var(--desktop-font-size); 
+            color: var(--text-primary); 
+        } 
+        .chart-legend-color { 
+            width: 12px; 
+            height: 12px; 
+            margin-right: 6px; 
+            border-radius: 2px; 
+        } 
+        .chart-filter { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        } 
+        .chart-filter select { 
+            padding: 6px 10px; 
+            border: 1px solid var(--bg-quinary); 
+            border-radius: 4px; 
+            font-size: var(--desktop-font-size); 
+            background-color: var(--bg-primary); 
+            color: var(--text-primary); 
+            min-width: 80px; 
+        } 
+        /* Desktop View (Default) */ 
+        @media (min-width: 992px) { 
+            /* Desktop standard sizes */ 
+            * { 
+                font-size: var(--desktop-font-size); 
+            } 
+             
+            .results-grid { 
+                grid-template-columns: repeat(4, 1fr); 
+            } 
+             
+            .params-grid { 
+                grid-template-columns: 1fr 1fr; 
+            } 
+             
+            .calculator-grid { 
+                grid-template-columns: repeat(4, 1fr); 
+            } 
+             
+            .header { 
+                height: 55px; 
+            } 
+             
+            .title { 
+                font-size: var(--desktop-header-font); 
+            } 
+             
+            .view h2 { 
+                font-size: var(--desktop-title-font); 
+            } 
+             
+            .data-table th, .data-table td { 
+                font-size: var(--desktop-table-font); 
+            } 
+             
+            .data-table input { 
+                font-size: var(--desktop-table-font); 
+            } 
+             
+            .results-header, .params-header { 
+                font-size: calc(var(--desktop-font-size) + 1px); 
+            } 
+             
+            .result-item, .param-item { 
+                font-size: var(--desktop-font-size); 
+            } 
+             
+            .result-value, .param-value { 
+                font-size: var(--desktop-font-size); 
+            } 
+             
+            .shift-controls label, .shift-controls select { 
+                font-size: var(--desktop-font-size); 
+            } 
+             
+            .legend-item { 
+                font-size: var(--desktop-font-size); 
+            } 
+             
+            .status-message { 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+            } 
+             
+            .chart-container { 
+                height: 500px; 
+            } 
+        } 
+        /* Tablet View */ 
+        @media (min-width: 768px) and (max-width: 991px) { 
+            /* Tablet standard sizes */ 
+            * { 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+            } 
+             
+            .header { 
+                height: 50px; 
+                padding: 8px 15px; 
+            } 
+             
+            .title { 
+                font-size: calc(var(--desktop-header-font) - 1px); 
+            } 
+             
+            .subtitle { 
+                font-size: calc(var(--desktop-font-size) - 2px); 
+            } 
+             
+            .datetime { 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+            } 
+             
+            .nav-item { 
+                padding: 10px 12px; 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+            } 
+             
+            .view h2 { 
+                font-size: calc(var(--desktop-title-font) - 1px); 
+                margin-bottom: calc(var(--desktop-margin) - 3px); 
+            } 
+             
+            .results-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: calc(var(--desktop-margin) - 3px); 
+            } 
+             
+            .params-grid { 
+                grid-template-columns: 1fr; 
+                gap: calc(var(--desktop-margin) - 3px); 
+            } 
+             
+            .results-header, .params-header { 
+                font-size: calc(var(--desktop-font-size)); 
+                padding: 8px 10px; 
+            } 
+             
+            .results-content, .params-content { 
+                padding: 8px; 
+            } 
+             
+            .result-item, .param-item { 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+                margin-bottom: calc(var(--desktop-margin) - 3px); 
+            } 
+             
+            .result-value, .param-value { 
+                min-width: 80px; 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+            } 
+             
+            .param-label { 
+                width: 130px; 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+            } 
+             
+            .shift-controls label, .shift-controls select { 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+            } 
+             
+            .legend-item { 
+                font-size: calc(var(--desktop-font-size) - 1px); 
+            } 
+             
+            .status-message { 
+                font-size: calc(var(--desktop-font-size) - 2px); 
+            } 
+             
+            .calculator-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+            } 
+             
+            .chart-container { 
+                height: 400px; 
+            } 
+        } 
+        /* Mobile View */ 
+        @media (max-width: 767px) { 
+            /* Mobile standard sizes */ 
+            * { 
+                font-size: var(--mobile-font-size); 
+            } 
+             
+            body { 
+                padding: 0; 
+            } 
+             
+            .header { 
+                flex-direction: column; 
+                padding: var(--mobile-padding); 
+                text-align: center; 
+                height: auto; 
+                min-height: auto; 
+                gap: 10px; 
+            } 
+             
+            .header .logo-container { 
+                margin-bottom: 0; 
+                justify-content: center; 
+            } 
+             
+            .title { 
+                font-size: var(--mobile-header-font); 
+            } 
+             
+            .subtitle { 
+                font-size: calc(var(--mobile-font-size) - 1px); 
+            } 
+             
+            .datetime { 
+                font-size: var(--mobile-font-size); 
+                margin-top: 0; 
+            } 
+             
+            .user-info { 
+                flex-direction: row; 
+                gap: 10px; 
+                margin-top: 0; 
+                width: 100%; 
+                justify-content: center; 
+                flex-wrap: wrap; 
+            } 
+             
+            .header-actions { 
+                margin-left: 0; 
+                margin-top: 0; 
+                justify-content: center; 
+                gap: 10px; 
+            } 
+             
+            .logout-btn { 
+                width: 36px; 
+                height: 36px; 
+                font-size: var(--mobile-icon-size); 
+            } 
+             
+            .header-action-btn { 
+                width: 32px; 
+                height: 32px; 
+                font-size: calc(var(--mobile-icon-size) - 2px); 
+            } 
+             
+            .theme-toggle { 
+                width: 32px; 
+                height: 32px; 
+                font-size: calc(var(--mobile-icon-size) - 2px); 
+            } 
+             
+            .nav-item { 
+                padding: 12px 10px; 
+                font-size: var(--mobile-font-size); 
+            } 
+             
+            .content { 
+                padding: var(--mobile-padding); 
+            } 
+             
+            .view h2 { 
+                font-size: var(--mobile-title-font); 
+                margin-bottom: var(--mobile-margin); 
+            } 
+             
+            .data-table th, .data-table td { 
+                padding: 6px 8px; 
+                font-size: var(--mobile-table-font); 
+            } 
+             
+            .data-table input { 
+                font-size: var(--mobile-table-font); 
+                padding: 4px; 
+            } 
+             
+            .results-grid, .params-grid { 
+                gap: var(--mobile-margin); 
+            } 
+             
+            .results-grid { 
+                grid-template-columns: 1fr; 
+            } 
+             
+            .params-grid { 
+                grid-template-columns: 1fr; 
+            } 
+             
+            .results-header, .params-header { 
+                font-size: calc(var(--mobile-font-size) + 1px); 
+                padding: 8px 12px; 
+            } 
+             
+            .results-content, .params-content { 
+                padding: var(--mobile-padding); 
+            } 
+             
+            .result-item, .param-item { 
+                font-size: var(--mobile-font-size); 
+                margin-bottom: var(--mobile-margin); 
+                padding-bottom: 8px; 
+            } 
+             
+            .result-value, .param-value { 
+                min-width: 70px; 
+                font-size: var(--mobile-font-size); 
+                padding: 3px 6px; 
+            } 
+             
+            .param-label { 
+                width: 120px; 
+                font-size: var(--mobile-font-size); 
+            } 
+             
+            .shift-controls { 
+                flex-direction: column; 
+                align-items: stretch; 
+            } 
+             
+            .shift-controls label { 
+                margin-bottom: var(--mobile-margin); 
+                margin-right: 0; 
+            } 
+             
+            .shift-controls select { 
+                width: 100%; 
+                font-size: var(--mobile-font-size); 
+            } 
+             
+            .legend-item { 
+                margin-right: 10px; 
+                margin-bottom: var(--mobile-margin); 
+                font-size: var(--mobile-font-size); 
+            } 
+             
+            .legend-color { 
+                width: 16px; 
+                height: 16px; 
+                margin-right: 5px; 
+            } 
+             
+            .status-message { 
+                font-size: calc(var(--mobile-font-size) - 1px); 
+            } 
+             
+            .shift-report-container h3 { 
+                font-size: var(--mobile-title-font); 
+            } 
+             
+            .calculator-grid { 
+                grid-template-columns: 1fr; 
+                padding: var(--mobile-card-padding); 
+            } 
+             
+            /* Chart Container Mobile Styles */ 
+            .chart-container { 
+                height: 350px; 
+                padding: 15px; 
+            } 
+             
+            .chart-controls { 
+                flex-direction: column; 
+                gap: 10px; 
+                align-items: flex-start; 
+            } 
+             
+            .chart-legend { 
+                gap: 10px; 
+            } 
+             
+            .chart-legend-item { 
+                font-size: var(--mobile-font-size); 
+            } 
+             
+            .chart-filter { 
+                width: 100%; 
+                justify-content: space-between; 
+            } 
+             
+            .chart-filter select { 
+                flex: 1; 
+                max-width: 150px; 
+            } 
+             
+            /* Auth Card Mobile Styles */ 
+            .auth-card { 
+                padding: var(--mobile-card-padding); 
+                max-width: 100%; 
+            } 
+             
+            .logo-container { 
+                justify-content: center; 
+                text-align: center; 
+                flex-direction: column; 
+            } 
+             
+            .logo-img { 
+                width: 40px; 
+                height: 40px; 
+                margin-right: 0; 
+                margin-bottom: var(--mobile-margin); 
+            } 
+             
+            .auth-title { 
+                font-size: var(--mobile-title-font); 
+                text-align: center; 
+            } 
+             
+            .auth-subtitle { 
+                text-align: center; 
+                font-size: var(--mobile-font-size); 
+            } 
+             
+            .form-group input { 
+                padding: 10px 12px; 
+                font-size: var(--mobile-input-font); 
+            } 
+             
+            .auth-button { 
+                padding: 12px; 
+                font-size: var(--mobile-input-font); 
+            } 
+             
+            .auth-links { 
+                margin-top: 20px; 
+                font-size: var(--mobile-font-size); 
+            } 
+             
+            .auth-links a { 
+                display: block; 
+                margin: 8px 0; 
+            } 
+        } 
+        /* Small Mobile View */ 
+        @media (max-width: 480px) { 
+            /* Extra small adjustments for very small screens */ 
+            .header .logo-img { 
+                width: 25px; 
+                height: 25px; 
+            } 
+             
+            .nav-item { 
+                padding: 10px 8px; 
+                font-size: calc(var(--mobile-font-size) - 1px); 
+            } 
+             
+            .nav-item i { 
+                margin-right: 5px; 
+            } 
+             
+            .view h2 { 
+                font-size: calc(var(--mobile-title-font) - 1px); 
+            } 
+             
+            .view h2 i { 
+                margin-right: 5px; 
+            } 
+             
+            .result-label i, .param-label i { 
+                display: none; /* Hide icons on very small screens to save space */ 
+            } 
+             
+            .param-label { 
+                width: 100px; 
+                font-size: calc(var(--mobile-font-size) - 1px); 
+            } 
+             
+            .result-value, .param-value { 
+                min-width: 60px; 
+                font-size: calc(var(--mobile-font-size) - 1px); 
+            } 
+             
+            .data-table th, .data-table td { 
+                padding: 4px 6px; 
+                font-size: calc(var(--mobile-table-font) - 1px); 
+            } 
+             
+            .data-table input { 
+                font-size: calc(var(--mobile-table-font) - 1px); 
+                padding: 3px; 
+            } 
+             
+            .chart-container { 
+                height: 300px; 
+            } 
+             
+            .header-action-btn { 
+                width: 28px; 
+                height: 28px; 
+                font-size: calc(var(--mobile-icon-size) - 4px); 
+            } 
+             
+            .theme-toggle { 
+                width: 28px; 
+                height: 28px; 
+                font-size: calc(var(--mobile-icon-size) - 4px); 
+            } 
+        } 
+        /* Print styles */ 
+        @media print { 
+            body { 
+                background-color: white; 
+                padding: 0; 
+                font-size: 12pt; 
+            } 
+             
+            .calculator { 
+                box-shadow: none; 
+                border: 1px solid #ccc; 
+            } 
+             
+            input:disabled { 
+                background-color: transparent; 
+                border: none; 
+                padding: 2px; 
+            } 
+             
+            .theme-toggle { 
+                display: none; 
+            } 
+             
+            .chart-container { 
+                break-inside: avoid; 
+                page-break-inside: avoid; 
+            } 
+        } 
+        /* Input field min-width styles */ 
+        input { 
+            min-width: 80px; 
+        } 
+        /* Specific adjustments for table inputs */ 
+        .data-table input { 
+            min-width: 70px; 
+        } 
+        /* For mobile devices */ 
+        @media (max-width: 767px) { 
+            input { 
+                min-width: 60px; 
+            } 
+             
+            .data-table input { 
+                min-width: 50px; 
+            } 
+        } 
+        /* For very small mobile devices */ 
+        @media (max-width: 480px) { 
+            input { 
+                min-width: 50px; 
+            } 
+             
+            .data-table input { 
+                min-width: 40px; 
+            } 
+        } 
+    </style> 
+</head> 
+<body> 
+    <!-- Authentication Container --> 
+    <div class="auth-container" id="authContainer"> 
+        <!-- Login Card --> 
+        <div class="auth-card" id="loginCard"> 
+            <div class="logo-container"> 
+                <img src="bipin.png" alt="B Logo" class="logo-img"> 
+                <div class="logo-text"> 
+                    <h1 class="auth-title">BLAST FURNACE SYSTEM</h1> 
+                    <div class="auth-subtitle">ROURKELA STEEL PLANT</div> 
+                </div> 
+            </div> 
+            <div id="loginAlert" class="alert"></div> 
+            <form id="loginForm"> 
+                <div class="form-group"> 
+                    <label for="loginEmail">Email</label> 
+                    <i class="fas fa-envelope input-icon"></i> 
+                    <input type="email" id="loginEmail" name="email" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="loginPassword">Password</label> 
+                    <i class="fas fa-lock input-icon"></i> 
+                    <input type="password" id="loginPassword" name="password" required> 
+                </div> 
+                <button type="submit" class="auth-button"> 
+                    <i class="fas fa-sign-in-alt"></i> Login 
+                </button> 
+            </form> 
+            <div class="auth-links"> 
+                <a href="#" id="showRegister"><i class="fas fa-user-plus"></i> Create Account</a> 
+                <a href="#" id="showForgotPassword"><i class="fas fa-key"></i> Forgot Password?</a> 
+            </div> 
+        </div> 
+         
+        <!-- Register Card --> 
+        <div class="auth-card hidden" id="registerCard"> 
+            <div class="logo-container"> 
+                <img src="bipin.png" alt="B Logo" class="logo-img"> 
+                <div class="logo-text"> 
+                    <h1 class="auth-title">CREATE ACCOUNT</h1> 
+                    <div class="auth-subtitle">ROURKELA STEEL PLANT</div> 
+                </div> 
+            </div> 
+            <div id="registerAlert" class="alert"></div> 
+            <form id="registerForm"> 
+                <div class="form-group"> 
+                    <label for="registerName">Full Name</label> 
+                    <i class="fas fa-user input-icon"></i> 
+                    <input type="text" id="registerName" name="name" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="registerEmail">Email</label> 
+                    <i class="fas fa-envelope input-icon"></i> 
+                    <input type="email" id="registerEmail" name="email" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="registerPassword">Password</label> 
+                    <i class="fas fa-lock input-icon"></i> 
+                    <input type="password" id="registerPassword" name="password" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="confirmPassword">Confirm Password</label> 
+                    <i class="fas fa-lock input-icon"></i> 
+                    <input type="password" id="confirmPassword" name="confirmPassword" required> 
+                </div> 
+                <button type="submit" class="auth-button"> 
+                    <i class="fas fa-user-plus"></i> Register 
+                </button> 
+            </form> 
+            <div class="auth-links"> 
+                <a href="#" id="showLoginFromRegister"><i class="fas fa-arrow-left"></i> Back to Login</a> 
+            </div> 
+        </div> 
+         
+        <!-- Forgot Password Card --> 
+        <div class="auth-card hidden" id="forgotPasswordCard"> 
+            <div class="logo-container"> 
+                <img src="bipin.png" alt="B Logo" class="logo-img"> 
+                <div class="logo-text"> 
+                    <h1 class="auth-title">RESET PASSWORD</h1> 
+                    <div class="auth-subtitle">ROURKELA STEEL PLANT</div> 
+                </div> 
+            </div> 
+            <div id="forgotPasswordAlert" class="alert"></div> 
+            <form id="forgotPasswordForm"> 
+                <div class="form-group"> 
+                    <label for="forgotEmail">Email</label> 
+                    <i class="fas fa-envelope input-icon"></i> 
+                    <input type="email" id="forgotEmail" name="email" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="newPassword">New Password</label> 
+                    <i class="fas fa-lock input-icon"></i> 
+                    <input type="password" id="newPassword" name="newPassword" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="confirmNewPassword">Confirm New Password</label> 
+                    <i class="fas fa-lock input-icon"></i> 
+                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required> 
+                </div> 
+                <button type="submit" class="auth-button"> 
+                    <i class="fas fa-key"></i> Reset Password 
+                </button> 
+            </form> 
+            <div class="auth-links"> 
+                <a href="#" id="showLoginFromForgot"><i class="fas fa-arrow-left"></i> Back to Login</a> 
+            </div> 
+        </div> 
+    </div> 
+    <!-- Dashboard --> 
+    <div class="dashboard" id="dashboard"> 
+        <!-- Header --> 
+        <div class="header"> 
+            <div class="logo-container"> 
+                <img src="bipin.png" alt="B Logo" class="logo-img"> 
+                <div class="title-container"> 
+                    <div class="title">WELCOME TO BLAST FURNACE</div> 
+                    <div class="subtitle">ROURKELA STEEL PLANT</div> 
+                </div> 
+            </div> 
+            <div class="user-info"> 
+                <div class="datetime" id="datetime"> 
+                    <i class="fas fa-clock"></i> 
+                </div> 
+                <div class="user-name" id="userName"> 
+                    <i class="fas fa-user"></i> 
+                </div> 
+                <div class="header-actions"> 
+                    <div class="tooltip"> 
+                        <button class="header-action-btn reset-btn" onclick="resetToDefault()"> 
+                            <i class="fas fa-undo"></i> 
+                        </button> 
+                        <span class="tooltiptext">Reset to Default</span> 
+                    </div> 
+                    <div class="tooltip"> 
+                        <button class="header-action-btn save-btn" onclick="setCurrentAsDefault()"> 
+                            <i class="fas fa-save"></i> 
+                        </button> 
+                        <span class="tooltiptext">Set Current as Default</span> 
+                    </div> 
+                    <div class="tooltip"> 
+                        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()"> 
+                            <i class="fas fa-moon" id="theme-icon"></i> 
+                        </button> 
+                        <span class="tooltiptext">Toggle Theme</span> 
+                    </div> 
+                </div> 
+                <button class="logout-btn" onclick="logout()"> 
+                    <i class="fas fa-sign-out-alt"></i> 
+                </button> 
+            </div> 
+        </div> 
+         
+        <!-- Navigation --> 
+        <div class="nav"> 
+            <div class="nav-item active" onclick="showView('materials')"> 
+                <i class="fas fa-flask"></i> Material Properties 
+            </div> 
+            <div class="nav-item" onclick="showView('inputs')"> 
+                <i class="fas fa-weight"></i> Input Quantities 
+            </div> 
+            <div class="nav-item" onclick="showView('results')"> 
+                <i class="fas fa-chart-line"></i> Results 
+            </div> 
+            <div class="nav-item" onclick="showView('blast_params')"> 
+                <i class="fas fa-fire"></i> Blast Parameters 
+            </div> 
+            <div class="nav-item" onclick="showView('shift_production')"> 
+                <i class="fas fa-calendar-alt"></i> Shift Production 
+            </div> 
+            <div class="nav-item" onclick="showView('coke_rate_trend')"> 
+                <i class="fas fa-chart-area"></i> Coke Rate Trend 
+            </div> 
+            <div class="nav-item" onclick="showView('hearth_status')"> 
+                <i class="fas fa-thermometer-half"></i> Hearth Status 
+            </div> 
+        </div> 
+         
+        <!-- Content Area --> 
+        <div class="content"> 
+            <!-- Material Properties View --> 
+            <div id="materials-view" class="view active"> 
+                <h2><i class="fas fa-flask"></i> Material Properties</h2> 
+                <div class="table-container"> 
+                    <table class="data-table" id="materials-table"> 
+                        <thead> 
+                            <tr> 
+                                <th>Material</th> 
+                                <th>C (%)</th> 
+                                <th>Moisture (%)</th> 
+                                <th>FE (%)</th> 
+                                <th>SiO2 (%)</th> 
+                                <th>CAO (%)</th> 
+                                <th>MGO (%)</th> 
+                                <th>AL203 (%)</th> 
+                                <th>Density</th> 
+                            </tr> 
+                        </thead> 
+                        <tbody id="materials-tbody"> 
+                            <!-- Populated by JavaScript --> 
+                        </tbody> 
+                    </table> 
+                </div> 
+            </div> 
+             
+            <!-- Input Quantities View --> 
+            <div id="inputs-view" class="view"> 
+                <h2><i class="fas fa-weight"></i> Input Quantities</h2> 
+                <div class="table-container"> 
+                    <table class="data-table" id="inputs-table"> 
+                        <thead> 
+                            <tr> 
+                                <th>Material</th> 
+                                <th>Weight (Kg)</th> 
+                                <th>Moisture Adj.</th> 
+                                <th>Dry Weight</th> 
+                                <th>Fe Input</th> 
+                                <th>C Input</th> 
+                                <th>SiO2 Input</th> 
+                                <th>CaO Input</th> 
+                                <th>MgO Input</th> 
+                                <th>Al2O3 Input</th> 
+                            </tr> 
+                        </thead> 
+                        <tbody id="inputs-tbody"> 
+                            <!-- Populated by JavaScript --> 
+                        </tbody> 
+                    </table> 
+                </div> 
+            </div> 
+             
+            <!-- Results View --> 
+            <div id="results-view" class="view"> 
+                <h2><i class="fas fa-chart-line"></i> Results</h2> 
+                <div class="results-grid"> 
+                    <div class="results-section"> 
+                        <div class="results-header"> 
+                            <i class="fas fa-industry"></i> Hot Metal,Percentages,Ratio & Rates 
+                        </div> 
+                        <div class="results-content" id="consumption-rates"> 
+                            <!-- Populated by JavaScript --> 
+                        </div> 
+                    </div> 
+                    <div class="results-section"> 
+                        <div class="results-header"> 
+                            <i class="fas fa-calculator"></i> Input Totals 
+                        </div> 
+                        <div class="results-content" id="input-totals"> 
+                            <!-- Populated by JavaScript --> 
+                        </div> 
+                    </div> 
+                    <div class="results-section"> 
+                        <div class="results-header"> 
+                            <i class="fas fa-cube"></i> Volume Calculations 
+                        </div> 
+                        <div class="results-content" id="volume-calculations"> 
+                            <!-- Populated by JavaScript --> 
+                        </div> 
+                    </div> 
+                    <div class="results-section"> 
+                        <div class="results-header"> 
+                            <i class="fas fa-tachometer-alt"></i> Burden_Wt Details 
+                        </div> 
+                        <div class="results-content" id="production-metrics"> 
+                            <!-- Populated by JavaScript --> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+             
+            <!-- Blast Parameters View --> 
+            <div id="blast_params-view" class="view"> 
+                <h2><i class="fas fa-fire"></i> Blast Parameters</h2> 
+                <div class="params-grid"> 
+                    <div class="params-section"> 
+                        <div class="params-header"> 
+                            <i class="fas fa-sliders-h"></i> Blast Parameters 
+                        </div> 
+                        <div class="params-content" id="blast-params"> 
+                            <!-- Populated by JavaScript --> 
+                        </div> 
+                    </div> 
+                    <div class="params-section"> 
+                        <div class="params-header"> 
+                            <i class="fas fa-chart-bar"></i> Outputs 
+                        </div> 
+                        <div class="params-content" id="derived-params"> 
+                            <!-- Populated by JavaScript --> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+             
+            <!-- Shift Production View --> 
+            <div id="shift_production-view" class="view"> 
+                <h2><i class="fas fa-calendar-alt"></i> Shift Production</h2> 
+                <div class="shift-controls"> 
+                    <label for="shift-filter"> 
+                        <i class="fas fa-filter"></i> Filter Shift Columns: 
+                    </label> 
+                    <select id="shift-filter" onchange="filterShiftColumns()"> 
+                        <option value="all">All Shifts</option> 
+                        <option value="A">Shift A</option> 
+                        <option value="B">Shift B</option> 
+                        <option value="C">Shift C</option> 
+                    </select> 
+                </div> 
+                <div class="shift-table-container"> 
+                    <table class="data-table" id="shift-table"> 
+                        <thead> 
+                            <tr> 
+                                <th>Hour</th> 
+                                <th>Shift</th> 
+                                <th>Coke</th> 
+                                <th>Sinter</th> 
+                                <th>Iron Ore</th> 
+                                <th>Pellets</th> 
+                                <th>Scraps</th> 
+                                <th>Nut Coke</th> 
+                                <th>PCI</th> 
+                                <th>CB Vol(Nm³)</th> 
+                                <th>O2 Vol(Nm³)</th> 
+                                <th>Hot Metal</th> 
+                                <th>Coke Rate</th> 
+                                <th>NC Rate</th> 
+                                <th>PCI Rate</th> 
+                                <th>Fuel Rate</th> 
+                                <th>SPO2 Rate</th> 
+                            </tr> 
+                        </thead> 
+                        <tbody id="shift-tbody"> 
+                            <!-- Populated by JavaScript --> 
+                        </tbody> 
+                    </table> 
+                </div> 
+                <div class="shift-legend"> 
+                    <div class="legend-item"> 
+                        <div class="legend-color" style="background-color: var(--shift-a-color);"></div> 
+                        <span>Shift A</span> 
+                    </div> 
+                    <div class="legend-item"> 
+                        <div class="legend-color" style="background-color: var(--shift-b-color);"></div> 
+                        <span>Shift B</span> 
+                    </div> 
+                    <div class="legend-item"> 
+                        <div class="legend-color" style="background-color: var(--shift-c-color);"></div> 
+                        <span>Shift C</span> 
+                    </div> 
+                </div> 
+                         
+                <!-- Shift Report Card --> 
+                <div class="shift-report-container"> 
+                    <h3><i class="fas fa-clipboard-list"></i> Shift Report Card</h3> 
+                    <div class="shift-report-table-container"> 
+                        <table class="data-table" id="shift-report-table"> 
+                            <thead> 
+                                <tr> 
+                                    <th>Shift</th> 
+                                    <th>Total Hot Metal</th> 
+                                    <th>Avg Coke Rate</th> 
+                                    <th>Avg NC Rate</th> 
+                                    <th>Avg PCI Rate</th> 
+                                    <th>Avg Fuel Rate</th> 
+                                    <th>Avg SPO2 Rate</th> 
+                                    <th>Performance</th> 
+                                </tr> 
+                            </thead> 
+                            <tbody id="shift-report-tbody"> 
+                                <!-- Populated by JavaScript --> 
+                            </tbody> 
+                        </table> 
+                    </div> 
+                </div> 
+            </div> 
+             
+            <!-- Coke Rate Trend View --> 
+            <div id="coke_rate_trend-view" class="view"> 
+                <h2><i class="fas fa-chart-area"></i> Coke Rate Trend</h2> 
+                <div class="chart-container"> 
+                    <div class="chart-controls"> 
+                        <div class="chart-legend"> 
+                            <div class="chart-legend-item"> 
+                                <div class="chart-legend-color" style="background-color: var(--chart-hot-metal);"></div> 
+                                <span>Hot Metal</span> 
+                            </div> 
+                            <div class="chart-legend-item"> 
+                                <div class="chart-legend-color" style="background-color: var(--chart-coke-rate);"></div> 
+                                <span>Coke Rate</span> 
+                            </div> 
+                            <div class="chart-legend-item"> 
+                                <div class="chart-legend-color" style="background-color: var(--chart-nc-rate);"></div> 
+                                <span>NC Rate</span> 
+                            </div> 
+                            <div class="chart-legend-item"> 
+                                <div class="chart-legend-color" style="background-color: var(--chart-pci-rate);"></div> 
+                                <span>PCI Rate</span> 
+                            </div> 
+                            <div class="chart-legend-item"> 
+                                <div class="chart-legend-color" style="background-color: var(--chart-spo2-rate);"></div> 
+                                <span>SPO2 Rate</span> 
+                            </div> 
+                        </div> 
+                        <div class="chart-filter"> 
+                            <label for="trend-shift-filter">Filter Shift:</label> 
+                            <select id="trend-shift-filter" onchange="updateTrendChart()"> 
+                                <option value="all">All Shifts</option> 
+                                <option value="A">Shift A</option> 
+                                <option value="B">Shift B</option> 
+                                <option value="C">Shift C</option> 
+                            </select> 
+                        </div> 
+                    </div> 
+                    <canvas id="trend-chart"></canvas> 
+                </div> 
+            </div> 
+             
+            <!-- Hearth Status View --> 
+            <div id="hearth_status-view" class="view"> 
+                <h2><i class="fas fa-thermometer-half"></i> Hearth Status</h2> 
+                <div class="hearth-calculator"> 
+                    <div class="calculator-grid"> 
+                        <!-- Input Parameters Column --> 
+                        <div class="hearth-section"> 
+                            <div class="hearth-section-title"> 
+                                <i class="fas fa-cog"></i> Input Parameters 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="production">Furnace Production (t/day)</label> 
+                                <input type="number" id="production" value="6600" oninput="calculateHearth()"> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="slagRate">Slag Rate (kg/THM)</label> 
+                                <input type="number" id="slagRate" value="250" oninput="calculateHearth()"> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="hmDensity">Hot Metal Density (t/m³)</label> 
+                                <input type="number" id="hmDensity" value="7.2" step="0.1" oninput="calculateHearth()"> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="slagDensity">Slag Density (t/m³)</label> 
+                                <input type="number" id="slagDensity" value="2.4" step="0.1" oninput="calculateHearth()"> 
+                            </div> 
+                        </div> 
+                                         
+                        <!-- More Input Parameters --> 
+                        <div class="hearth-section"> 
+                            <div class="hearth-section-title"> 
+                                <i class="fas fa-ruler-combined"></i> Hearth Parameters 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="hearthVoidage">Hearth Voidage (%)</label> 
+                                <input type="number" id="hearthVoidage" value="20" step="0.1" oninput="calculateHearth()"> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="hearthDiameter">Hearth Diameter (m)</label> 
+                                <input type="number" id="hearthDiameter" value="10.8" step="0.1" oninput="calculateHearth()"> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="tuyereHeight">Taphole to Tuyere Height (m)</label> 
+                                <input type="number" id="tuyereHeight" value="3.9" step="0.1" oninput="calculateHearth()"> 
+                            </div> 
+                        </div> 
+                                         
+                        <!-- Intermediate Calculations Column --> 
+                        <div class="hearth-section"> 
+                            <div class="hearth-section-title"> 
+                                <i class="fas fa-calculator"></i> Intermediate Calculations 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="productionRate">Production Rate (t/min)</label> 
+                                <input type="text" id="productionRate" disabled> 
+                                <div class="formula-hint">Production ÷ (24 × 60)</div> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="ironVolume">Iron Volume (m³/min)</label> 
+                                <input type="text" id="ironVolume" disabled> 
+                                <div class="formula-hint">Production Rate ÷ Hot Metal Density</div> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="slagVolume">Slag Volume (m³/min)</label> 
+                                <input type="text" id="slagVolume" disabled> 
+                                <div class="formula-hint">(Slag Rate ÷ 1000 × Production Rate) ÷ Slag Density</div> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="totalLiquidVolume">Total Liquid (m³/min)</label> 
+                                <input type="text" id="totalLiquidVolume" disabled> 
+                                <div class="formula-hint">Iron Volume + Slag Volume</div> 
+                            </div> 
+                        </div> 
+                                         
+                        <!-- Final Results Column --> 
+                        <div class="hearth-section"> 
+                            <div class="hearth-section-title"> 
+                                <i class="fas fa-chart-pie"></i> Hearth Calculations 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="hearthArea">Hearth Area (m²)</label> 
+                                <input type="text" id="hearthArea" disabled> 
+                                <div class="formula-hint">π × (Hearth Diameter ÷ 2)²</div> 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="storageCapacity">Storage Capacity (m³)</label> 
+                                <input type="text" id="storageCapacity" disabled> 
+                                <div class="formula-hint">Hearth Voidage × Area × Height</div> 
+                            </div> 
+                            <div class="hearth-section-title" style="margin-top: 25px;"> 
+                                <i class="fas fa-exclamation-triangle"></i> Final Result 
+                            </div> 
+                            <div class="hearth-input-group"> 
+                                <label for="timeToTuyeres">Time Until Liquid Reaches Tuyeres</label> 
+                                <input type="text" id="timeToTuyeres" disabled class="result-highlight"> 
+                                <div class="formula-hint">Storage Capacity ÷ Total Liquid Accumulation</div> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+         
+        <!-- Status Bar --> 
+        <div class="status-bar"> 
+            <div class="status-message" id="status-message"> 
+                <i class="fas fa-sync-alt"></i> Ready - All calculations are dynamic and automatic 
+                <span class="calculation-indicator"></span> 
+            </div> 
+        </div> 
+    </div> 
+    <script> 
+        // Global variable to store the chart instance 
+        let trendChart = null; 
+        // Theme Management 
+        function initializeTheme() { 
+            // Check for saved theme preference or default to system preference 
+            const savedTheme = localStorage.getItem('theme'); 
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; 
+             
+            if (savedTheme) { 
+                document.documentElement.setAttribute('data-theme', savedTheme); 
+                updateThemeIcon(savedTheme); 
+            } else if (systemPrefersDark) { 
+                document.documentElement.setAttribute('data-theme', 'dark'); 
+                updateThemeIcon('dark'); 
+            } else { 
+                document.documentElement.setAttribute('data-theme', 'light'); 
+                updateThemeIcon('light'); 
+            } 
+             
+            // Listen for system theme changes 
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { 
+                if (!localStorage.getItem('theme')) { 
+                    const newTheme = e.matches ? 'dark' : 'light'; 
+                    document.documentElement.setAttribute('data-theme', newTheme); 
+                    updateThemeIcon(newTheme); 
+                } 
+            }); 
+        } 
+        function toggleTheme() { 
+            const currentTheme = document.documentElement.getAttribute('data-theme'); 
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light'; 
+            document.documentElement.setAttribute('data-theme', newTheme); 
+            localStorage.setItem('theme', newTheme); 
+            updateThemeIcon(newTheme); 
+             
+            // Refresh the chart if the trend view is active 
+            if (document.getElementById('coke_rate_trend-view').classList.contains('active')) { 
+                setTimeout(updateTrendChart, 100); 
+            } 
+        } 
+        function updateThemeIcon(theme) { 
+            const themeIcon = document.getElementById('theme-icon'); 
+            if (theme === 'dark') { 
+                themeIcon.className = 'fas fa-sun'; 
+            } else { 
+                themeIcon.className = 'fas fa-moon'; 
+            } 
+        } 
+        // Authentication Functions 
+        function checkAuth() { 
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')); 
+            if (currentUser) { 
+                // User is logged in, show dashboard 
+                document.getElementById('authContainer').style.display = 'none'; 
+                document.getElementById('dashboard').classList.add('active'); 
+                displayUserName(); 
+                initializeApp(); 
+            } else { 
+                // User is not logged in, show login form 
+                document.getElementById('authContainer').style.display = 'flex'; 
+                document.getElementById('dashboard').classList.remove('active'); 
+            } 
+        } 
+        function displayUserName() { 
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')); 
+            if (currentUser) { 
+                document.getElementById('userName').innerHTML = `<i class="fas fa-user"></i> ${currentUser.name}`; 
+            } 
+        } 
+        function logout() { 
+            localStorage.removeItem('currentUser'); 
+            document.getElementById('authContainer').style.display = 'flex'; 
+            document.getElementById('dashboard').classList.remove('active'); 
+            document.getElementById('loginForm').reset(); 
+            document.getElementById('registerForm').reset(); 
+            document.getElementById('forgotPasswordForm').reset(); 
+            hideAlerts(); 
+            showAuthCard('loginCard'); 
+        } 
+        function showAlert(alertId, message, type) { 
+            const alertElement = document.getElementById(alertId); 
+            alertElement.textContent = message; 
+            alertElement.className = `alert alert-${type}`; 
+            alertElement.style.display = 'block'; 
+            // Hide alert after 3 seconds 
+            setTimeout(() => { 
+                alertElement.style.display = 'none'; 
+            }, 3000); 
+        } 
+        function hideAlerts() { 
+            document.getElementById('loginAlert').style.display = 'none'; 
+            document.getElementById('registerAlert').style.display = 'none'; 
+            document.getElementById('forgotPasswordAlert').style.display = 'none'; 
+        } 
+        function showAuthCard(cardId) { 
+            // Hide all auth cards 
+            document.getElementById('loginCard').classList.add('hidden'); 
+            document.getElementById('registerCard').classList.add('hidden'); 
+            document.getElementById('forgotPasswordCard').classList.add('hidden'); 
+             
+            // Show the selected card 
+            document.getElementById(cardId).classList.remove('hidden'); 
+             
+            // Hide alerts 
+            hideAlerts(); 
+        } 
+        // Show/Hide Auth Cards 
+        document.getElementById('showRegister').addEventListener('click', function(e) { 
+            e.preventDefault(); 
+            showAuthCard('registerCard'); 
+        }); 
+        document.getElementById('showLoginFromRegister').addEventListener('click', function(e) { 
+            e.preventDefault(); 
+            showAuthCard('loginCard'); 
+        }); 
+        document.getElementById('showForgotPassword').addEventListener('click', function(e) { 
+            e.preventDefault(); 
+            showAuthCard('forgotPasswordCard'); 
+        }); 
+        document.getElementById('showLoginFromForgot').addEventListener('click', function(e) { 
+            e.preventDefault(); 
+            showAuthCard('loginCard'); 
+        }); 
+        // Login Form Handler 
+        document.getElementById('loginForm').addEventListener('submit', function(e) { 
+            e.preventDefault(); 
+            const email = document.getElementById('loginEmail').value; 
+            const password = document.getElementById('loginPassword').value; 
+             
+            // Get users from localStorage 
+            const users = JSON.parse(localStorage.getItem('blastFurnaceUsers')) || []; 
+             
+            // Find user with matching email and password 
+            const user = users.find(u => u.email === email && u.password === password); 
+             
+            if (user) { 
+                // Save current user to session 
+                localStorage.setItem('currentUser', JSON.stringify(user)); 
+                 
+                // Show success message 
+                showAlert('loginAlert', 'Login successful! Redirecting...', 'success'); 
+                 
+                // Redirect to dashboard after 1 second 
+                setTimeout(() => { 
+                    checkAuth(); 
+                }, 1000); 
+            } else { 
+                // Show error message 
+                showAlert('loginAlert', 'Invalid email or password', 'danger'); 
+            } 
+        }); 
+        // Register Form Handler 
+        document.getElementById('registerForm').addEventListener('submit', function(e) { 
+            e.preventDefault(); 
+            const name = document.getElementById('registerName').value; 
+            const email = document.getElementById('registerEmail').value; 
+            const password = document.getElementById('registerPassword').value; 
+            const confirmPassword = document.getElementById('confirmPassword').value; 
+             
+            // Validate passwords match 
+            if (password !== confirmPassword) { 
+                showAlert('registerAlert', 'Passwords do not match', 'danger'); 
+                return; 
+            } 
+             
+            // Get users from localStorage 
+            const users = JSON.parse(localStorage.getItem('blastFurnaceUsers')) || []; 
+             
+            // Check if user already exists 
+            if (users.find(u => u.email === email)) { 
+                showAlert('registerAlert', 'User with this email already exists', 'danger'); 
+                return; 
+            } 
+             
+            // Create new user 
+            const newUser = { 
+                id: Date.now(), 
+                name, 
+                email, 
+                password 
+            }; 
+             
+            // Add user to array 
+            users.push(newUser); 
+             
+            // Save users to localStorage 
+            localStorage.setItem('blastFurnaceUsers', JSON.stringify(users)); 
+             
+            // Show success message 
+            showAlert('registerAlert', 'Registration successful! Please login.', 'success'); 
+             
+            // Clear form 
+            document.getElementById('registerForm').reset(); 
+             
+            // Switch to login after 2 seconds 
+            setTimeout(() => { 
+                showAuthCard('loginCard'); 
+            }, 2000); 
+        }); 
+        // Forgot Password Form Handler 
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) { 
+            e.preventDefault(); 
+            const email = document.getElementById('forgotEmail').value; 
+            const newPassword = document.getElementById('newPassword').value; 
+            const confirmNewPassword = document.getElementById('confirmNewPassword').value; 
+             
+            // Validate passwords match 
+            if (newPassword !== confirmNewPassword) { 
+                showAlert('forgotPasswordAlert', 'Passwords do not match', 'danger'); 
+                return; 
+            } 
+             
+            // Get users from localStorage 
+            const users = JSON.parse(localStorage.getItem('blastFurnaceUsers')) || []; 
+             
+            // Find user with matching email 
+            const userIndex = users.findIndex(u => u.email === email); 
+             
+            if (userIndex === -1) { 
+                // User not found 
+                showAlert('forgotPasswordAlert', 'No account found with this email address', 'danger'); 
+                return; 
+            } 
+             
+            // Update user password 
+            users[userIndex].password = newPassword; 
+             
+            // Save updated users to localStorage 
+            localStorage.setItem('blastFurnaceUsers', JSON.stringify(users)); 
+             
+            // Show success message 
+            showAlert('forgotPasswordAlert', 'Password reset successful! Please login with your new password.', 'success'); 
+             
+            // Clear form 
+            document.getElementById('forgotPasswordForm').reset(); 
+             
+            // Switch to login after 2 seconds 
+            setTimeout(() => { 
+                showAuthCard('loginCard'); 
+            }, 2000); 
+        }); 
+        // Application Data 
+        const appData = { 
+            materials: { 
+                "COKE": {"C": "86", "Moisture": "4.5", "FE": "0.0", "SiO2": "5.5", "CAO": "0.0", "MGO": "0.0", "AL203": "3.3", "Density": "550"}, 
+                "SINTER": {"C": "0", "Moisture": "0.6", "FE": "53.9", "SiO2": "6.9", "CAO": "10.5", "MGO": "2.3", "AL203": "3.7", "Density": "1800"}, 
+                "ORE": {"C": "0", "Moisture": "4.5", "FE": "62.5", "SiO2": "2.5", "CAO": "0.0", "MGO": "0.0", "AL203": "3.6", "Density": "2200"}, 
+                "PELLETS": {"C": "0", "Moisture": "2.8", "FE": "63.5", "SiO2": "4.0", "CAO": "0.5", "MGO": "0.3", "AL203": "1.4", "Density": "2000"}, 
+                "SCRAP": {"C": "0", "Moisture": "0.5", "FE": "65.0", "SiO2": "0.0", "CAO": "0.0", "MGO": "0.0", "AL203": "0.0", "Density": "1200"}, 
+                "PCI": {"C": "88", "Moisture": "0.0", "FE": "0.0", "SiO2": "4.4", "CAO": "0.0", "MGO": "0.0", "AL203": "2.6", "Density": "550"}, 
+                "NCOKE": {"C": "89", "Moisture": "5.7", "FE": "0.0", "SiO2": "0.0", "CAO": "0.0", "MGO": "0.0", "AL203": "0.0", "Density": "550"} 
+            }, 
+            inputs: { 
+                "COKE": {"Weight": "8100"}, 
+                "SINTER": {"Weight": "21100"}, 
+                "ORE": {"Weight": "3200"}, 
+                "PELLETS": {"Weight": "3500"}, 
+                "SCRAP": {"Weight": "600"}, 
+                "PCI": {"Weight": "0"}, 
+                "NCOKE": {"Weight": "0"} 
+            }, 
+            blastParams: { 
+                "Blast Volume": "150000", 
+                "O2 Enrichment": "10500", 
+                "Blast Temperature": "1150", 
+                "Top Pressure": "1.87", 
+                "Blast Pressure": "3.15", 
+                "DP": "1.28", 
+                "Humidity": "10.5", 
+                "Tuyere Velocity": "220", 
+                "Raceway Flame Temp": "2150", 
+                "Hot Metal": "1000", 
+                "Basicity": "1.15", 
+                "Al₂O₃": "4", 
+                "Nos Of Tuyeres": "20", 
+                "Gas Generation": "264000", 
+                "Hearth Area": "55.4", 
+                "Furnace Resistance": "350", 
+                "Furnace Permeability": "370", 
+                "O2 %": "25.0", 
+                "Silicon%": "1.0", 
+                "HMT": "1500" 
+            }, 
+            shiftMaterialProperties: { 
+                "coke": {"moisture": 0, "fe": 0}, 
+                "sinter": {"moisture": 0, "fe": 0}, 
+                "ironOre": {"moisture": 0, "fe": 0}, 
+                "pellets": {"moisture": 0, "fe": 0}, 
+                "scraps": {"moisture": 0, "fe": 0}, 
+                "nutCoke": {"moisture": 0, "fe": 0}, 
+                "pci": {"moisture": 0, "fe": 0} 
+            }, 
+            shiftData: {}, 
+            hearthData: { 
+                "production": "6600", 
+                "slagRate": "250", 
+                "hmDensity": "7.2", 
+                "slagDensity": "2.4", 
+                "hearthVoidage": "20", 
+                "hearthDiameter": "10.8", 
+                "tuyereHeight": "3.9" 
+            } 
+        }; 
+        // Store default values for reset functionality 
+        const defaultData = JSON.parse(JSON.stringify(appData)); 
+        // Derived blast parameters 
+        const derivedBlastParams = [ 
+            "DP", "Tuyere Velocity", "Raceway Flame Temp", "Hot Metal", "O2 %", "Silicon%",  
+            "Furnace Resistance", "Furnace Permeability" 
+        ]; 
+        // Initialize the application 
+        function initializeApp() { 
+            updateDateTime(); 
+            setInterval(updateDateTime, 1000); 
+             
+            initializeMaterialsView(); 
+            initializeInputsView(); 
+            initializeResultsView(); 
+            initializeBlastParamsView(); 
+            initializeShiftProductionView(); 
+            initializeCokeRateTrendView(); 
+            initializeHearthStatusView(); 
+             
+            // Sync shift material properties with main materials 
+            syncShiftMaterialProperties(); 
+             
+            // Initial calculations 
+            calculateInputs(); 
+            calculateAll(); 
+            calculateHearth(); 
+        } 
+        // Update datetime display 
+        function updateDateTime() { 
+            const now = new Date(); 
+            const dateTimeString = now.toLocaleString(); 
+            document.getElementById('datetime').innerHTML = `<i class="fas fa-clock"></i> ${dateTimeString}`; 
+        } 
+        // Show view function 
+        function showView(viewName) { 
+            // Hide all views 
+            const views = document.querySelectorAll('.view'); 
+            views.forEach(view => { 
+                view.classList.remove('active'); 
+            }); 
+             
+            // Show selected view 
+            document.getElementById(`${viewName}-view`).classList.add('active'); 
+             
+            // Update navigation 
+            const navItems = document.querySelectorAll('.nav-item'); 
+            navItems.forEach(item => { 
+                item.classList.remove('active'); 
+            }); 
+            event.target.classList.add('active'); 
+             
+            // Update status 
+            updateStatus(`Switched to ${viewName.replace('_', ' ')} view`); 
+             
+            // If switching to coke rate trend view, update the chart 
+            if (viewName === 'coke_rate_trend') { 
+                setTimeout(updateTrendChart, 100); // Small delay to ensure the view is visible 
+            } 
+        } 
+        // Update status message 
+        function updateStatus(message) { 
+            document.getElementById('status-message').innerHTML = `  
+                <i class="fas fa-sync-alt"></i> ${message}  
+                <span class="calculation-indicator"></span> 
+            `; 
+        } 
+        // Reset to default values 
+        function resetToDefault() { 
+            // Reset materials data 
+            appData.materials = JSON.parse(JSON.stringify(defaultData.materials)); 
+             
+            // Reset inputs data 
+            appData.inputs = JSON.parse(JSON.stringify(defaultData.inputs)); 
+             
+            // Reset blast parameters 
+            appData.blastParams = JSON.parse(JSON.stringify(defaultData.blastParams)); 
+             
+            // Reset hearth data 
+            appData.hearthData = JSON.parse(JSON.stringify(defaultData.hearthData)); 
+             
+            // Re-initialize views 
+            initializeMaterialsView(); 
+            initializeInputsView(); 
+            initializeBlastParamsView(); 
+            initializeHearthStatusView(); 
+             
+            // Recalculate everything 
+            calculateInputs(); 
+            calculateAll(); 
+            calculateBlastParameters(); 
+            calculateHearth(); 
+             
+            // Update trend chart if visible 
+            if (document.getElementById('coke_rate_trend-view').classList.contains('active')) { 
+                updateTrendChart(); 
+            } 
+             
+            // Update status 
+            updateStatus("All values have been reset to default"); 
+        } 
+        // Set current values as default 
+        function setCurrentAsDefault() { 
+            // Update default values with current values 
+            defaultData.materials = JSON.parse(JSON.stringify(appData.materials)); 
+            defaultData.inputs = JSON.parse(JSON.stringify(appData.inputs)); 
+            defaultData.blastParams = JSON.parse(JSON.stringify(appData.blastParams)); 
+            defaultData.hearthData = JSON.parse(JSON.stringify(appData.hearthData)); 
+             
+            // Update status 
+            updateStatus("Current values have been set as new default"); 
+        } 
+        // Initialize Materials View 
+        function initializeMaterialsView() { 
+            const tbody = document.getElementById('materials-tbody'); 
+            tbody.innerHTML = ''; 
+             
+            const materialsList = Object.keys(appData.materials); 
+            const properties = ["C", "Moisture", "FE", "SiO2", "CAO", "MGO", "AL203", "Density"]; 
+             
+            materialsList.forEach(material => { 
+                const row = document.createElement('tr'); 
+                 
+                // Material name 
+                const nameCell = document.createElement('td'); 
+                nameCell.textContent = material; 
+                nameCell.style.fontWeight = 'bold'; 
+                row.appendChild(nameCell); 
+                 
+                // Properties 
+                properties.forEach(prop => { 
+                    const cell = document.createElement('td'); 
+                    const input = document.createElement('input'); 
+                    input.type = 'text'; 
+                    input.value = appData.materials[material][prop]; 
+                    // Changed from blur to input for real-time calculation 
+                    input.addEventListener('input', function() { 
+                        updateMaterialProperty(material, prop, this.value); 
+                    }); 
+                    cell.appendChild(input); 
+                    row.appendChild(cell); 
+                }); 
+                 
+                tbody.appendChild(row); 
+            }); 
+        } 
+        // Update material property 
+        function updateMaterialProperty(material, property, value) { 
+            appData.materials[material][property] = value; 
+             
+            // Trigger calculations 
+            calculateInputs(); 
+            calculateAll(); 
+             
+            // Update shift material properties if needed 
+            if (property === "Moisture" || property === "FE") { 
+                syncShiftMaterialProperties(); 
+            } 
+             
+            updateStatus(`Updated ${material} ${property}. All calculations updated automatically.`); 
+        } 
+        // Initialize Inputs View 
+        function initializeInputsView() { 
+            const tbody = document.getElementById('inputs-tbody'); 
+            tbody.innerHTML = ''; 
+             
+            const inputsList = Object.keys(appData.inputs); 
+             
+            inputsList.forEach(material => { 
+                const row = document.createElement('tr'); 
+                 
+                // Material name 
+                const nameCell = document.createElement('td'); 
+                nameCell.textContent = material; 
+                nameCell.style.fontWeight = 'bold'; 
+                row.appendChild(nameCell); 
+                 
+                // Weight input 
+                const weightCell = document.createElement('td'); 
+                const weightInput = document.createElement('input'); 
+                weightInput.type = 'text'; 
+                weightInput.value = appData.inputs[material].Weight; 
+                // Changed from blur to input for real-time calculation 
+                weightInput.addEventListener('input', function() { 
+                    updateInputWeight(material, this.value); 
+                }); 
+                weightCell.appendChild(weightInput); 
+                row.appendChild(weightCell); 
+                 
+                // Calculated values (placeholder) 
+                for (let i = 0; i < 8; i++) { 
+                    const cell = document.createElement('td'); 
+                    cell.className = 'calculated'; 
+                    cell.id = `input-${material}-${i}`; 
+                    row.appendChild(cell); 
+                } 
+                 
+                tbody.appendChild(row); 
+            }); 
+        } 
+        // Update input weight 
+        function updateInputWeight(material, value) { 
+            appData.inputs[material].Weight = value; 
+             
+            // Trigger calculations 
+            calculateInputs(); 
+            calculateAll(); 
+             
+            updateStatus(`Updated ${material} Weight. All calculations updated automatically.`); 
+        } 
+        // Initialize Results View 
+        function initializeResultsView() { 
+            // Hot Metal,Percentages,Ratio & Rates 
+            const consumptionRates = [ 
+                "Hot Metal", "Coke Rate", "Slag Rate", "PCI Rate", "Ncoke Rate", "Fuel Rate",  
+                "Sinter %", "Ore %", "Pellets %", "Scrap %", "Coke %", "Ore/Coke" 
+            ]; 
+             
+            const consumptionContainer = document.getElementById('consumption-rates'); 
+            consumptionContainer.innerHTML = ''; 
+             
+            consumptionRates.forEach(rate => { 
+                const item = document.createElement('div'); 
+                item.className = 'result-item'; 
+                 
+                const label = document.createElement('div'); 
+                label.className = 'result-label'; 
+                 
+                // Removed all icons from result labels 
+                label.textContent = `${rate}:`; 
+                 
+                const value = document.createElement('div'); 
+                value.className = 'result-value'; 
+                value.id = `result-${rate.replace(/\s+/g, '-')}`; 
+                 
+                item.appendChild(label); 
+                item.appendChild(value); 
+                consumptionContainer.appendChild(item); 
+            }); 
+             
+            // Input Totals 
+            const inputTotals = [ 
+                "Total Weight", "Total Dry Weight", "Total Fe Input", "Total SiO2", "Total CaO",  
+                "Total MgO", "Total Al2O3", "Slag Weight", "Slag Basicity", "Alumina Ratio",  
+                "CaO/SiO2", "MgO/SiO2" 
+            ]; 
+             
+            const totalsContainer = document.getElementById('input-totals'); 
+            totalsContainer.innerHTML = ''; 
+             
+            inputTotals.forEach(total => { 
+                const item = document.createElement('div'); 
+                item.className = 'result-item'; 
+                 
+                const label = document.createElement('div'); 
+                label.className = 'result-label'; 
+                 
+                // Removed all icons from result labels 
+                label.textContent = `${total}:`; 
+                 
+                const value = document.createElement('div'); 
+                value.className = 'result-value'; 
+                value.id = `result-${total.replace(/\s+/g, '-')}`; 
+                 
+                item.appendChild(label); 
+                item.appendChild(value); 
+                totalsContainer.appendChild(item); 
+            }); 
+             
+            // Volume Calculations 
+            const volumeCalculations = [ 
+                "Coke Volume", "Ncoke Volume", "Total Iron Bearing Vol", "Sinter Volume",  
+                "Ore Volume", "Pellets Volume", "Scrap Volume", "Total Volume", "Fe/C Ratio" 
+            ]; 
+             
+            const volumeContainer = document.getElementById('volume-calculations'); 
+            volumeContainer.innerHTML = ''; 
+             
+            volumeCalculations.forEach(vol => { 
+                const item = document.createElement('div'); 
+                item.className = 'result-item'; 
+                 
+                const label = document.createElement('div'); 
+                label.className = 'result-label'; 
+                 
+                // Removed all icons from result labels 
+                label.textContent = `${vol}:`; 
+                 
+                const value = document.createElement('div'); 
+                value.className = 'result-value'; 
+                value.id = `result-${vol.replace(/\s+/g, '-')}`; 
+                 
+                item.appendChild(label); 
+                item.appendChild(value); 
+                volumeContainer.appendChild(item); 
+            }); 
+             
+            // Burden_Wt Details 
+            const productionMetrics = [ 
+                "Total Iron Bearing Wt", "Sinter Weight", "Ore Weight", "Pellets Weight",  
+                "Scrap Weight", "Productivity", "Specific Consumption", "Yield", "Total C Input",  
+                "C in Hot Metal", "C in Gas", "C Efficiency" 
+            ]; 
+             
+            const metricsContainer = document.getElementById('production-metrics'); 
+            metricsContainer.innerHTML = ''; 
+             
+            productionMetrics.forEach(metric => { 
+                const item = document.createElement('div'); 
+                item.className = 'result-item'; 
+                 
+                const label = document.createElement('div'); 
+                label.className = 'result-label'; 
+                 
+                // Removed all icons from result labels 
+                label.textContent = `${metric}:`; 
+                 
+                const value = document.createElement('div'); 
+                value.className = 'result-value'; 
+                value.id = `result-${metric.replace(/\s+/g, '-')}`; 
+                 
+                item.appendChild(label); 
+                item.appendChild(value); 
+                metricsContainer.appendChild(item); 
+            }); 
+        } 
+        // Initialize Blast Parameters View 
+        function initializeBlastParamsView() { 
+            // Blast Parameters 
+            const blastParams = [ 
+                "Blast Volume", "O2 Enrichment", "Blast Temperature", "Top Pressure", "Blast Pressure",  
+                "Humidity", "Basicity", "Al₂O₃", "Nos Of Tuyeres", "Gas Generation", "Hearth Area", "HMT" 
+            ]; 
+             
+            const blastContainer = document.getElementById('blast-params'); 
+            blastContainer.innerHTML = ''; 
+             
+            blastParams.forEach(param => { 
+                const item = document.createElement('div'); 
+                item.className = 'param-item'; 
+                 
+                const label = document.createElement('div'); 
+                label.className = 'param-label'; 
+                 
+                // Add appropriate icon based on the parameter type 
+                let icon = 'fas fa-sliders-h'; 
+                if (param.includes('Volume')) icon = 'fas fa-expand-arrows-alt'; 
+                else if (param.includes('Temperature')) icon = 'fas fa-thermometer-half'; 
+                else if (param.includes('Pressure')) icon = 'fas fa-tachometer-alt'; 
+                else if (param.includes('Humidity')) icon = 'fas fa-tint'; 
+                else if (param.includes('Tuyeres')) icon = 'fas fa-circle'; 
+                else if (param.includes('Gas')) icon = 'fas fa-wind'; 
+                else if (param.includes('Area')) icon = 'fas fa-vector-square'; 
+                 
+                label.innerHTML = `<i class="${icon}"></i> ${param}:`; 
+                 
+                const input = document.createElement('input'); 
+                input.className = 'param-input'; 
+                input.type = 'text'; 
+                input.value = appData.blastParams[param]; 
+                // Changed from blur to input for real-time calculation 
+                input.addEventListener('input', function() { 
+                    updateBlastParam(param, this.value); 
+                }); 
+                 
+                item.appendChild(label); 
+                item.appendChild(input); 
+                blastContainer.appendChild(item); 
+            }); 
+             
+            // Outputs 
+            const derivedParams = [ 
+                "DP", "Tuyere Velocity", "Raceway Flame Temp", "Hot Metal", "O2 %", "Silicon%",  
+                "Furnace Resistance", "Furnace Permeability" 
+            ]; 
+             
+            const derivedContainer = document.getElementById('derived-params'); 
+            derivedContainer.innerHTML = ''; 
+             
+            derivedParams.forEach(param => { 
+                const item = document.createElement('div'); 
+                item.className = 'param-item'; 
+                 
+                const label = document.createElement('div'); 
+                label.className = 'param-label'; 
+                 
+                // Add appropriate icon based on the parameter type 
+                let icon = 'fas fa-chart-line'; 
+                if (param.includes('Velocity')) icon = 'fas fa-tachometer-alt'; 
+                else if (param.includes('Temp')) icon = 'fas fa-thermometer-half'; 
+                else if (param.includes('Hot Metal')) icon = 'fas fa-fire'; 
+                else if (param.includes('%')) icon = 'fas fa-percentage'; 
+                else if (param.includes('Resistance')) icon = 'fas fa-compress-arrows-alt'; 
+                else if (param.includes('Permeability')) icon = 'fas fa-filter'; 
+                 
+                label.innerHTML = `<i class="${icon}"></i> ${param}:`; 
+                 
+                const value = document.createElement('div'); 
+                value.className = 'param-value'; 
+                value.id = `blast-${param.replace(/\s+/g, '-')}`; 
+                value.textContent = appData.blastParams[param]; 
+                 
+                item.appendChild(label); 
+                item.appendChild(value); 
+                derivedContainer.appendChild(item); 
+            }); 
+        } 
+        // Update blast parameter 
+        function updateBlastParam(param, value) { 
+            appData.blastParams[param] = value; 
+            calculateBlastParameters(); 
+            updateStatus(`Updated ${param}. Blast parameters recalculated automatically.`); 
+        } 
+        // Initialize Shift Production View 
+        function initializeShiftProductionView() { 
+            // Define shift data 
+            const shifts = [ 
+                {id: "A", name: "A", hours: ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00"]}, 
+                {id: "B", name: "B", hours: ["15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]}, 
+                {id: "C", name: "C", hours: ["23:00", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00"]} 
+            ]; 
+             
+            // Initialize shift data storage 
+            shifts.forEach(shift => { 
+                shift.hours.forEach(hour => { 
+                    const key = `${shift.id}-${hour}`; 
+                    if (!appData.shiftData[key]) { 
+                        appData.shiftData[key] = [hour, shift.name, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]; 
+                    } 
+                }); 
+            }); 
+             
+            // Populate shift table 
+            populateShiftTable('all'); 
+             
+            // Calculate initial shift report 
+            calculateShiftReport(); 
+        } 
+        // Initialize Coke Rate Trend View 
+        function initializeCokeRateTrendView() { 
+            // Initialize the chart when the view is first created 
+            // The actual chart will be created when the view is shown 
+        } 
+        // Initialize Hearth Status View 
+        function initializeHearthStatusView() { 
+            // Set the values from appData.hearthData 
+            Object.keys(appData.hearthData).forEach(param => { 
+                const element = document.getElementById(param); 
+                if (element) { 
+                    element.value = appData.hearthData[param]; 
+                } 
+            }); 
+             
+            // Calculate initial hearth status 
+            calculateHearth(); 
+        } 
+        // Populate shift table 
+        function populateShiftTable(shiftFilter) { 
+            const tbody = document.getElementById('shift-tbody'); 
+            tbody.innerHTML = ''; 
+             
+            // Define shift data 
+            const shifts = [ 
+                {id: "A", name: "A", hours: ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00"]}, 
+                {id: "B", name: "B", hours: ["15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]}, 
+                {id: "C", name: "C", hours: ["23:00", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00"]} 
+            ]; 
+             
+            // Determine which shifts to show 
+            let shiftsToShow = shifts; 
+            if (shiftFilter !== 'all') { 
+                shiftsToShow = shifts.filter(shift => shift.id === shiftFilter); 
+            } 
+             
+            // Create rows for each shift and hour 
+            shiftsToShow.forEach(shift => { 
+                shift.hours.forEach(hour => { 
+                    const key = `${shift.id}-${hour}`; 
+                    const values = appData.shiftData[key]; 
+                     
+                    const row = document.createElement('tr'); 
+                    // Apply shift color class to the row 
+                    row.classList.add(`shift-${shift.id.toLowerCase()}-row`); 
+                     
+                    // Add cells 
+                    values.forEach((value, col) => { 
+                        const cell = document.createElement('td'); 
+                        if (col < 2) {  // Hour and Shift (non-editable) 
+                            cell.textContent = value; 
+                        } else if (col <= 10) {  // Editable values 
+                            const input = document.createElement('input'); 
+                            input.type = 'text'; 
+                            input.value = value; 
+                            // Changed from blur to input for real-time calculation 
+                            input.addEventListener('input', function() { 
+                                updateShiftEntry(key, col, this.value); 
+                            }); 
+                            cell.appendChild(input); 
+                        } else {  // Calculated values 
+                            cell.className = 'calculated'; 
+                            cell.id = `shift-${key}-${col}`; 
+                            cell.textContent = value; 
+                        } 
+                        row.appendChild(cell); 
+                    }); 
+                     
+                    tbody.appendChild(row); 
+                }); 
+            }); 
+             
+            // Recalculate all rows 
+            recalculateAllShiftRows(); 
+        } 
+        // Filter shift columns 
+        function filterShiftColumns() { 
+            const shiftFilter = document.getElementById('shift-filter').value; 
+            populateShiftTable(shiftFilter); 
+            calculateShiftReport(); 
+            updateStatus(`Showing data for ${shiftFilter === 'all' ? 'All Shifts' : 'Shift ' + shiftFilter}`); 
+        } 
+        // Update shift entry 
+        function updateShiftEntry(key, column, value) { 
+            // Update the stored value 
+            appData.shiftData[key][column] = value; 
+             
+            // Recalculate this row 
+            calculateShiftRow(key); 
+             
+            // Recalculate the shift report 
+            calculateShiftReport(); 
+             
+            // Update trend chart if visible 
+            if (document.getElementById('coke_rate_trend-view').classList.contains('active')) { 
+                updateTrendChart(); 
+            } 
+             
+            updateStatus("Updated shift data. Calculations updated automatically."); 
+        } 
+        // Calculate inputs 
+        function calculateInputs() { 
+            Object.keys(appData.inputs).forEach(material => { 
+                const weight = safeParseFloat(appData.inputs[material].Weight); 
+                const moisture = safeParseFloat(appData.materials[material].Moisture); 
+                const moistureAdj = 1 - (moisture / 100); 
+                const dryWeight = weight * moistureAdj; 
+                 
+                // Update the inputs view 
+                const row = document.querySelector(`#inputs-tbody tr:nth-child(${Object.keys(appData.inputs).indexOf(material) + 1})`); 
+                if (row) { 
+                    // Update calculated values 
+                    row.cells[2].textContent = moistureAdj.toFixed(2);  // Moisture Adj. 
+                    row.cells[3].textContent = dryWeight.toFixed(1);     // Dry Weight 
+                     
+                    // Calculate element inputs 
+                    const fe = safeParseFloat(appData.materials[material].FE); 
+                    const c = safeParseFloat(appData.materials[material].C); 
+                    const sio2 = safeParseFloat(appData.materials[material].SiO2); 
+                    const cao = safeParseFloat(appData.materials[material].CAO); 
+                    const mgo = safeParseFloat(appData.materials[material].MGO); 
+                    const al2o3 = safeParseFloat(appData.materials[material].AL203); 
+                     
+                    row.cells[4].textContent = (dryWeight * fe / 100).toFixed(1);    // Fe Input 
+                    row.cells[5].textContent = (dryWeight * c / 100).toFixed(1);     // C Input 
+                    row.cells[6].textContent = (dryWeight * sio2 / 100).toFixed(1);  // SiO2 Input 
+                    row.cells[7].textContent = (dryWeight * cao / 100).toFixed(1);   // CaO Input 
+                    row.cells[8].textContent = (dryWeight * mgo / 100).toFixed(1);   // MgO Input 
+                    row.cells[9].textContent = (dryWeight * al2o3 / 100).toFixed(1); // Al2O3 Input 
+                } 
+            }); 
+        } 
+        // Calculate blast parameters 
+        function calculateBlastParameters() { 
+            // Calculate DP 
+            const blastPressure = safeParseFloat(appData.blastParams["Blast Pressure"]); 
+            const topPressure = safeParseFloat(appData.blastParams["Top Pressure"]); 
+            const dp = blastPressure - topPressure; 
+            appData.blastParams["DP"] = dp.toFixed(2); 
+             
+            // Calculate Raceway Flame Temp 
+            const blastTemp = safeParseFloat(appData.blastParams["Blast Temperature"]); 
+            const o2Enrich = safeParseFloat(appData.blastParams["O2 Enrichment"]); 
+            const humidity = safeParseFloat(appData.blastParams["Humidity"]); 
+            const flameTemp = blastTemp + (o2Enrich * 10) - (humidity * 2); 
+            appData.blastParams["Raceway Flame Temp"] = flameTemp.toFixed(1); 
+             
+            // Calculate Tuyere Velocity 
+            const blastVolume = safeParseFloat(appData.blastParams["Blast Volume"]); 
+            const tuyereArea = 0.1; 
+            const velocity = (blastVolume / 60) / tuyereArea; 
+            appData.blastParams["Tuyere Velocity"] = velocity.toFixed(1); 
+             
+            // Calculate Hot Metal 
+            const hotmetalPerd = ((blastVolume * 0.020) + (o2Enrich * 0.015)); 
+            appData.blastParams["Hot Metal"] = hotmetalPerd.toFixed(1); 
+             
+            // Calculate O2 % 
+            const o2EnrichmentValue = safeParseFloat(appData.blastParams["O2 Enrichment"]); 
+            const blastVolumeValue = safeParseFloat(appData.blastParams["Blast Volume"]); 
+            if (blastVolumeValue > 0) { 
+                const normalAirO2 = blastVolumeValue * 0.21; 
+                const totalO2 = normalAirO2 + o2EnrichmentValue; 
+                const o2Percentage = (totalO2 / blastVolumeValue) * 100; 
+                appData.blastParams["O2 %"] = o2Percentage.toFixed(1); 
+            } else { 
+                appData.blastParams["O2 %"] = "0"; 
+            } 
+             
+            // Calculate Silicon% 
+            const hmt = safeParseFloat(appData.blastParams["HMT"]); 
+            const basicity = safeParseFloat(appData.blastParams["Basicity"]); 
+            const al2o3 = safeParseFloat(appData.blastParams["Al₂O₃"]); 
+            const siliconPercent = ( -2.15 + (0.0018 * hmt) + (0.15 * basicity) + (0.025 * al2o3) - (0.008 * humidity) ); 
+            appData.blastParams["Silicon%"] = siliconPercent.toFixed(2); 
+             
+            // Calculate Furnace Resistance and Permeability 
+            const hotBlastPr = safeParseFloat(appData.blastParams["Blast Pressure"]); 
+            const hbvol = safeParseFloat(appData.blastParams["Blast Volume"]); 
+            const hbt = safeParseFloat(appData.blastParams["Blast Temperature"]); 
+            const nosTuyeres = safeParseFloat(appData.blastParams["Nos Of Tuyeres"]); 
+            const topPr = safeParseFloat(appData.blastParams["Top Pressure"]); 
+            const topgasVol = safeParseFloat(appData.blastParams["Gas Generation"]); 
+            const hearthArea = safeParseFloat(appData.blastParams["Hearth Area"]); 
+             
+            const topgasVolPerMin = topgasVol / 60; 
+            const shaftgasVol = topgasVolPerMin / hearthArea; 
+             
+            const pdsTuyere = (10**-8) * 6.5 * (hbt + 273.16) / (hotBlastPr + 1.003) * ((hbvol / 60 / nosTuyeres) ** 2); 
+             
+            const term1 = (hotBlastPr - pdsTuyere + 1.003) ** 2; 
+            const term2 = (topPr + 1.003) ** 2; 
+            const term3 = (term1 - term2) ** 0.588235294; 
+            const fceResistance = (term3 * 10000) / shaftgasVol; 
+             
+            const term4 = (hotBlastPr - pdsTuyere + 1.003) ** 2; 
+            const term5 = (topPr + 1.003) ** 2; 
+            const permeability = (shaftgasVol ** 1.7) / (term4 - term5); 
+             
+            appData.blastParams["Furnace Resistance"] = fceResistance.toFixed(1); 
+            appData.blastParams["Furnace Permeability"] = permeability.toFixed(1); 
+             
+            // Update the Outputs fields 
+            derivedBlastParams.forEach(param => { 
+                const element = document.getElementById(`blast-${param.replace(/\s+/g, '-')}`); 
+                if (element) { 
+                    element.textContent = appData.blastParams[param]; 
+                } 
+            }); 
+        } 
+        // Calculate all results 
+        function calculateAll() { 
+            // Calculate totals 
+            const totals = { 
+                weight: 0, 
+                dryWeight: 0, 
+                fe: 0, 
+                c: 0, 
+                sio2: 0, 
+                cao: 0, 
+                mgo: 0, 
+                al2o3: 0, 
+                cokeDryWeight: 0, 
+                pciDryWeight: 0, 
+                ncokeDryWeight: 0 
+            }; 
+             
+            // Calculate inputs for each material 
+            Object.keys(appData.inputs).forEach(material => { 
+                const weight = safeParseFloat(appData.inputs[material].Weight); 
+                const moisture = safeParseFloat(appData.materials[material].Moisture); 
+                const moistureAdj = 1 - (moisture / 100); 
+                const dryWeight = weight * moistureAdj; 
+                 
+                totals.weight += weight; 
+                totals.dryWeight += dryWeight; 
+                 
+                // Calculate element inputs 
+                const fe = safeParseFloat(appData.materials[material].FE); 
+                const c = safeParseFloat(appData.materials[material].C); 
+                const sio2 = safeParseFloat(appData.materials[material].SiO2); 
+                const cao = safeParseFloat(appData.materials[material].CAO); 
+                const mgo = safeParseFloat(appData.materials[material].MGO); 
+                const al2o3 = safeParseFloat(appData.materials[material].AL203); 
+                 
+                totals.fe += dryWeight * fe / 100; 
+                totals.c += dryWeight * c / 100; 
+                totals.sio2 += dryWeight * sio2 / 100; 
+                totals.cao += dryWeight * cao / 100; 
+                totals.mgo += dryWeight * mgo / 100; 
+                totals.al2o3 += dryWeight * al2o3 / 100; 
+                 
+                // Store dry weights for specific materials 
+                if (material === "COKE") { 
+                    totals.cokeDryWeight = dryWeight; 
+                } else if (material === "PCI") { 
+                    totals.pciDryWeight = dryWeight; 
+                } else if (material === "NCOKE") { 
+                    totals.ncokeDryWeight = dryWeight; 
+                } 
+            }); 
+             
+            // Calculate volumes 
+            const volumes = { 
+                coke: totals.cokeDryWeight / safeParseFloat(appData.materials["COKE"].Density), 
+                ncoke: totals.ncokeDryWeight / safeParseFloat(appData.materials["NCOKE"].Density), 
+                sinter: safeParseFloat(appData.inputs["SINTER"].Weight) / safeParseFloat(appData.materials["SINTER"].Density), 
+                ore: safeParseFloat(appData.inputs["ORE"].Weight) / safeParseFloat(appData.materials["ORE"].Density), 
+                pellets: safeParseFloat(appData.inputs["PELLETS"].Weight) / safeParseFloat(appData.materials["PELLETS"].Density), 
+                scrap: safeParseFloat(appData.inputs["SCRAP"].Weight) / safeParseFloat(appData.materials["SCRAP"].Density) 
+            }; 
+             
+            const ironBearingMaterials = ["SINTER", "ORE", "PELLETS", "SCRAP"]; 
+            const totalIronBearingWeight = ironBearingMaterials.reduce((sum, mat) => sum + safeParseFloat(appData.inputs[mat].Weight), 0); 
+            const totalIronBearingVol = ["sinter", "ore", "pellets", "scrap"].reduce((sum, mat) => sum + volumes[mat], 0); 
+            const totalVol = volumes.coke + volumes.ncoke + totalIronBearingVol; 
+            const ocRatio = totalIronBearingWeight / Math.max(safeParseFloat(appData.inputs["COKE"].Weight), 1); 
+             
+            // Calculate Burden_Wt Details 
+            const hmProduction = totals.fe / 0.945; 
+            const cokeRate = (totals.cokeDryWeight * 1000) / Math.max(hmProduction, 1); 
+            const ncokeRate = (totals.ncokeDryWeight * 1000) / Math.max(hmProduction, 1); 
+            const pciRate = (totals.pciDryWeight * 1000) / Math.max(hmProduction, 1); 
+            const fuelRate = cokeRate + ncokeRate + pciRate; 
+            const cInHm = hmProduction * 0.045; 
+            const cInGas = totals.c - cInHm; 
+            const cEfficiency = (cInHm / Math.max(totals.c, 1)) * 100; 
+            const slagWeight = totals.sio2 + totals.cao + totals.mgo + totals.al2o3; 
+             
+            // Calculate ratios 
+            const feCRatio = totals.fe / Math.max(totals.c, 1); 
+            const slagBasicity = (totals.cao + totals.mgo) / Math.max(totals.sio2, 1); 
+            const aluminaRatio = totals.al2o3 / Math.max((totals.cao + totals.mgo), 1); 
+            const caoSio2 = totals.cao / Math.max(totals.sio2, 1); 
+            const mgoSio2 = totals.mgo / Math.max(totals.sio2, 1); 
+             
+            // Calculate percentages 
+            const sinterPct = (safeParseFloat(appData.inputs["SINTER"].Weight) / Math.max(totalIronBearingWeight, 1)) * 100; 
+            const orePct = (safeParseFloat(appData.inputs["ORE"].Weight) / Math.max(totalIronBearingWeight, 1)) * 100; 
+            const pelletsPct = (safeParseFloat(appData.inputs["PELLETS"].Weight) / Math.max(totalIronBearingWeight, 1)) * 100; 
+            const scrapPct = (safeParseFloat(appData.inputs["SCRAP"].Weight) / Math.max(totalIronBearingWeight, 1)) * 100; 
+            const cokePct = (safeParseFloat(appData.inputs["COKE"].Weight) / Math.max(totals.weight, 1)) * 100; 
+             
+            // Calculate productivity metrics 
+            const productivity = hmProduction / 1493; 
+            const specificConsumption = totals.weight / Math.max(hmProduction / 1000, 1); 
+            const yieldPct = (hmProduction / Math.max(totals.fe, 1)) * 100; 
+             
+            // Update results display 
+            updateResult("Hot Metal", hmProduction.toFixed(1)); 
+            updateResult("Coke Rate", cokeRate.toFixed(1)); 
+            updateResult("Slag Rate", (slagWeight * 1000 / Math.max(hmProduction, 1)).toFixed(1)); 
+            updateResult("PCI Rate", pciRate.toFixed(1)); 
+            updateResult("Ncoke Rate", ncokeRate.toFixed(1)); 
+            updateResult("Fuel Rate", fuelRate.toFixed(2)); 
+            updateResult("Sinter %", sinterPct.toFixed(1)); 
+            updateResult("Ore %", orePct.toFixed(1)); 
+            updateResult("Pellets %", pelletsPct.toFixed(1)); 
+            updateResult("Scrap %", scrapPct.toFixed(1)); 
+            updateResult("Coke %", cokePct.toFixed(1)); 
+            updateResult("Ore/Coke", ocRatio.toFixed(2)); 
+             
+            updateResult("Total Weight", totals.weight.toFixed(1)); 
+            updateResult("Total Dry Weight", totals.dryWeight.toFixed(1)); 
+            updateResult("Total Fe Input", totals.fe.toFixed(1)); 
+            updateResult("Total SiO2", totals.sio2.toFixed(1)); 
+            updateResult("Total CaO", totals.cao.toFixed(1)); 
+            updateResult("Total MgO", totals.mgo.toFixed(1)); 
+            updateResult("Total Al2O3", totals.al2o3.toFixed(1)); 
+            updateResult("Slag Weight", slagWeight.toFixed(1)); 
+            updateResult("Slag Basicity", slagBasicity.toFixed(2)); 
+            updateResult("Alumina Ratio", aluminaRatio.toFixed(2)); 
+            updateResult("CaO/SiO2", caoSio2.toFixed(2)); 
+            updateResult("MgO/SiO2", mgoSio2.toFixed(2)); 
+             
+            updateResult("Coke Volume", volumes.coke.toFixed(2)); 
+            updateResult("Ncoke Volume", volumes.ncoke.toFixed(2)); 
+            updateResult("Total Iron Bearing Vol", totalIronBearingVol.toFixed(2)); 
+            updateResult("Sinter Volume", volumes.sinter.toFixed(2)); 
+            updateResult("Ore Volume", volumes.ore.toFixed(2)); 
+            updateResult("Pellets Volume", volumes.pellets.toFixed(2)); 
+            updateResult("Scrap Volume", volumes.scrap.toFixed(2)); 
+            updateResult("Total Volume", totalVol.toFixed(2)); 
+            updateResult("Fe/C Ratio", feCRatio.toFixed(2)); 
+             
+            updateResult("Total Iron Bearing Wt", totalIronBearingWeight.toFixed(1)); 
+            updateResult("Sinter Weight", safeParseFloat(appData.inputs["SINTER"].Weight).toFixed(1)); 
+            updateResult("Ore Weight", safeParseFloat(appData.inputs["ORE"].Weight).toFixed(1)); 
+            updateResult("Pellets Weight", safeParseFloat(appData.inputs["PELLETS"].Weight).toFixed(1)); 
+            updateResult("Scrap Weight", safeParseFloat(appData.inputs["SCRAP"].Weight).toFixed(1)); 
+            updateResult("Productivity", productivity.toFixed(2)); 
+            updateResult("Specific Consumption", specificConsumption.toFixed(1)); 
+            updateResult("Total C Input", totals.c.toFixed(1)); 
+            updateResult("Yield", yieldPct.toFixed(1)); 
+            updateResult("C in Hot Metal", cInHm.toFixed(1)); 
+            updateResult("C in Gas", cInGas.toFixed(1)); 
+            updateResult("C Efficiency", cEfficiency.toFixed(1)); 
+        } 
+        // Update result 
+        function updateResult(field, value) { 
+            const element = document.getElementById(`result-${field.replace(/\s+/g, '-')}`); 
+            if (element) { 
+                element.textContent = value; 
+            } 
+        } 
+        // Sync shift material properties with main materials 
+        function syncShiftMaterialProperties() { 
+            // Map the material names from the materials object to the shiftMaterialProperties keys 
+            const materialMapping = { 
+                'COKE': 'coke', 
+                'SINTER': 'sinter', 
+                'ORE': 'ironOre', 
+                'PELLETS': 'pellets', 
+                'SCRAP': 'scraps', 
+                'PCI': 'pci', 
+                'NCOKE': 'nutCoke' 
+            }; 
+             
+            // Update shiftMaterialProperties with values from materials 
+            Object.keys(materialMapping).forEach(materialName => { 
+                const shiftKey = materialMapping[materialName]; 
+                if (appData.materials[materialName] && appData.shiftMaterialProperties[shiftKey]) { 
+                    appData.shiftMaterialProperties[shiftKey].moisture = safeParseFloat(appData.materials[materialName].Moisture); 
+                    appData.shiftMaterialProperties[shiftKey].fe = safeParseFloat(appData.materials[materialName].FE); 
+                     
+                    // Also update C content if it exists in shiftMaterialProperties 
+                    if ('c' in appData.shiftMaterialProperties[shiftKey]) { 
+                        appData.shiftMaterialProperties[shiftKey].c = safeParseFloat(appData.materials[materialName].C); 
+                    } 
+                } 
+            }); 
+             
+            // Recalculate all shift rows with updated properties 
+            recalculateAllShiftRows(); 
+            updateStatus("Shift material properties synchronized with main materials"); 
+        } 
+        // Calculate shift row 
+        function calculateShiftRow(key) { 
+            const values = appData.shiftData[key]; 
+             
+            // Get material inputs from the row 
+            const coke = safeParseFloat(values[2]); 
+            const sinter = safeParseFloat(values[3]); 
+            const ironOre = safeParseFloat(values[4]); 
+            const pellets = safeParseFloat(values[5]); 
+            const scraps = safeParseFloat(values[6]); 
+            const nutCoke = safeParseFloat(values[7]); 
+            const pci = safeParseFloat(values[8]); 
+            const cbVolume = safeParseFloat(values[9]);  // CB Volume 
+            const o2Volume = safeParseFloat(values[10]); // O2 Enrichment Volume 
+             
+            // Calculate hot metal 
+            const inputs = { 
+                "coke": coke, 
+                "sinter": sinter, 
+                "ironOre": ironOre, 
+                "pellets": pellets, 
+                "scraps": scraps, 
+                "nutCoke": nutCoke, 
+                "pci": pci 
+            }; 
+            const hotMetal = calculateHotMetal(inputs); 
+             
+            // Calculate rates 
+            const cokeRate = calculateRates("coke", coke, hotMetal); 
+            const nutCokeRate = calculateRates("nutCoke", nutCoke, hotMetal); 
+            const pciRate = calculateRates("pci", pci, hotMetal); 
+            const fuelRate = cokeRate + nutCokeRate + pciRate; 
+             
+            // Calculate SPO2 Rate using CB Volume (21% O2) + O2 Enrichment Volume 
+            const oxygenRate = calculateOxygenRate(cbVolume, o2Volume, hotMetal); 
+             
+            // Update the calculated values 
+            values[11] = hotMetal.toFixed(1);      // Hot Metal 
+            values[12] = cokeRate.toFixed(0);       // Coke Rate 
+            values[13] = nutCokeRate.toFixed(0);   // NC Rate 
+            values[14] = pciRate.toFixed(0);        // PCI Rate 
+            values[15] = fuelRate.toFixed(0);       // Fuel Rate 
+            values[16] = oxygenRate.toFixed(0);     // SPO2 Rate 
+             
+            // Update the stored values in shiftData 
+            appData.shiftData[key] = values; 
+             
+            // Update the table cells 
+            for (let col = 11; col <= 16; col++) { 
+                const cell = document.getElementById(`shift-${key}-${col}`); 
+                if (cell) { 
+                    cell.textContent = values[col]; 
+                } 
+            } 
+        } 
+        // Recalculate all shift rows 
+        function recalculateAllShiftRows() { 
+            Object.keys(appData.shiftData).forEach(key => { 
+                calculateShiftRow(key); 
+            }); 
+             
+            // Update shift report after recalculating all rows 
+            calculateShiftReport(); 
+             
+            // Update trend chart if visible 
+            if (document.getElementById('coke_rate_trend-view').classList.contains('active')) { 
+                updateTrendChart(); 
+            } 
+        } 
+        // Calculate hot metal 
+        function calculateHotMetal(inputs) { 
+            // Calculate total Fe input 
+            let totalFe = 0; 
+            Object.keys(inputs).forEach(material => { 
+                if (appData.shiftMaterialProperties[material]) { 
+                    const props = appData.shiftMaterialProperties[material]; 
+                    const dryWeight = inputs[material] * (1 - props.moisture / 100); 
+                    totalFe += dryWeight * (props.fe / 100); 
+                } 
+            }); 
+             
+            // Calculate hot metal (Fe recovery rate 94.5%) 
+            return totalFe / 0.945; 
+        } 
+        // Calculate rates 
+        function calculateRates(material, inputVal, hotMetal) { 
+            inputVal = safeParseFloat(inputVal); 
+            hotMetal = safeParseFloat(hotMetal); 
+             
+            // Avoid division by zero 
+            if (hotMetal === 0) { 
+                return 0; 
+            } 
+             
+            if (appData.shiftMaterialProperties[material]) { 
+                const props = appData.shiftMaterialProperties[material]; 
+                const dryWeight = inputVal * (1 - props.moisture / 100); 
+                return (dryWeight / hotMetal) * 1000;  // kg per ton of hot metal 
+            } 
+             
+            return 0; 
+        } 
+        // Calculate oxygen rate - updated to include CB Volume 
+        function calculateOxygenRate(cbVolume, o2EnrichmentVolume, hotMetal) { 
+            cbVolume = safeParseFloat(cbVolume); 
+            o2EnrichmentVolume = safeParseFloat(o2EnrichmentVolume); 
+            hotMetal = safeParseFloat(hotMetal); 
+             
+            // Avoid division by zero 
+            if (hotMetal === 0) { 
+                return 0; 
+            } 
+             
+            // Calculate total oxygen: CB Volume (21% O2) + O2 Enrichment Volume 
+            const totalOxygen = (cbVolume * 0.21) + o2EnrichmentVolume; 
+            return totalOxygen / hotMetal;  // Nm³ per ton of hot metal 
+        } 
+        // Calculate hearth status 
+        function calculateHearth() { 
+            // Get input values 
+            const production = parseFloat(document.getElementById('production').value) || 0; 
+            const slagRate = parseFloat(document.getElementById('slagRate').value) || 0; 
+            const hmDensity = parseFloat(document.getElementById('hmDensity').value) || 0; 
+            const slagDensity = parseFloat(document.getElementById('slagDensity').value) || 0; 
+            const hearthVoidage = (parseFloat(document.getElementById('hearthVoidage').value) || 0) / 100; 
+            const hearthDiameter = parseFloat(document.getElementById('hearthDiameter').value) || 0; 
+            const tuyereHeight = parseFloat(document.getElementById('tuyereHeight').value) || 0; 
+             
+            // Store the values in appData.hearthData 
+            appData.hearthData.production = production; 
+            appData.hearthData.slagRate = slagRate; 
+            appData.hearthData.hmDensity = hmDensity; 
+            appData.hearthData.slagDensity = slagDensity; 
+            appData.hearthData.hearthVoidage = hearthVoidage * 100; 
+            appData.hearthData.hearthDiameter = hearthDiameter; 
+            appData.hearthData.tuyereHeight = tuyereHeight; 
+             
+            // Calculate production rate in t/min 
+            const productionRate = production / (24 * 60); // t/min 
+            document.getElementById('productionRate').value = productionRate.toFixed(4) + " t/min"; 
+             
+            // Calculate iron volume 
+            const ironVolume = productionRate / hmDensity; // m³/min 
+            document.getElementById('ironVolume').value = ironVolume.toFixed(4) + " m³/min"; 
+             
+            // Calculate slag volume 
+            const slagVolume = ((slagRate / 1000) * productionRate) / slagDensity; // m³/min 
+            document.getElementById('slagVolume').value = slagVolume.toFixed(4) + " m³/min"; 
+             
+            // Total liquid volume 
+            const totalLiquidVolume = ironVolume + slagVolume; // m³/min 
+            document.getElementById('totalLiquidVolume').value = totalLiquidVolume.toFixed(4) + " m³/min"; 
+             
+            // Calculate hearth area 
+            const hearthArea = Math.PI * Math.pow(hearthDiameter / 2, 2); // m² 
+            document.getElementById('hearthArea').value = hearthArea.toFixed(2) + " m²"; 
+             
+            // Calculate storage capacity 
+            const storageCapacity = hearthVoidage * hearthArea * tuyereHeight; // m³ 
+            document.getElementById('storageCapacity').value = storageCapacity.toFixed(2) + " m³"; 
+             
+            // Calculate time until liquid reaches tuyeres 
+            const timeToTuyeres = storageCapacity / totalLiquidVolume; // minutes 
+            document.getElementById('timeToTuyeres').value = timeToTuyeres.toFixed(0) + " minutes"; 
+        } 
+        // Safely parse float 
+        function safeParseFloat(value) { 
+            const parsed = parseFloat(value); 
+            return isNaN(parsed) ? 0 : parsed; 
+        } 
+        // Shift Report Card Functions 
+        // Function to calculate and populate shift report card 
+        function calculateShiftReport() { 
+            const shiftSummary = { 
+                A: { hotMetal: 0, cokeRate: 0, ncRate: 0, pciRate: 0, fuelRate: 0, spo2Rate: 0, count: 0 }, 
+                B: { hotMetal: 0, cokeRate: 0, ncRate: 0, pciRate: 0, fuelRate: 0, spo2Rate: 0, count: 0 }, 
+                C: { hotMetal: 0, cokeRate: 0, ncRate: 0, pciRate: 0, fuelRate: 0, spo2Rate: 0, count: 0 } 
+            }; 
+             
+            // Aggregate data by shift from the actual shift table data 
+            const shiftTableRows = document.querySelectorAll('#shift-tbody tr'); 
+            shiftTableRows.forEach(row => { 
+                const cells = row.querySelectorAll('td'); 
+                if (cells.length >= 17) { 
+                    const shift = cells[1].textContent; 
+                    if (shiftSummary[shift]) { 
+                        // Get values directly from table cells 
+                        shiftSummary[shift].hotMetal += safeParseFloat(cells[11].textContent); 
+                        shiftSummary[shift].cokeRate += safeParseFloat(cells[12].textContent); 
+                        shiftSummary[shift].ncRate += safeParseFloat(cells[13].textContent); 
+                        shiftSummary[shift].pciRate += safeParseFloat(cells[14].textContent); 
+                        shiftSummary[shift].fuelRate += safeParseFloat(cells[15].textContent); 
+                        shiftSummary[shift].spo2Rate += safeParseFloat(cells[16].textContent); 
+                        shiftSummary[shift].count += 1; 
+                    } 
+                } 
+            }); 
+             
+            // Calculate averages and populate the table 
+            const tbody = document.getElementById('shift-report-tbody'); 
+            tbody.innerHTML = ''; 
+             
+            Object.keys(shiftSummary).forEach(shift => { 
+                const data = shiftSummary[shift]; 
+                if (data.count > 0) { 
+                    const avgCokeRate = data.cokeRate / data.count; 
+                    const avgNcRate = data.ncRate / data.count; 
+                    const avgPciRate = data.pciRate / data.count; 
+                    const avgFuelRate = data.fuelRate / data.count; 
+                    const avgSpo2Rate = data.spo2Rate / data.count; 
+                     
+                    // Create row 
+                    const row = document.createElement('tr'); 
+                     
+                    // Shift cell with color indicator 
+                    const shiftCell = document.createElement('td'); 
+                    shiftCell.innerHTML = ` 
+                        <div style="display: flex; align-items: center;"> 
+                            <div class="legend-color" style="background-color: var(--shift-${shift.toLowerCase()}-color); margin-right: 8px;"></div> 
+                            Shift ${shift} 
+                        </div> 
+                    `; 
+                    row.appendChild(shiftCell); 
+                     
+                    // Add data cells 
+                    addCell(row, data.hotMetal.toFixed(1)); 
+                    addCell(row, avgCokeRate.toFixed(0)); 
+                    addCell(row, avgNcRate.toFixed(0)); 
+                    addCell(row, avgPciRate.toFixed(0)); 
+                    addCell(row, avgFuelRate.toFixed(0)); 
+                    addCell(row, avgSpo2Rate.toFixed(0)); 
+                     
+                    // Performance indicator 
+                    const perfCell = document.createElement('td'); 
+                    let perfClass = 'performance-average'; 
+                    let perfText = 'Average'; 
+                     
+                    if (avgFuelRate < 450) { 
+                        perfClass = 'performance-good'; 
+                        perfText = 'Good'; 
+                    } else if (avgFuelRate > 500) { 
+                        perfClass = 'performance-poor'; 
+                        perfText = 'Poor'; 
+                    } 
+                     
+                    perfCell.innerHTML = ` 
+                        <div style="display: flex; align-items: center;"> 
+                            ${perfText} 
+                            <span class="performance-indicator ${perfClass}"></span> 
+                        </div> 
+                    `; 
+                    row.appendChild(perfCell); 
+                     
+                    tbody.appendChild(row); 
+                } 
+            }); 
+        } 
+        // Helper function to add a cell to a row 
+        function addCell(row, content) { 
+            const cell = document.createElement('td'); 
+            cell.textContent = content; 
+            row.appendChild(cell); 
+        } 
+        // Coke Rate Trend Chart Functions 
+        function updateTrendChart() { 
+            const canvas = document.getElementById('trend-chart'); 
+            if (!canvas) return; 
+             
+            const ctx = canvas.getContext('2d'); 
+            const shiftFilter = document.getElementById('trend-shift-filter').value; 
+             
+            // Prepare data for the chart 
+            const chartData = prepareChartData(shiftFilter); 
+             
+            // Get current theme for chart colors 
+            const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark'; 
+            const textColor = isDarkMode ? '#e0e0e0' : '#333333'; 
+            const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'; 
+             
+            // Destroy existing chart if it exists 
+            if (trendChart) { 
+                trendChart.destroy(); 
+            } 
+             
+            // Create new chart 
+            trendChart = new Chart(ctx, { 
+                type: 'line', 
+                data: chartData, 
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    plugins: { 
+                        title: { 
+                            display: true, 
+                            text: 'Coke Rate Trend Analysis', 
+                            color: textColor, 
+                            font: { 
+                                size: 16, 
+                                weight: 'bold' 
+                            } 
+                        }, 
+                        legend: { 
+                            display: false // We're using a custom legend 
+                        }, 
+                        tooltip: { 
+                            mode: 'index', 
+                            intersect: false, 
+                            backgroundColor: isDarkMode ? 'rgba(30, 30, 30, 0.9)' : 'rgba(255, 255, 255, 0.9)', 
+                            titleColor: textColor, 
+                            bodyColor: textColor, 
+                            borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)', 
+                            borderWidth: 1 
+                        } 
+                    }, 
+                    scales: { 
+                        x: { 
+                            title: { 
+                                display: true, 
+                                text: 'Time (Hours)', 
+                                color: textColor 
+                            }, 
+                            ticks: { 
+                                color: textColor 
+                            }, 
+                            grid: { 
+                                color: gridColor 
+                            } 
+                        }, 
+                        y: { 
+                            title: { 
+                                display: true, 
+                                text: 'Value', 
+                                color: textColor 
+                            }, 
+                            ticks: { 
+                                color: textColor 
+                            }, 
+                            grid: { 
+                                color: gridColor 
+                            } 
+                        } 
+                    }, 
+                    interaction: { 
+                        mode: 'nearest', 
+                        axis: 'x', 
+                        intersect: false 
+                    } 
+                } 
+            }); 
+             
+            updateStatus("Trend chart updated successfully"); 
+        } 
+        function prepareChartData(shiftFilter) { 
+            // Define shift data 
+            const shifts = [ 
+                {id: "A", name: "A", hours: ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00"]}, 
+                {id: "B", name: "B", hours: ["15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]}, 
+                {id: "C", name: "C", hours: ["23:00", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00"]} 
+            ]; 
+             
+            // Determine which shifts to include 
+            let shiftsToInclude = shifts; 
+            if (shiftFilter !== 'all') { 
+                shiftsToInclude = shifts.filter(shift => shift.id === shiftFilter); 
+            } 
+             
+            // Prepare labels and datasets 
+            const labels = []; 
+            const hotMetalData = []; 
+            const cokeRateData = []; 
+            const ncRateData = []; 
+            const pciRateData = []; 
+            const spo2RateData = []; 
+             
+            // Collect data for each hour 
+            shiftsToInclude.forEach(shift => { 
+                shift.hours.forEach(hour => { 
+                    const key = `${shift.id}-${hour}`; 
+                    const values = appData.shiftData[key]; 
+                     
+                    if (values) { 
+                        labels.push(`${shift.name}-${hour}`); 
+                        hotMetalData.push(safeParseFloat(values[11]));      // Hot Metal 
+                        cokeRateData.push(safeParseFloat(values[12]));       // Coke Rate 
+                        ncRateData.push(safeParseFloat(values[13]));         // NC Rate 
+                        pciRateData.push(safeParseFloat(values[14]));        // PCI Rate 
+                        spo2RateData.push(safeParseFloat(values[16]));      // SPO2 Rate 
+                    } 
+                }); 
+            }); 
+             
+            // Get current theme for chart colors 
+            const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark'; 
+             
+            // Define colors based on theme 
+            const colors = { 
+                hotMetal: isDarkMode ? '#e57373' : '#e74c3c', 
+                cokeRate: isDarkMode ? '#64b5f6' : '#3498db', 
+                ncRate: isDarkMode ? '#81c784' : '#2ecc71', 
+                pciRate: isDarkMode ? '#ffb74d' : '#f39c12', 
+                spo2Rate: isDarkMode ? '#ba68c8' : '#9b59b6' 
+            }; 
+             
+            return { 
+                labels: labels, 
+                datasets: [ 
+                    { 
+                        label: 'Hot Metal', 
+                        data: hotMetalData, 
+                        borderColor: colors.hotMetal, 
+                        backgroundColor: isDarkMode ? 'rgba(229, 115, 115, 0.1)' : 'rgba(231, 76, 60, 0.1)', 
+                        borderWidth: 2, 
+                        tension: 0.3, 
+                        fill: false 
+                    }, 
+                    { 
+                        label: 'Coke Rate', 
+                        data: cokeRateData, 
+                        borderColor: colors.cokeRate, 
+                        backgroundColor: isDarkMode ? 'rgba(100, 181, 246, 0.1)' : 'rgba(52, 152, 219, 0.1)', 
+                        borderWidth: 2, 
+                        tension: 0.3, 
+                        fill: false 
+                    }, 
+                    { 
+                        label: 'NC Rate', 
+                        data: ncRateData, 
+                        borderColor: colors.ncRate, 
+                        backgroundColor: isDarkMode ? 'rgba(129, 199, 132, 0.1)' : 'rgba(46, 204, 113, 0.1)', 
+                        borderWidth: 2, 
+                        tension: 0.3, 
+                        fill: false 
+                    }, 
+                    { 
+                        label: 'PCI Rate', 
+                        data: pciRateData, 
+                        borderColor: colors.pciRate, 
+                        backgroundColor: isDarkMode ? 'rgba(255, 183, 77, 0.1)' : 'rgba(243, 156, 18, 0.1)', 
+                        borderWidth: 2, 
+                        tension: 0.3, 
+                        fill: false 
+                    }, 
+                    { 
+                        label: 'SPO2 Rate', 
+                        data: spo2RateData, 
+                        borderColor: colors.spo2Rate, 
+                        backgroundColor: isDarkMode ? 'rgba(186, 104, 200, 0.1)' : 'rgba(155, 89, 182, 0.1)', 
+                        borderWidth: 2, 
+                        tension: 0.3, 
+                        fill: false 
+                    } 
+                ] 
+            }; 
+        } 
+        // Check authentication on page load 
+        document.addEventListener('DOMContentLoaded', function() { 
+            // Initialize theme first 
+            initializeTheme(); 
+             
+            // Then check authentication 
+            checkAuth(); 
+        }); 
+    </script> 
+</body> 
+</html>
