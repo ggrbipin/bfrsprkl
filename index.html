@@ -3,8 +3,8 @@
 <head> 
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
-    <title>BLAST FURNACE SYSTEM - ROURKELA STEEL PLANT</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    <title>BLAST FURNACE</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'></text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -43,24 +43,28 @@
             --chart-nc-rate: #4CAF50;
             --chart-pci-rate: #FF9800;
             --chart-spo2-rate: #9C27B0;
+            --alert-danger-bg: #FFEBEE;
+            --alert-success-bg: #E8F5E9;
+            --snackbar-bg: #323232;
             --desktop-font-size: 14px;
             --desktop-header-font: 16px;
             --desktop-title-font: 18px;
             --desktop-input-font: 14px;
             --desktop-table-font: 13px;
-            --desktop-padding: 8px;
-            --desktop-margin: 8px;
+            --desktop-padding: 2px;
+            --desktop-margin: 2px;
             --icon-size: 20px;
-            --grid-gap: 12px;
+            --grid-gap: 2px;
             --mobile-font-size: 14px;
             --mobile-header-font: 16px;
             --mobile-title-font: 18px;
             --mobile-input-font: 14px;
             --mobile-table-font: 12px;
-            --mobile-padding: 6px;
-            --mobile-margin: 6px;
+            --mobile-padding: 2px;
+            --mobile-margin: 2px;
             --mobile-icon-size: 18px;
             --theme-transition: all 0.3s ease;
+            --scroll-position: 0%;
         } 
         
         /* Dark Mode */
@@ -83,6 +87,15 @@
             --chart-nc-rate: #66BB6A;
             --chart-pci-rate: #FFB74D;
             --chart-spo2-rate: #AB47BC;
+            --alert-danger-bg: #4A1F1F;
+            --alert-success-bg: #1F3A1F;
+            --snackbar-bg: #1A1A1A;
+        }
+        
+        /* System Theme - Uses system default colors */
+        [data-theme="system"] {
+            --header-bg: system-color(accent);
+            --header-text: system-color(accent-text);
         }
         
         /* Enhanced theme transitions */
@@ -208,7 +221,7 @@
             align-items: center;
             justify-content: center;
             padding: 0 12px;
-            height: 32px;
+            height: 30px;
             border-radius: 4px;
             background-color: var(--button-bg);
             color: var(--button-fg);
@@ -224,7 +237,7 @@
             transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             outline: none;
-            min-height: 44px;
+            min-height: 40px;
         }
         
         .md-button:hover {
@@ -281,18 +294,19 @@
             padding: 0 12px;
             display: flex;
             align-items: center;
-            height: 56px;
+            height: 55px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            position: fixed;
+            position: relative;
             top: 0;
             left: 0;
             right: 0;
             z-index: 999;
+            flex-shrink: 0;
         }
         
         .md-app-bar-title {
             flex: 1;
-            font-size: 20px;
+            font-size: 30px;
             font-weight: 500;
             margin: 0;
             display: flex;
@@ -305,8 +319,8 @@
         }
         
         .md-app-bar-logo {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             margin-right: 12px;
             border-radius: 4px;
             flex-shrink: 0;
@@ -341,7 +355,7 @@
         }
         
         .md-nav-header {
-            padding: 12px;
+            padding: 10px;
             display: flex;
             align-items: center;
         }
@@ -355,7 +369,7 @@
         
         .md-nav-header h3 {
             color: var(--header-text);
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 500;
             margin: 0;
         }
@@ -375,7 +389,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            min-height: 44px;
+            min-height: 40px;
         }
         
         .md-nav-item:hover {
@@ -433,13 +447,14 @@
             background-color: var(--header-bg);
             display: flex;
             justify-content: space-around;
-            position: fixed;
+            position: relative;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 56px;
+            height: 64px;
             box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
             z-index: 1000;
+            flex-shrink: 0;
         }
         
         .md-bottom-nav-item {
@@ -450,7 +465,7 @@
             justify-content: center;
             color: var(--header-text);
             text-decoration: none;
-            padding: 6px 0;
+            padding: 3px 0;
             transition: background-color 0.3s ease;
             cursor: pointer;
             position: relative;
@@ -499,13 +514,13 @@
         }
         
         .md-snackbar {
-            background-color: #323232;
+            background-color: var(--snackbar-bg);
             color: white;
             padding: 12px 20px;
             border-radius: 4px;
             box-shadow: 0 3px 5px rgba(0,0,0,0.2), 0 6px 10px rgba(0,0,0,0.2);
             position: fixed;
-            bottom: 24px;
+            bottom: 2px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             transition: transform 0.3s ease;
@@ -529,12 +544,13 @@
             text-transform: uppercase;
             font-weight: 500;
             cursor: pointer;
-            padding: 6px;
+            padding: 3px;
             margin: -6px;
         }
         
         .md-table {
             width: 100%;
+            height: 100%;
             border-collapse: collapse;
             background-color: var(--bg-primary);
         }
@@ -542,8 +558,8 @@
         .md-table th {
             background-color: var(--bg-tertiary);
             color: var(--text-primary);
-            padding: 8px 10px;
-            text-align: left;
+            padding: 3px 3px;
+            text-align: center;
             font-weight: 500;
             font-size: 14px;
             text-transform: uppercase;
@@ -551,7 +567,7 @@
         }
         
         .md-table td {
-            padding: 8px 10px;
+            padding: 3px 10px;
             border-bottom: 1px solid var(--bg-quaternary);
             font-size: 14px;
             position: relative;
@@ -563,14 +579,14 @@
         
         .md-table input {
             width: 100%;
-            padding: 6px;
+            padding: 2px;
             border: 1px solid var(--bg-quinary);
             border-radius: 4px;
             font-size: 14px;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             transition: border-color 0.3s ease;
-            min-height: 44px;
+            min-height: 35px;
             box-sizing: border-box;
         }
         
@@ -581,12 +597,40 @@
         
         .md-table .calculated {
             background-color: var(--bg-tertiary);
-            padding: 6px;
+            padding: 3px;
             border-radius: 4px;
-            text-align: right;
+            text-align: center;
             font-size: 14px;
             font-weight: 500;
             color: var(--calculated-field-color);
+        }
+        
+        /* Enhanced shift production table styles */
+        #shift-table {
+            min-width: 800px; /* Ensure the table is wide enough for all columns */
+        }
+        
+        #shift-table input {
+            width: 100%;
+            min-width: 60px;
+            max-width: 120px;
+            padding: 3px;
+            font-size: 14px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        
+        #shift-table td {
+            min-width: 70px;
+            padding: 3px 4px;
+            white-space: nowrap;
+        }
+        
+        #shift-table th {
+            min-width: 70px;
+            padding: 3px 4px;
+            white-space: nowrap;
+            text-align: center;
         }
         
         /* Auth Container */
@@ -604,7 +648,7 @@
             justify-content: center;
             align-items: center;
             padding: 0;
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            background-color: var(--bg-secondary);
             margin: 0;
             overflow: auto;
             box-sizing: border-box;
@@ -647,14 +691,14 @@
             margin-bottom: 8px;
             font-size: 20px;
             font-weight: 500;
-            text-align: left;
+            text-align: center;
         }
         
         .auth-subtitle {
             color: var(--text-tertiary);
             margin-bottom: 0;
             font-size: 14px;
-            text-align: left;
+            text-align: center;
         }
         
         .form-group {
@@ -771,20 +815,20 @@
         }
         
         .alert-danger {
-            background-color: #FFEBEE;
-            color: #C62828;
-            border: 1px solid #EF9A9A;
+            background-color: var(--alert-danger-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--bg-quinary);
         }
         
         .alert-success {
-            background-color: #E8F5E9;
-            color: #2E7D32;
-            border: 1px solid #A5D6A7;
+            background-color: var(--alert-success-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--bg-quinary);
         }
         
         /* Dashboard */
         .dashboard {
-            position: absolute;
+            position: relative;
             top: 0;
             left: 0;
             right: 0;
@@ -807,14 +851,13 @@
         
         .content {
             flex: 1;
-            padding: 64px 8px 56px 8px;
+            padding: 3px;
             overflow: hidden;
             width: 100%;
             min-height: 0;
-            height: calc(100% - 56px - 56px); /* App bar height + status bar height */
-            box-sizing: border-box;
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
         }
         
         .view {
@@ -836,7 +879,7 @@
         
         .view h2 {
             font-size: 18px;
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             padding-bottom: 4px;
             border-bottom: 2px solid var(--header-bg);
             display: flex;
@@ -856,10 +899,11 @@
             border-radius: 8px;
             border: 1px solid var(--bg-quaternary);
             overflow-x: auto;
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
             position: relative;
+            max-height: 70vh; /* Limit height for vertical scrolling */
         }
         
         /* Add scroll indicators for tables */
@@ -900,12 +944,19 @@
             scroll-behavior: smooth;
         }
         
+        /* Enhanced shift production table container */
+        #shift_production-view .table-container {
+            max-height: 85vh; /* Increased height for larger table */
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
         /* Results Items - Modified for 4-column layout */
         .results-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 2px;
+            margin-bottom: 2px;
         }
         
         .results-item {
@@ -934,9 +985,9 @@
         
         .results-value {
             background-color: var(--bg-tertiary);
-            padding: 6px 12px;
+            padding: 3px 12px;
             border-radius: 4px;
-            text-align: right;
+            text-align: center;
             font-size: 14px;
             font-weight: 500;
             color: var(--calculated-field-color);
@@ -952,7 +1003,7 @@
             font-size: 16px;
             font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             padding-bottom: 6px;
             border-bottom: 1px solid var(--bg-quaternary);
             display: flex;
@@ -968,8 +1019,8 @@
         .blast-params-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 2px;
+            margin-bottom: 2px;
         }
         
         .params-item {
@@ -1005,7 +1056,7 @@
         
         .params-input {
             width: 100%;
-            padding: 8px;
+            padding: 3px;
             border: 1px solid var(--bg-quinary);
             border-radius: 4px;
             font-size: 14px;
@@ -1026,11 +1077,11 @@
         
         .params-value {
             background-color: var(--bg-tertiary);
-            padding: 8px;
+            padding: 3px;
             border-radius: 4px;
             border: 1px solid var(--bg-quaternary);
             width: 100%;
-            text-align: right;
+            text-align: center;
             font-size: 14px;
             font-weight: 500;
             color: var(--calculated-field-color);
@@ -1047,7 +1098,7 @@
             font-size: 16px;
             font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             padding-bottom: 6px;
             border-bottom: 1px solid var(--bg-quaternary);
             display: flex;
@@ -1061,7 +1112,7 @@
         
         /* Shift Production */
         .shift-controls {
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
@@ -1083,7 +1134,7 @@
         }
         
         .shift-controls select {
-            padding: 8px 12px;
+            padding: 3px 12px;
             border: 1px solid var(--bg-quinary);
             border-radius: 4px;
             width: 180px;
@@ -1106,9 +1157,9 @@
         
         .shift-legend {
             display: flex;
-            margin-top: 12px;
+            margin-top: 2px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 2px;
         }
         
         .legend-item {
@@ -1129,16 +1180,13 @@
         .status-bar {
             background-color: var(--statusbar-bg);
             color: var(--statusbar-fg);
-            padding: 6px 16px;
+            padding: 3px 16px;
             border-top: 1px solid var(--bg-quaternary);
             display: flex;
             align-items: center;
             flex-shrink: 0;
             z-index: 100;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            position: relative;
             height: 32px; /* Fixed height */
         }
         
@@ -1218,7 +1266,7 @@
         .calculator-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 12px;
+            gap: 2px;
             padding: 16px;
             flex: 1;
             min-height: 0;
@@ -1234,7 +1282,7 @@
             font-size: 16px;
             font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             padding-bottom: 6px;
             border-bottom: 1px solid var(--bg-quaternary);
             display: flex;
@@ -1247,7 +1295,7 @@
         }
         
         .hearth-input-group {
-            margin-bottom: 12px;
+            margin-bottom: 2px;
         }
         
         .hearth-input-group label {
@@ -1320,7 +1368,7 @@
             border-radius: 8px;
             border: 1px solid var(--bg-quaternary);
             padding: 16px;
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -1332,14 +1380,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             flex-shrink: 0;
         }
         
         .chart-legend {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 2px;
         }
         
         .chart-legend-item {
@@ -1363,7 +1411,7 @@
         }
         
         .chart-filter select {
-            padding: 8px 12px;
+            padding: 3px 12px;
             border: 1px solid var(--bg-quinary);
             border-radius: 4px;
             font-size: 14px;
@@ -1390,28 +1438,129 @@
                 margin-bottom: 16px;
                 border-radius: 8px;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                max-height: 50vh;
+                overflow-y: auto;
+            }
+            
+            /* Make table headers sticky for better navigation */
+            #shift-table thead, #materials-table thead, #inputs-table thead, #shift-report-table thead {
+                position: sticky;
+                top: 0;
+                background-color: var(--bg-tertiary);
+                z-index: 10;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            
+            /* Add horizontal scroll indicator */
+            .table-container::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(to right, 
+                    var(--primary-color) 0%, 
+                    var(--primary-color) var(--scroll-position, 0%), 
+                    var(--bg-quaternary) var(--scroll-position, 0%), 
+                    var(--bg-quaternary) 100%);
+                opacity: 0.7;
+                pointer-events: none;
+                z-index: 5;
+            }
+            
+            /* Enhanced shift production table for mobile */
+            #shift_production-view .table-container {
+                max-height: 70vh; /* Increased height for mobile */
+            }
+            
+            /* Enhance input fields for touch */
+            #shift-table input, .md-table input {
+                border-radius: 6px;
+                border: 1px solid var(--bg-quinary);
+                transition: all 0.2s ease;
+                min-width: 50px;
+                max-width: 80px;
+                padding: 10px 6px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            #shift-table input:focus, .md-table input:focus {
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+                outline: none;
+            }
+            
+            /* Better visual feedback for calculated cells */
+            #shift-table .calculated, .md-table .calculated {
+                border-radius: 4px;
+                transition: background-color 0.3s ease;
+            }
+            
+            /* Add visual feedback for shift rows */
+            .shift-a-row, .shift-b-row, .shift-c-row {
+                position: relative;
+            }
+            
+            .shift-a-row::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background-color: var(--shift-a-color);
+            }
+            
+            .shift-b-row::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background-color: var(--shift-b-color);
+            }
+            
+            .shift-c-row::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background-color: var(--shift-c-color);
             }
             
             .md-table {
-                min-width: 600px; /* Ensure table is scrollable but not too narrow */
+                min-width: 600px;
+            }
+            
+            #shift-table {
+                min-width: 700px;
             }
             
             .md-table th, .md-table td {
-                padding: 8px 6px;
+                padding: 3px 6px;
                 font-size: 12px;
                 white-space: nowrap;
             }
             
+            #shift-table td, #shift-table th {
+                min-width: 60px;
+                padding: 3px 2px;
+            }
+            
             .md-table input {
                 font-size: 12px;
-                padding: 6px 4px;
+                padding: 3px 4px;
                 min-width: 60px;
                 min-height: 44px;
             }
             
             .md-table .calculated {
                 font-size: 12px;
-                padding: 6px 4px;
+                padding: 3px 4px;
             }
             
             .results-grid {
@@ -1426,7 +1575,7 @@
             
             .calculator-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 2px;
                 padding: 12px;
             }
             
@@ -1468,7 +1617,7 @@
             .chart-controls {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                gap: 2px;
             }
             
             .chart-legend {
@@ -1522,7 +1671,7 @@
             
             .view h2 {
                 font-size: 18px;
-                margin-bottom: 12px;
+                margin-bottom: 2px;
                 padding-bottom: 6px;
             }
             
@@ -1534,7 +1683,7 @@
             .auth-card {
                 max-width: 100%;
                 padding: 16px;
-                margin: 16px;
+                margin: 2px;
                 border-radius: 12px;
             }
             
@@ -1590,7 +1739,7 @@
             }
             
             .md-snackbar-action {
-                padding: 8px;
+                padding: 3px;
                 margin: -8px;
             }
             
@@ -1604,7 +1753,7 @@
             }
             
             .content {
-                padding: 56px 8px 64px 8px; /* Adjust for app bar and bottom nav */
+                padding: 3px;
             }
             
             .results-section-title, .blast-params-section-title, .hearth-section-title {
@@ -1647,8 +1796,22 @@
         }
         
         @media (max-width: 480px) {
-            .chart-container {
-                height: 250px;
+            .table-container {
+                max-height: 40vh;
+            }
+            
+            #shift-table {
+                min-width: 600px;
+            }
+            
+            #shift-table input {
+                min-width: 45px;
+                max-width: 70px;
+            }
+            
+            #shift-table td, #shift-table th {
+                min-width: 50px;
+                padding: 4px 2px;
             }
             
             .results-grid {
@@ -1669,7 +1832,7 @@
             }
             
             .md-table th, .md-table td {
-                padding: 6px 4px;
+                padding: 3px 4px;
                 font-size: 11px;
             }
             
@@ -1710,7 +1873,7 @@
             <div class="logo-container"> 
                 <img src="sailrsp.png" alt="" class="logo-img"> 
                 <div class="logo-text"> 
-                    <h1 class="auth-title">BLAST FURNACE SYSTEM</h1> 
+                    <h1 class="auth-title">BLAST FURNACE</h1> 
                     <div class="auth-subtitle">ROURKELA STEEL PLANT</div> 
                 </div> 
             </div> 
@@ -1819,7 +1982,7 @@
             <img src="sailrsp.png" alt="" class="md-app-bar-logo">
             <h1 class="md-app-bar-title"> 
             
-                    BLAST FURNACE - RSP
+                    BLAST FURNACE - ROURKELA STEEL PLANT
             </h1> 
             <div class="md-app-bar-actions"> 
                 <button class="md-button md-button-icon reset-btn" onclick="resetToDefault()"> 
@@ -2051,26 +2214,6 @@
                             </tr> 
                         </thead> 
                         <tbody id="shift-tbody"></tbody> 
-                    </table> 
-                </div>
-                <h3 style="margin-top: 20px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--header-bg); display: flex; align-items: center; color: var(--text-primary);"> 
-                    <i class="material-icons" style="margin-right: 10px; font-size: 20px;">summarize</i> Shift Report Card 
-                </h3> 
-                <div class="table-container"> 
-                    <table class="md-table" id="shift-report-table"> 
-                        <thead> 
-                            <tr> 
-                                <th>Shift</th> 
-                                <th>Total Hot Metal</th> 
-                                <th>Avg Coke Rate</th> 
-                                <th>Avg NC Rate</th> 
-                                <th>Avg PCI Rate</th> 
-                                <th>Avg Fuel Rate</th> 
-                                <th>Avg SPO2 Rate</th> 
-                                <th>Performance</th> 
-                            </tr> 
-                        </thead> 
-                        <tbody id="shift-report-tbody"></tbody> 
                     </table> 
                 </div> 
             </div> 
@@ -2380,6 +2523,36 @@
             document.documentElement.setAttribute('data-theme', theme);
             updateThemeIcon(theme);
             updateThemeIndicator('system');
+            
+            // Apply system default colors to header and sidebar
+            const systemAccentColor = getSystemAccentColor();
+            if (systemAccentColor) {
+                document.documentElement.style.setProperty('--header-bg', systemAccentColor);
+                document.documentElement.style.setProperty('--header-text', getContrastColor(systemAccentColor));
+            }
+        }
+        
+        function getSystemAccentColor() {
+            // Try to get the system accent color
+            // This is a fallback approach since direct access to system accent color is limited in browsers
+            const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (isDarkMode) {
+                // Dark mode accent colors
+                return '#1E88E5'; // Material Design Blue 600
+            } else {
+                // Light mode accent colors
+                return '#1976D2'; // Material Design Blue 700
+            }
+        }
+        
+        function getContrastColor(hexColor) {
+            // Calculate contrast color (black or white) based on background color
+            const r = parseInt(hexColor.substr(1, 2), 16);
+            const g = parseInt(hexColor.substr(3, 2), 16);
+            const b = parseInt(hexColor.substr(5, 2), 16);
+            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            return brightness > 128 ? '#000000' : '#FFFFFF';
         }
         
         function updateThemeIcon(theme) {
@@ -3073,14 +3246,15 @@
             updateStatus(`Updated ${param}. Blast parameters recalculated automatically.`); 
         }
         
-        // Shift Production View
+        // Enhanced shift production view initialization
         function initializeShiftProductionView() { 
             const shifts = [ 
                 {id: "A", name: "A", hours: ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00"]}, 
                 {id: "B", name: "B", hours: ["15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]}, 
                 {id: "C", name: "C", hours: ["23:00", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00"]} 
             ]; 
-             
+            
+            // Initialize shift data if not exists
             shifts.forEach(shift => { 
                 shift.hours.forEach(hour => { 
                     const key = `${shift.id}-${hour}`; 
@@ -3089,33 +3263,71 @@
                     } 
                 }); 
             }); 
-             
+            
             populateShiftTable('all'); 
-            calculateShiftReport(); 
+            
+            // Add touch scrolling optimization
+            optimizeShiftTableScrolling();
         }
         
-        function initializeCokeRateTrendView() { 
-            // Chart will be initialized when view is shown
+        // Optimize shift table scrolling for mobile
+        function optimizeShiftTableScrolling() {
+            const tableContainer = document.querySelector('#shift_production-view .table-container');
+            if (!tableContainer) return;
+            
+            // Add touch event listeners for better scrolling
+            let isDown = false;
+            let startX;
+            let startY;
+            let scrollLeft;
+            let scrollTop;
+            
+            tableContainer.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - tableContainer.offsetLeft;
+                startY = e.touches[0].pageY - tableContainer.offsetTop;
+                scrollLeft = tableContainer.scrollLeft;
+                scrollTop = tableContainer.scrollTop;
+                tableContainer.classList.add('scrolling');
+            }, { passive: true });
+            
+            tableContainer.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.touches[0].pageX - tableContainer.offsetLeft;
+                const y = e.touches[0].pageY - tableContainer.offsetTop;
+                const walkX = (x - startX) * 2; // Adjust horizontal scrolling speed
+                const walkY = (y - startY) * 2; // Adjust vertical scrolling speed
+                tableContainer.scrollLeft = scrollLeft - walkX;
+                tableContainer.scrollTop = scrollTop - walkY;
+            }, { passive: false });
+            
+            tableContainer.addEventListener('touchend', () => {
+                isDown = false;
+                tableContainer.classList.remove('scrolling');
+            });
+            
+            // Initialize scroll indicators
+            updateScrollIndicators(tableContainer);
+            
+            // Update scroll indicators on scroll
+            tableContainer.addEventListener('scroll', () => {
+                updateScrollIndicators(tableContainer);
+                updateScrollPositionIndicator();
+            });
         }
         
-        function initializeHearthStatusView() { 
-            Object.keys(appData.hearthData).forEach(param => { 
-                const element = document.getElementById(param); 
-                if (element) element.value = appData.hearthData[param]; 
-            }); 
-            calculateHearth(); 
-        }
-        
+        // Enhanced populateShiftTable function
         function populateShiftTable(shiftFilter) { 
             const tbody = document.getElementById('shift-tbody'); 
             tbody.innerHTML = ''; 
-             
+            
             const shifts = [ 
                 {id: "A", name: "A", hours: ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00"]}, 
                 {id: "B", name: "B", hours: ["15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]}, 
                 {id: "C", name: "C", hours: ["23:00", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00"]} 
             ]; 
-             
+            
             let shiftsToShow = shifts; 
             if (shiftFilter !== 'all') shiftsToShow = shifts.filter(shift => shift.id === shiftFilter); 
              
@@ -3123,51 +3335,105 @@
                 shift.hours.forEach(hour => { 
                     const key = `${shift.id}-${hour}`; 
                     const values = appData.shiftData[key]; 
-                     
+                    
                     const row = document.createElement('tr'); 
                     row.classList.add(`shift-${shift.id.toLowerCase()}-row`); 
-                     
+                    
                     values.forEach((value, col) => { 
                         const cell = document.createElement('td'); 
-                        if (col < 2) { 
+                        
+                        // Set appropriate min-width for each column
+                        if (col === 0) { // Hour column
+                            cell.style.minWidth = '60px';
                             cell.textContent = value; 
-                        } else if (col <= 10) { 
+                        } else if (col === 1) { // Shift column
+                            cell.style.minWidth = '60px';
+                            cell.textContent = value; 
+                        } else if (col <= 10) { // Input columns
+                            cell.style.minWidth = '70px';
                             const input = document.createElement('input'); 
                             input.type = 'text'; 
                             input.value = value; 
+                            input.style.width = '100%';
+                            input.style.minWidth = '60px';
+                            input.style.maxWidth = '100px';
                             input.addEventListener('input', function() { 
                                 updateShiftEntry(key, col, this.value); 
                                 scheduleAutoSave(); 
                             }); 
+                            
+                            // Add touch feedback
+                            input.addEventListener('touchstart', function() {
+                                this.style.transform = 'scale(1.05)';
+                            });
+                            
+                            input.addEventListener('touchend', function() {
+                                this.style.transform = 'scale(1)';
+                            });
+                            
                             cell.appendChild(input); 
-                        } else { 
+                        } else { // Calculated columns
+                            cell.style.minWidth = '70px';
                             cell.className = 'calculated'; 
                             cell.id = `shift-${key}-${col}`; 
                             cell.textContent = value; 
                         } 
+                        
                         row.appendChild(cell); 
                     }); 
-                     
+                    
                     tbody.appendChild(row); 
                 }); 
             }); 
              
             recalculateAllShiftRows(); 
+            
+            // Optimize scrolling for mobile
+            if (window.innerWidth <= 767) {
+                setTimeout(() => {
+                    optimizeShiftTableScrolling();
+                }, 100);
+            }
         }
         
         function filterShiftColumns() { 
             const shiftFilter = document.getElementById('shift-filter').value; 
             populateShiftTable(shiftFilter); 
-            calculateShiftReport(); 
             updateStatus(`Showing data for ${shiftFilter === 'all' ? 'All Shifts' : 'Shift ' + shiftFilter}`); 
         }
         
+        // Enhanced updateShiftEntry function for better mobile experience
         function updateShiftEntry(key, column, value) { 
             appData.shiftData[key][column] = value; 
             calculateShiftRow(key); 
-            calculateShiftReport(); 
             if (document.getElementById('coke_rate_trend-view').classList.contains('active')) updateTrendChart(); 
+            
+            // Show feedback on mobile
+            if (window.innerWidth <= 767) {
+                const cell = document.getElementById(`shift-${key}-${column}`);
+                if (cell) {
+                    cell.style.backgroundColor = 'rgba(76, 175, 80, 0.2)';
+                    setTimeout(() => {
+                        cell.style.backgroundColor = '';
+                    }, 300);
+                }
+            }
+            
             updateStatus("Updated shift data. Calculations updated automatically."); 
+        }
+        
+        // Initialize Coke Rate Trend View
+        function initializeCokeRateTrendView() { 
+            // Chart will be initialized when view is shown
+        }
+        
+        // Initialize Hearth Status View
+        function initializeHearthStatusView() { 
+            Object.keys(appData.hearthData).forEach(param => { 
+                const element = document.getElementById(param); 
+                if (element) element.value = appData.hearthData[param]; 
+            }); 
+            calculateHearth(); 
         }
         
         // Calculations
@@ -3462,7 +3728,6 @@
         
         function recalculateAllShiftRows() { 
             Object.keys(appData.shiftData).forEach(key => calculateShiftRow(key)); 
-            calculateShiftReport(); 
             if (document.getElementById('coke_rate_trend-view').classList.contains('active')) updateTrendChart(); 
         }
         
@@ -3539,91 +3804,6 @@
             document.getElementById('timeToTuyeres').value = timeToTuyeres.toFixed(0) + " minutes"; 
              
             scheduleAutoSave(); 
-        }
-        
-        function calculateShiftReport() { 
-            const shiftSummary = { 
-                A: { hotMetal: 0, cokeRate: 0, ncRate: 0, pciRate: 0, fuelRate: 0, spo2Rate: 0, count: 0 }, 
-                B: { hotMetal: 0, cokeRate: 0, ncRate: 0, pciRate: 0, fuelRate: 0, spo2Rate: 0, count: 0 }, 
-                C: { hotMetal: 0, cokeRate: 0, ncRate: 0, pciRate: 0, fuelRate: 0, spo2Rate: 0, count: 0 } 
-            }; 
-             
-            const shiftTableRows = document.querySelectorAll('#shift-tbody tr'); 
-            shiftTableRows.forEach(row => { 
-                const cells = row.querySelectorAll('td'); 
-                if (cells.length >= 17) { 
-                    const shift = cells[1].textContent; 
-                    if (shiftSummary[shift]) { 
-                        shiftSummary[shift].hotMetal += safeParseFloat(cells[11].textContent); 
-                        shiftSummary[shift].cokeRate += safeParseFloat(cells[12].textContent); 
-                        shiftSummary[shift].ncRate += safeParseFloat(cells[13].textContent); 
-                        shiftSummary[shift].pciRate += safeParseFloat(cells[14].textContent); 
-                        shiftSummary[shift].fuelRate += safeParseFloat(cells[15].textContent); 
-                        shiftSummary[shift].spo2Rate += safeParseFloat(cells[16].textContent); 
-                        shiftSummary[shift].count += 1; 
-                    } 
-                } 
-            }); 
-             
-            const tbody = document.getElementById('shift-report-tbody'); 
-            tbody.innerHTML = ''; 
-             
-            Object.keys(shiftSummary).forEach(shift => { 
-                const data = shiftSummary[shift]; 
-                if (data.count > 0) { 
-                    const avgCokeRate = data.cokeRate / data.count; 
-                    const avgNcRate = data.ncRate / data.count; 
-                    const avgPciRate = data.pciRate / data.count; 
-                    const avgFuelRate = data.fuelRate / data.count; 
-                    const avgSpo2Rate = data.spo2Rate / data.count; 
-                     
-                    const row = document.createElement('tr'); 
-                     
-                    const shiftCell = document.createElement('td'); 
-                    shiftCell.innerHTML = ` 
-                        <div style="display: flex; align-items: center;"> 
-                            <div class="legend-color" style="background-color: var(--shift-${shift.toLowerCase()}-color); margin-right: 6px;"></div> 
-                            Shift ${shift} 
-                        </div> 
-                    `; 
-                    row.appendChild(shiftCell); 
-                     
-                    addCell(row, data.hotMetal.toFixed(1)); 
-                    addCell(row, avgCokeRate.toFixed(0)); 
-                    addCell(row, avgNcRate.toFixed(0)); 
-                    addCell(row, avgPciRate.toFixed(0)); 
-                    addCell(row, avgFuelRate.toFixed(0)); 
-                    addCell(row, avgSpo2Rate.toFixed(0)); 
-                     
-                    const perfCell = document.createElement('td'); 
-                    let perfClass = 'performance-average'; 
-                    let perfText = 'Average'; 
-                     
-                    if (avgFuelRate < 450) { 
-                        perfClass = 'performance-good'; 
-                        perfText = 'Good'; 
-                    } else if (avgFuelRate > 500) { 
-                        perfClass = 'performance-poor'; 
-                        perfText = 'Poor'; 
-                    } 
-                     
-                    perfCell.innerHTML = ` 
-                        <div style="display: flex; align-items: center;"> 
-                            ${perfText} 
-                            <span class="performance-indicator ${perfClass}"></span> 
-                        </div> 
-                    `; 
-                    row.appendChild(perfCell); 
-                     
-                    tbody.appendChild(row); 
-                } 
-            }); 
-        }
-        
-        function addCell(row, content) { 
-            const cell = document.createElement('td'); 
-            cell.textContent = content; 
-            row.appendChild(cell); 
         }
         
         function updateTrendChart() { 
@@ -3845,6 +4025,9 @@
                 }
                 lastTouchEnd = now;
             }, false);
+            
+            // Update scroll position indicators
+            updateScrollPositionIndicator();
         }); 
         
         // Create ripple effect for touch interactions
@@ -3919,6 +4102,18 @@
             } else {
                 container.classList.add('scroll-right');
             }
+        }
+        
+        // Update scroll position indicator
+        function updateScrollPositionIndicator() {
+            const tableContainers = document.querySelectorAll('.table-container');
+            
+            tableContainers.forEach(container => {
+                if (container.scrollWidth > container.clientWidth) {
+                    const scrollPercentage = (container.scrollLeft / (container.scrollWidth - container.clientWidth)) * 100;
+                    container.style.setProperty('--scroll-position', `${scrollPercentage}%`);
+                }
+            });
         }
     </script> 
 </body> 
