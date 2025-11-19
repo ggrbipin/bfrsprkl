@@ -81,7 +81,7 @@
             --spacing-2xl: 1.25rem;
 
             /* Border Radius - Windows 11 rounded corners */
-            --radius-sm: 0.25rem;
+            --radius-sm: 0.45rem;
             --radius-md: 0.5rem;
             --radius-lg: 0.75rem;
             --radius-xl: 1rem;
@@ -3698,6 +3698,113 @@
             dataRetention: 30
         };
 
+        // NEW FUNCTION: Load saved data from localStorage
+        function loadSavedData() {
+            const savedData = localStorage.getItem('blastFurnaceSavedData');
+            if (savedData) {
+                const parsedData = JSON.parse(savedData);
+                
+                // Load comprehensive materials data
+                if (parsedData.materials) {
+                    Object.keys(parsedData.materials).forEach(material => {
+                        if (appData.materials[material]) {
+                            Object.keys(parsedData.materials[material]).forEach(property => {
+                                appData.materials[material][property] = parsedData.materials[material][property];
+                            });
+                        }
+                    });
+                }
+                
+                // Load comprehensive inputs data
+                if (parsedData.inputs) {
+                    Object.keys(parsedData.inputs).forEach(material => {
+                        if (appData.inputs[material]) {
+                            appData.inputs[material].Weight = parsedData.inputs[material].Weight;
+                        }
+                    });
+                }
+                
+                // Load blast parameters
+                if (parsedData.blastParams) {
+                    Object.keys(parsedData.blastParams).forEach(param => {
+                        appData.blastParams[param] = parsedData.blastParams[param];
+                    });
+                }
+                
+                // Load hearth data
+                if (parsedData.hearthData) {
+                    Object.keys(parsedData.hearthData).forEach(param => {
+                        appData.hearthData[param] = parsedData.hearthData[param];
+                    });
+                }
+                
+                // Load silicon data
+                if (parsedData.siliconData) {
+                    Object.keys(parsedData.siliconData).forEach(param => {
+                        appData.siliconData[param] = parsedData.siliconData[param];
+                    });
+                }
+                
+                // Load shift data
+                if (parsedData.shiftData) {
+                    appData.shiftData = parsedData.shiftData;
+                }
+                
+                // Load stock level calculator data
+                if (parsedData.stockLevelData) {
+                    Object.keys(parsedData.stockLevelData).forEach(param => {
+                        const element = document.getElementById(param);
+                        if (element) {
+                            element.value = parsedData.stockLevelData[param];
+                        }
+                    });
+                }
+            }
+        }
+
+        // NEW FUNCTION: Save all current data to localStorage
+        function saveAllData() {
+            const dataToSave = {
+                materials: JSON.parse(JSON.stringify(appData.materials)),
+                inputs: JSON.parse(JSON.stringify(appData.inputs)),
+                blastParams: JSON.parse(JSON.stringify(appData.blastParams)),
+                hearthData: JSON.parse(JSON.stringify(appData.hearthData)),
+                siliconData: JSON.parse(JSON.stringify(appData.siliconData)),
+                shiftData: JSON.parse(JSON.stringify(appData.shiftData)),
+                stockLevelData: {}
+            };
+            
+            // Save stock level calculator inputs
+            const stockLevelInputs = document.querySelectorAll('.stock-level-calculator input[type="number"], .stock-level-calculator input[type="range"]');
+            stockLevelInputs.forEach(input => {
+                dataToSave.stockLevelData[input.id] = input.value;
+            });
+            
+            localStorage.setItem('blastFurnaceSavedData', JSON.stringify(dataToSave));
+            
+            if (appSettings.showNotifications) {
+                showNotification('All data saved successfully!', 'success');
+            }
+        }
+
+        // NEW FUNCTION: Initialize auto-save functionality
+        function initializeAutoSave() {
+            // Save on input changes
+            document.addEventListener('input', function(e) {
+                if (appSettings.autoSaveData && e.target.type !== 'password' && e.target.type !== 'email') {
+                    clearTimeout(window.autoSaveTimeout);
+                    window.autoSaveTimeout = setTimeout(saveAllData, 1000); // Save after 1 second of inactivity
+                }
+            });
+            
+            // Save on form submissions
+            document.addEventListener('submit', function(e) {
+                if (appSettings.autoSaveData) {
+                    saveAllData();
+                }
+            });
+        }
+
         // Load settings from localStorage
         function loadSettings() {
             const savedSettings = localStorage.getItem('blastFurnaceSettings');
@@ -3820,6 +3927,7 @@
             if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
                 localStorage.removeItem('blastFurnaceDefaultData');
                 localStorage.removeItem('blastFurnaceShiftData');
+                localStorage.removeItem('blastFurnaceSavedData'); // Clear saved data too
 
                 // Reset to initial defaults
                 defaultData = JSON.parse(JSON.stringify(initialDefaultData));
@@ -3860,6 +3968,7 @@
                 updateUserHeader(currentUser);
 
                 loadDefaultData();
+                loadSavedData(); // Load saved user data
                 initializeComprehensiveView();
                 initializeShiftProductionView();
                 initializeCharts();
@@ -3867,6 +3976,7 @@
                 initializeStockLevelCalculator();
                 initializeUserDropdown();
                 initializeSettings();
+                initializeAutoSave(); // Initialize auto-save
             } else {
                 document.getElementById('authContainer').classList.remove('hidden');
                 document.getElementById('appContainer').classList.add('hidden');
@@ -3889,6 +3999,7 @@
 
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
+                saveAllData(); // Save data before logging out
                 localStorage.removeItem('currentUser');
                 document.getElementById('authContainer').classList.remove('hidden');
                 document.getElementById('appContainer').classList.add('hidden');
@@ -4957,14 +5068,17 @@
             alert('Default values saved successfully!');
         }
 
-        // Reset to default
+        // MODIFIED: Reset to default - now also clears saved data
         function resetToDefault() {
-            if (confirm('Are you sure you want to reset all values to default?')) {
+            if (confirm('Are you sure you want to reset all values to default? This will clear all saved data.')) {
                 appData.materials = JSON.parse(JSON.stringify(defaultData.materials));
                 appData.inputs = JSON.parse(JSON.stringify(defaultData.inputs));
                 appData.blastParams = JSON.parse(JSON.stringify(defaultData.blastParams));
                 appData.hearthData = JSON.parse(JSON.stringify(defaultData.hearthData));
                 appData.siliconData = JSON.parse(JSON.stringify(defaultData.siliconData));
+                
+                // Clear saved data
+                localStorage.removeItem('blastFurnaceSavedData');
 
                 initializeComprehensiveMaterials();
                 initializeComprehensiveInputs();
