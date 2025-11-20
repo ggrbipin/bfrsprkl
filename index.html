@@ -65,7 +65,7 @@
             --font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-size-xs: 1rem;
             --font-size-sm: 1.2rem;
-            --font-size-base: 1.4rem;
+            --font-size-base: 1.5rem;
             --font-size-lg: 1.6rem;
             --font-size-xl: 1.25rem;
             --font-size-2xl: 1.5rem;
@@ -339,6 +339,7 @@
             border: 1px solid var(--gray-light);
             border-radius: var(--radius-md);
             font-size: var(--font-size-base);
+            font-weight: 700;
             background: var(--white);
             color: var(--dark);
             transition: var(--transition);
@@ -557,8 +558,8 @@
 
         /* Settings Button */
         .settings-button {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -594,8 +595,8 @@
         }
 
         .user-avatar {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary) 0%, var(--info) 100%);
             color: var(--white);
@@ -2132,7 +2133,7 @@
     <div class="auth-container" id="authContainer">
         <div class="auth-card" id="loginCard">
             <div class="logo-container">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/SAIL_logo.svg/1200px-SAIL_logo.svg.png" alt="SAIL" class="logo-img">
+                <img src="sail.jpg" alt="SAIL" class="logo-img">
                 <div class="logo-text">
                     <h1 class="auth-title">BLAST FURNACE</h1>
                     <div class="auth-subtitle">ROURKELA STEEL PLANT</div>
@@ -2162,7 +2163,7 @@
 
         <div class="auth-card hidden" id="registerCard">
             <div class="logo-container">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/SAIL_logo.svg/1200px-SAIL_logo.svg.png" alt="SAIL" class="logo-img">
+                <img src="sail.jpg" alt="SAIL" class="logo-img">
                 <div class="logo-text">
                     <h1 class="auth-title">CREATE ACCOUNT</h1>
                     <div class="auth-subtitle">ROURKELA STEEL PLANT</div>
@@ -2201,7 +2202,7 @@
 
         <div class="auth-card hidden" id="forgotPasswordCard">
             <div class="logo-container">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/SAIL_logo.svg/1200px-SAIL_logo.svg.png" alt="SAIL" class="logo-img">
+                <img src="sail.jpg" alt="SAIL" class="logo-img">
                 <div class="logo-text">
                     <h1 class="auth-title">RESET PASSWORD</h1>
                     <div class="auth-subtitle">ROURKELA STEEL PLANT</div>
@@ -2238,10 +2239,8 @@
     <div class="app-container hidden" id="appContainer">
         <!-- Top Bar -->
         <div class="top-bar">
-            <div class="top-bar-left">
-                <div class="top-bar-logo">
-                    <i class="fas fa-industry"></i>
-                </div>
+                <img src="sail.jpg" alt="SAIL" class="logo-img">
+                <div class="logo-text">
                 <div class="top-bar-title-container">
                     <div class="top-bar-title">BLAST FURNACE</div>
                     <div class="top-bar-subtitle">ROURKELA STEEL PLANT</div>
@@ -2295,1109 +2294,1108 @@
         </div>
 
         <!-- Main Content -->
+        <div class="main-content">
+            <!-- Comprehensive View -->
+            <div class="comprehensive-card win11-animation" id="comprehensive-view">
 
-        <!-- Material Properties Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-flask"></i>
-                Material Properties & Composition
-            </h3>
-            <div class="table-container" style="overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
-                <table class="data-table" id="comp-materials-table">
-                    <thead>
-                        <tr>
-                            <th>Material</th>
-                            <th>C (%)</th>
-                            <th>Moisture (%)</th>
-                            <th>FE (%)</th>
-                            <th>SiO2 (%)</th>
-                            <th>CAO (%)</th>
-                            <th>MGO (%)</th>
-                            <th>AL203 (%)</th>
-                            <th>Density</th>
-                        </tr>
-                    </thead>
-                    <tbody id="comp-materials-tbody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Input Quantities Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-weight-hanging"></i>
-                Input Quantities & Calculated Values
-            </h3>
-            <div class="table-container" style="overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
-                <table class="data-table" id="comp-inputs-table">
-                    <thead>
-                        <tr>
-                            <th>Material</th>
-                            <th>Weight (Kg)</th>
-                            <th>Moisture Adj.</th>
-                            <th>Dry Weight</th>
-                            <th>Fe Input</th>
-                            <th>C Input</th>
-                            <th>SiO2 Input</th>
-                            <th>CaO Input</th>
-                            <th>MgO Input</th>
-                            <th>Al2O3 Input</th>
-                        </tr>
-                    </thead>
-                    <tbody id="comp-inputs-tbody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Consumption Rates Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-chart-pie"></i>
-                Consumption Rates & Efficiency Metrics
-            </h3>
-            <div class="grid-4">
-                <div class="param-card">
-                    <div class="param-label">Hot Metal</div>
-                    <div class="param-value" id="comp-Hot-Metal-2">0<span class="param-unit">tons</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Coke Rate</div>
-                    <div class="param-value" id="comp-Coke-Rate-2">0<span class="param-unit">kg/THM</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">NC Rate</div>
-                    <div class="param-value" id="comp-Ncoke-Rate">0<span class="param-unit">kg/THM</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">PCI Rate</div>
-                    <div class="param-value" id="comp-PCI-Rate">0<span class="param-unit">kg/THM</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Rate</div>
-                    <div class="param-value" id="comp-Slag-Rate">0<span class="param-unit">kg/THM</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Fuel Rate</div>
-                    <div class="param-value" id="comp-Fuel-Rate-2">0<span class="param-unit">kg/THM</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">C Efficiency</div>
-                    <div class="param-value" id="comp-C-Efficiency">0<span class="param-unit">%</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Yield</div>
-                    <div class="param-value" id="comp-Yield">0<span class="param-unit">%</span></div>
-                </div>
-            </div>
-        </div>
-        <!-- Percentage Calculations Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-cube"></i>
-                Percentage,Volume & Ratio Calculation
-            </h3>
-            <div class="grid-4">
-                <div class="param-card">
-                    <div class="param-label">Coke </div>
-                    <div class="param-value" id="comp-Coke-Percent">0<span class="param-unit">%</span></div>
-                    <div class="param-value" id="comp-Coke-Volume">0<span class="param-unit">m³</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Ncoke </div>
-                    <div class="param-value" id="comp-Ncoke-Percent">0<span class="param-unit">%</span></div>
-                    <div class="param-value" id="comp-Ncoke-Volume">0<span class="param-unit">m³</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Sinter </div>
-                    <div class="param-value" id="comp-Sinter-Percent">0<span class="param-unit">%</span></div>
-                    <div class="param-value" id="comp-Sinter-Volume">0<span class="param-unit">m³</span></div>
-                </div>
-
-                <div class="param-card">
-                    <div class="param-label">Ore </div>
-                    <div class="param-value" id="comp-Ore-Percent">0<span class="param-unit">%</span></div>
-                    <div class="param-value" id="comp-Ore-Volume">0<span class="param-unit">m³</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Pellets </div>
-                    <div class="param-value" id="comp-Pellets-Percent">0<span class="param-unit">%</span></div>
-                    <div class="param-value" id="comp-Pellets-Volume">0<span class="param-unit">m³</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Scrap </div>
-                    <div class="param-value" id="comp-Scrap-Percent">0<span class="param-unit">%</span></div>
-                    <div class="param-value" id="comp-Scrap-Volume">0<span class="param-unit">m³</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Total Volume</div>
-                    <div class="param-value" id="comp-Total-Volume">0<span class="param-unit">m³</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Ore/Coke Ratio</div>
-                    <div class="param-value" id="comp-Ore-Coke-Ratio">0</div>
-                    <div class="param-label">Fe/C Ratio</div>
-                    <div class="param-value" id="comp-Fe-C-Ratio">0</div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Input Totals Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-calculator"></i>
-                Input Totals & Slag Analysis
-            </h3>
-            <div class="grid-4">
-                <div class="param-card">
-                    <div class="param-label">Total Weight</div>
-                    <div class="param-value" id="comp-Total-Weight">0<span class="param-unit">Kg</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Total Fe Input</div>
-                    <div class="param-value" id="comp-Total-Fe-Input">0<span class="param-unit">Kg</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Total C Input</div>
-                    <div class="param-value" id="comp-Total-C-Input">0<span class="param-unit">Kg</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Weight</div>
-                    <div class="param-value" id="comp-Slag-Weight">0<span class="param-unit">Kg</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Basicity</div>
-                    <div class="param-value" id="comp-Slag-Basicity">0</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Alumina Ratio</div>
-                    <div class="param-value" id="comp-Alumina-Ratio">0</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">CaO/SiO2</div>
-                    <div class="param-value" id="comp-CaO-SiO2">0</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">MgO/SiO2</div>
-                    <div class="param-value" id="comp-MgO-SiO2">0</div>
-                </div>
-            </div>
-        </div>
-        <!-- Silicon Calculation Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-calculator"></i>
-                Expected Silicon % in Hot Metal
-            </h3>
-            <div class="grid-3">
-                <div class="param-card">
-                    <div class="param-label">Slag SiO2 (%)</div>
-                    <input type="number" class="param-input" id="slag-sio2" value="32.5" step="0.1" onchange="calculateSilicon()">
-                    <div class="param-unit">%</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag CaO (%)</div>
-                    <input type="number" class="param-input" id="slag-cao" value="38.5" step="0.1" onchange="calculateSilicon()">
-                    <div class="param-unit">%</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag MgO (%)</div>
-                    <input type="number" class="param-input" id="slag-mgo" value="8.5" step="0.1" onchange="calculateSilicon()">
-                    <div class="param-unit">%</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Al2O3 (%)</div>
-                    <input type="number" class="param-input" id="slag-al2o3" value="18.5" step="0.1" onchange="calculateSilicon()">
-                    <div class="param-unit">%</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Temperature</div>
-                    <input type="number" class="param-input" id="slag-temp" value="1500" step="1" onchange="calculateSilicon()">
-                    <div class="param-unit">°C</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Hot Metal Temperature</div>
-                    <input type="number" class="param-input" id="hm-temp" value="1500" step="1" onchange="calculateSilicon()">
-                    <div class="param-unit">°C</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Basicity</div>
-                    <div class="param-value" id="slag-basicity">1.18<span class="param-unit"></span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Volume</div>
-                    <input type="number" class="param-input" id="slag-volume" value="250" step="1" onchange="calculateSilicon()">
-                    <div class="param-unit">kg/THM</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">K Factor</div>
-                    <input type="number" class="param-input" id="k-factor" value="0.35" step="0.01" onchange="calculateSilicon()">
-                    <div class="param-unit"></div>
-                </div>
-            </div>
-
-            <div class="silicon-result">
-                <div class="silicon-result-value" id="silicon-result">1.05</div>
-                <div class="silicon-result-label">Expected Silicon % in Hot Metal</div>
-            </div>
-        </div>
-
-
-
-        <!-- Blast Parameters Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-fire"></i>
-                Blast Parameters & Operating Conditions
-            </h3>
-            <div class="grid-3">
-                <div class="param-card">
-                    <div class="param-label">Blast Volume</div>
-                    <input type="number" class="param-input" id="comp-blastVolume" value="150000" onchange="calculateAllComprehensive()">
-                    <div class="param-unit">Nm³/hr</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">O2 Enrichment</div>
-                    <input type="number" class="param-input" id="comp-o2Enrichment" value="10500" onchange="calculateAllComprehensive()">
-                    <div class="param-unit">Nm³/hr</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Blast Temperature</div>
-                    <input type="number" class="param-input" id="comp-blastTemp" value="1150" onchange="calculateAllComprehensive()">
-                    <div class="param-unit">°C</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Top Pressure</div>
-                    <input type="number" class="param-input" id="comp-topPressure" value="1.87" onchange="calculateAllComprehensive()">
-                    <div class="param-unit">kg/cm²</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Blast Pressure</div>
-                    <input type="number" class="param-input" id="comp-blastPressure" value="3.15" step="0.01" onchange="calculateAllComprehensive()">
-                    <div class="param-unit">kg/cm²</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Gas Generation</div>
-                    <input type="number" class="param-input" id="comp-Gas-Generation" value="264000" onchange="calculateAllComprehensive()">
-                    <div class="param-unit">Nm³/hr</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Pressure Drop</div>
-                    <div class="param-value" id="comp-dp">1.28<span class="param-unit">kg/cm²</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Tuyere Velocity</div>
-                    <div class="param-value" id="comp-tuyereVelocity">220<span class="param-unit">m/s</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Raceway Flame Temp</div>
-                    <div class="param-value" id="comp-flameTemp">2150<span class="param-unit">°C</span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">O2 Percentage</div>
-                    <div class="param-value" id="comp-o2Percentage">25.0<span class="param-unit">%</span></div>
-                </div>
-            </div>
-        </div>
-        <!-- Furnace Resistance & Permeability Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-cogs"></i>
-                Furnace Resistance & Permeability
-            </h3>
-            <div class="grid-3">
-                <div class="param-card">
-                    <div class="param-label">Furnace Resistance</div>
-                    <div class="param-value" id="comp-Furnace-Resistance">0<span class="param-unit"></span></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Furnace Permeability</div>
-                    <div class="param-value" id="comp-Furnace-Permeability">0<span class="param-unit"></span></div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <!-- Hearth Status Section -->
-        <div class="section">
-            <h3 class="section-title">
-                <i class="fas fa-temperature-high"></i>
-                Hearth Status & Critical Parameters
-            </h3>
-            <div class="grid-3">
-                <div class="param-card">
-                    <div class="param-label">Furnace Production</div>
-                    <input type="number" class="param-input" id="comp-production" value="6600" oninput="calculateAllComprehensive()">
-                    <div class="param-unit">t/day</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Rate</div>
-                    <input type="number" class="param-input" id="comp-slagRate" value="250" oninput="calculateAllComprehensive()">
-                    <div class="param-unit">kg/THM</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Hot Metal Density</div>
-                    <input type="number" class="param-input" id="comp-hmDensity" value="7.2" step="0.1" oninput="calculateAllComprehensive()">
-                    <div class="param-unit">t/m³</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Slag Density</div>
-                    <input type="number" class="param-input" id="comp-slagDensity" value="2.4" step="0.1" oninput="calculateAllComprehensive()">
-                    <div class="param-unit">t/m³</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Hearth Voidage</div>
-                    <input type="number" class="param-input" id="comp-hearthVoidage" value="20" step="0.1" oninput="calculateAllComprehensive()">
-                    <div class="param-unit">%</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Hearth Diameter</div>
-                    <input type="number" class="param-input" id="comp-hearthDiameter" value="10.8" step="0.1" oninput="calculateAllComprehensive()">
-                    <div class="param-unit">m</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Tuyere Height</div>
-                    <input type="number" class="param-input" id="comp-tuyereHeight" value="3.9" step="0.1" oninput="calculateAllComprehensive()">
-                    <div class="param-unit">m</div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Time to Tuyeres</div>
-                    <div class="param-value" id="comp-timeToTuyeres">0<span class="param-unit">minutes</span></div>
-                    <div class="status-indicator status-warning"></div>
-                </div>
-                <div class="param-card">
-                    <div class="param-label">Production Rate</div>
-                    <div class="param-value" id="comp-productionRate">0<span class="param-unit">t/min</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-            <button class="btn btn-primary" onclick="calculateAllComprehensive()">
-                <i class="fas fa-calculator"></i> Recalculate All
-            </button>
-            <button class="btn btn-secondary" onclick="saveDefaultData()">
-                <i class="fas fa-save"></i> Save
-            </button>
-            <button class="btn btn-outline" onclick="resetToDefault()">
-                <i class="fas fa-undo"></i> Reset
-            </button>
-            <button class="btn btn-outline" onclick="exportData()">
-                <i class="fas fa-download"></i> Export
-            </button>
-        </div>
-    </div>
-    </div>
-    </div>
-
-    <!-- Shift Production View -->
-    <div class="comprehensive-card win11-animation" id="shift-view" style="display: none;">
-        <div class="card-header">
-            <h2 class="card-title">
-                <i class="fas fa-clock"></i>
-                24-Hour Shift Production
-            </h2>
-            <p class="card-subtitle">Monitor and analyze production data across all three shifts</p>
-        </div>
-
-        <div class="card-body">
-            <div class="shift-controls">
-                <label for="shift-filter">
-                    <i class="fas fa-filter"></i> Filter by Shift:
-                </label>
-                <select id="shift-filter" onchange="filterShiftColumns()">
-                    <option value="all">All Shifts</option>
-                    <option value="A">Shift A (7:00-15:00)</option>
-                    <option value="B">Shift B (15:00-23:00)</option>
-                    <option value="C">Shift C (23:00-7:00)</option>
-                </select>
-
-                <button class="btn btn-primary" onclick="calculateAllShiftRows()">
-                    <i class="fas fa-calculator"></i> Recalculate All
-                </button>
-
-                <button class="btn btn-outline" onclick="generateSampleData()">
-                    <i class="fas fa-database"></i> Generate Sample Data
-                </button>
-            </div>
-
-            <div class="shift-legend">
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color: rgba(0, 120, 212, 0.3);"></div>
-                    <span>Shift A</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color: rgba(16, 124, 16, 0.3);"></div>
-                    <span>Shift B</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color: rgba(216, 59, 1, 0.3);"></div>
-                    <span>Shift C</span>
-                </div>
-            </div>
-
-            <div class="table-container" style="overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); margin-top: var(--spacing-md);">
-                <table class="data-table" id="shift-table">
-                    <thead>
-                        <tr>
-                            <th>Hour</th>
-                            <th>Shift</th>
-                            <th>Coke</th>
-                            <th>Sinter</th>
-                            <th>Iron Ore</th>
-                            <th>Pellets</th>
-                            <th>Scraps</th>
-                            <th>Nut Coke</th>
-                            <th>PCI</th>
-                            <th>CB Vol</th>
-                            <th>O2 Vol</th>
-                            <th>Hot Metal</th>
-                            <th>Coke Rate</th>
-                            <th>NC Rate</th>
-                            <th>PCI Rate</th>
-                            <th>Fuel Rate</th>
-                            <th>SPO2 Rate</th>
-                        </tr>
-                    </thead>
-                    <tbody id="shift-tbody"></tbody>
-                </table>
-            </div>
-
-            <!-- Charts and Trends Section -->
-            <div class="section">
-                <h3 class="section-title">
-                    <i class="fas fa-chart-line"></i>
-                    Production Trends & Analysis
-                </h3>
-
-                <div class="chart-grid">
-                    <div class="chart-container">
-                        <div class="chart-title">Hot Metal Production by Hour</div>
-                        <canvas id="hotMetalChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Material Consumption by Shift</div>
-                        <canvas id="materialConsumptionChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Fuel Rate Comparison</div>
-                        <canvas id="fuelRateChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">Production Efficiency by Shift</div>
-                        <canvas id="efficiencyChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="action-buttons" style="margin-top: var(--spacing-md);">
-                <button class="btn btn-primary" onclick="exportShiftData()">
-                    <i class="fas fa-download"></i> Export
-                </button>
-                <button class="btn btn-outline" onclick="clearShiftData()">
-                    <i class="fas fa-trash"></i> Clear
-                </button>
-                <button class="btn btn-outline" onclick="updateCharts()">
-                    <i class="fas fa-sync-alt"></i> Update
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stock Level Calculator View -->
-    <div class="comprehensive-card win11-animation stock-level-calculator" id="stock-view" style="display: none;">
-        <div class="card-header">
-            <h2 class="card-title">
-                <i class="fas fa-calculator"></i>
-                Blast Furnace Stock Level
-            </h2>
-            <p class="card-subtitle">Calculate and analyze stock levels for optimal furnace operation</p>
-        </div>
-
-        <div class="card-body">
-            <!-- Parameters Section -->
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="bi bi-sliders"></i> Input Parameters
-                </h2>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-5">
-                    <!-- Basic Parameters Card -->
-                    <div class="win11-card">
-                        <div class="win11-card-header">
-                            <h5 class="win11-card-title">
-                                <i class="bi bi-gear-fill"></i> Basic Parameters
-                            </h5>
+                <div class="card-body">
+                    <!-- Material Properties Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-flask"></i>
+                            Material Properties & Composition
+                        </h3>
+                        <div class="table-container" style="overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                            <table class="data-table" id="comp-materials-table">
+                                <thead>
+                                    <tr>
+                                        <th>Material</th>
+                                        <th>C (%)</th>
+                                        <th>Moisture (%)</th>
+                                        <th>FE (%)</th>
+                                        <th>SiO2 (%)</th>
+                                        <th>CAO (%)</th>
+                                        <th>MGO (%)</th>
+                                        <th>AL203 (%)</th>
+                                        <th>Density</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="comp-materials-tbody"></tbody>
+                            </table>
                         </div>
-                        <div class="win11-card-body">
-                            <div class="mb-3">
-                                <label class="form-label-win11">
-                                    <i class="bi bi-rulers"></i>Furnace Hearth Diameter
-                                </label>
-                                <div class="input-group-win11">
-                                    <input type="number" class="form-control-win11 input-group-field" id="furnaceDiameter" value="10" step="0.1" min="5" max="20">
-                                    <span class="input-group-text-win11">m</span>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Internal diameter of the furnace hearth where burden materials accumulate.
-                                </div>
-                                <div class="validation-message-win11" id="furnaceDiameter-error">
-                                    Please enter a value between 5 and 20 meters
-                                </div>
+                    </div>
+
+                    <!-- Input Quantities Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-weight-hanging"></i>
+                            Input Quantities & Calculated Values
+                        </h3>
+                        <div class="table-container" style="overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                            <table class="data-table" id="comp-inputs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Material</th>
+                                        <th>Weight (Kg)</th>
+                                        <th>Moisture Adj.</th>
+                                        <th>Dry Weight</th>
+                                        <th>Fe Input</th>
+                                        <th>C Input</th>
+                                        <th>SiO2 Input</th>
+                                        <th>CaO Input</th>
+                                        <th>MgO Input</th>
+                                        <th>Al2O3 Input</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="comp-inputs-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Consumption Rates Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-chart-pie"></i>
+                            Consumption Rates & Efficiency Metrics
+                        </h3>
+                        <div class="grid-4">
+                            <div class="param-card">
+                                <div class="param-label">Hot Metal</div>
+                                <div class="param-value" id="comp-Hot-Metal-2">0<span class="param-unit">tons</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Coke Rate</div>
+                                <div class="param-value" id="comp-Coke-Rate-2">0<span class="param-unit">kg/THM</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">NC Rate</div>
+                                <div class="param-value" id="comp-Ncoke-Rate">0<span class="param-unit">kg/THM</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">PCI Rate</div>
+                                <div class="param-value" id="comp-PCI-Rate">0<span class="param-unit">kg/THM</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Rate</div>
+                                <div class="param-value" id="comp-Slag-Rate">0<span class="param-unit">kg/THM</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Fuel Rate</div>
+                                <div class="param-value" id="comp-Fuel-Rate-2">0<span class="param-unit">kg/THM</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">C Efficiency</div>
+                                <div class="param-value" id="comp-C-Efficiency">0<span class="param-unit">%</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Yield</div>
+                                <div class="param-value" id="comp-Yield">0<span class="param-unit">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Percentage Calculations Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-cube"></i>
+                            Percentage,Volume & Ratio Calculation
+                        </h3>
+                        <div class="grid-4">
+                            <div class="param-card">
+                                <div class="param-label">Coke </div>
+                                <div class="param-value" id="comp-Coke-Percent">0<span class="param-unit">%</span></div>
+                                <div class="param-value" id="comp-Coke-Volume">0<span class="param-unit">m³</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Ncoke </div>
+                                <div class="param-value" id="comp-Ncoke-Percent">0<span class="param-unit">%</span></div>
+                                <div class="param-value" id="comp-Ncoke-Volume">0<span class="param-unit">m³</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Sinter </div>
+                                <div class="param-value" id="comp-Sinter-Percent">0<span class="param-unit">%</span></div>
+                                <div class="param-value" id="comp-Sinter-Volume">0<span class="param-unit">m³</span></div>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label-win11">
-                                    <i class="bi bi-box-seam"></i>Burden Density
-                                </label>
-                                <div class="input-group-win11">
-                                    <input type="number" class="form-control-win11 input-group-field" id="burdenDensity" value="1.6" step="0.1" min="1" max="3">
-                                    <span class="input-group-text-win11">ton/m³</span>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Average bulk density of the burden materials (coke, iron ore, fluxes).
-                                </div>
-                                <div class="validation-message-win11" id="burdenDensity-error">
-                                    Please enter a value between 1 and 3 ton/m³
-                                </div>
+                            <div class="param-card">
+                                <div class="param-label">Ore </div>
+                                <div class="param-value" id="comp-Ore-Percent">0<span class="param-unit">%</span></div>
+                                <div class="param-value" id="comp-Ore-Volume">0<span class="param-unit">m³</span></div>
                             </div>
-
-                            <div class="mb-3">
-                                <label class="form-label-win11">
-                                    <i class="bi bi-speedometer2"></i>Production Rate
-                                </label>
-                                <div class="input-group-win11">
-                                    <input type="number" class="form-control-win11 input-group-field" id="productionRate" value="5000" step="100" min="1000" max="15000">
-                                    <span class="input-group-text-win11">ton/day</span>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Daily hot metal production capacity. Directly influences burden consumption rate.
-                                </div>
-                                <div class="validation-message-win11" id="productionRate-error">
-                                    Please enter a value between 1000 and 15000 ton/day
-                                </div>
+                            <div class="param-card">
+                                <div class="param-label">Pellets </div>
+                                <div class="param-value" id="comp-Pellets-Percent">0<span class="param-unit">%</span></div>
+                                <div class="param-value" id="comp-Pellets-Volume">0<span class="param-unit">m³</span></div>
                             </div>
-
-                            <div class="mb-3">
-                                <label class="form-label-win11">
-                                    <i class="bi bi-droplet"></i>Specific Consumption
-                                </label>
-                                <div class="input-group-win11">
-                                    <input type="number" class="form-control-win11 input-group-field" id="specificConsumption" value="1.65" step="0.01" min="1" max="3">
-                                    <span class="input-group-text-win11">ton/ton</span>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Ratio of burden materials consumed per ton of hot metal produced.
-                                </div>
-                                <div class="validation-message-win11" id="specificConsumption-error">
-                                    Please enter a value between 1 and 3 ton/ton
-                                </div>
+                            <div class="param-card">
+                                <div class="param-label">Scrap </div>
+                                <div class="param-value" id="comp-Scrap-Percent">0<span class="param-unit">%</span></div>
+                                <div class="param-value" id="comp-Scrap-Volume">0<span class="param-unit">m³</span></div>
                             </div>
-
-                            <div class="mb-3">
-                                <label class="form-label-win11">
-                                    <i class="bi bi-arrow-up-circle"></i>Charging Rate
-                                    <span class="badge-win11 badge-win11-warning ms-2">Editable</span>
-                                </label>
-                                <div class="editable-range-group">
-                                    <input type="number" class="editable-range-input" id="chargingRateInput" value="250" min="50" max="500" step="10">
-                                    <input type="range" class="form-range-win11 editable-range-slider" id="chargingRate" value="250" min="50" max="500" step="10">
-                                    <div class="editable-range-value" id="chargingRateValue">250 m³/hr</div>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Volumetric rate at which burden materials are charged into the furnace. Adjustable from 50-500 m³/hr.
-                                </div>
-                                <div class="validation-message-win11" id="chargingRate-error">
-                                    Please enter a value between 50 and 500 m³/hr
-                                </div>
+                            <div class="param-card">
+                                <div class="param-label">Total Volume</div>
+                                <div class="param-value" id="comp-Total-Volume">0<span class="param-unit">m³</span></div>
                             </div>
+                            <div class="param-card">
+                                <div class="param-label">Ore/Coke Ratio</div>
+                                <div class="param-value" id="comp-Ore-Coke-Ratio">0</div>
+                                <div class="param-label">Fe/C Ratio</div>
+                                <div class="param-value" id="comp-Fe-C-Ratio">0</div>
+                            </div>
+                        </div>
+                    </div>
 
-                            <!-- Bidirectional Target Stock Rise / Time to Achieve -->
-                            <div class="mb-3">
-                                <div class="toggle-win11">
-                                    <button class="toggle-option-win11 active" id="Mode" onclick="setCalculationMode('')">
-                                        <i class="bi bi-arrows-expand"></i> Stock Rise
+                    <!-- Input Totals Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-calculator"></i>
+                            Input Totals & Slag Analysis
+                        </h3>
+                        <div class="grid-4">
+                            <div class="param-card">
+                                <div class="param-label">Total Weight</div>
+                                <div class="param-value" id="comp-Total-Weight">0<span class="param-unit">Kg</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Total Fe Input</div>
+                                <div class="param-value" id="comp-Total-Fe-Input">0<span class="param-unit">Kg</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Total C Input</div>
+                                <div class="param-value" id="comp-Total-C-Input">0<span class="param-unit">Kg</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Weight</div>
+                                <div class="param-value" id="comp-Slag-Weight">0<span class="param-unit">Kg</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Basicity</div>
+                                <div class="param-value" id="comp-Slag-Basicity">0</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Alumina Ratio</div>
+                                <div class="param-value" id="comp-Alumina-Ratio">0</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">CaO/SiO2</div>
+                                <div class="param-value" id="comp-CaO-SiO2">0</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">MgO/SiO2</div>
+                                <div class="param-value" id="comp-MgO-SiO2">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Silicon Calculation Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-calculator"></i>
+                            Expected Silicon % in Hot Metal
+                        </h3>
+                        <div class="grid-3">
+                            <div class="param-card">
+                                <div class="param-label">Slag SiO2 (%)</div>
+                                <input type="number" class="param-input" id="slag-sio2" value="32.5" step="0.1" onchange="calculateSilicon()">
+                                <div class="param-unit">%</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag CaO (%)</div>
+                                <input type="number" class="param-input" id="slag-cao" value="38.5" step="0.1" onchange="calculateSilicon()">
+                                <div class="param-unit">%</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag MgO (%)</div>
+                                <input type="number" class="param-input" id="slag-mgo" value="8.5" step="0.1" onchange="calculateSilicon()">
+                                <div class="param-unit">%</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Al2O3 (%)</div>
+                                <input type="number" class="param-input" id="slag-al2o3" value="18.5" step="0.1" onchange="calculateSilicon()">
+                                <div class="param-unit">%</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Temperature</div>
+                                <input type="number" class="param-input" id="slag-temp" value="1500" step="1" onchange="calculateSilicon()">
+                                <div class="param-unit">°C</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Hot Metal Temperature</div>
+                                <input type="number" class="param-input" id="hm-temp" value="1500" step="1" onchange="calculateSilicon()">
+                                <div class="param-unit">°C</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Basicity</div>
+                                <div class="param-value" id="slag-basicity">1.18<span class="param-unit"></span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Volume</div>
+                                <input type="number" class="param-input" id="slag-volume" value="250" step="1" onchange="calculateSilicon()">
+                                <div class="param-unit">kg/THM</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">K Factor</div>
+                                <input type="number" class="param-input" id="k-factor" value="0.35" step="0.01" onchange="calculateSilicon()">
+                                <div class="param-unit"></div>
+                            </div>
+                        </div>
+
+                        <div class="silicon-result">
+                            <div class="silicon-result-value" id="silicon-result">1.05</div>
+                            <div class="silicon-result-label">Expected Silicon % in Hot Metal</div>
+                        </div>
+                    </div>
+
+                    <!-- Blast Parameters Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-fire"></i>
+                            Blast Parameters & Operating Conditions
+                        </h3>
+                        <div class="grid-3">
+                            <div class="param-card">
+                                <div class="param-label">Blast Volume</div>
+                                <input type="number" class="param-input" id="comp-blastVolume" value="150000" onchange="calculateAllComprehensive()">
+                                <div class="param-unit">Nm³/hr</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">O2 Enrichment</div>
+                                <input type="number" class="param-input" id="comp-o2Enrichment" value="10500" onchange="calculateAllComprehensive()">
+                                <div class="param-unit">Nm³/hr</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Blast Temperature</div>
+                                <input type="number" class="param-input" id="comp-blastTemp" value="1150" onchange="calculateAllComprehensive()">
+                                <div class="param-unit">°C</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Top Pressure</div>
+                                <input type="number" class="param-input" id="comp-topPressure" value="1.87" onchange="calculateAllComprehensive()">
+                                <div class="param-unit">kg/cm²</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Blast Pressure</div>
+                                <input type="number" class="param-input" id="comp-blastPressure" value="3.15" step="0.01" onchange="calculateAllComprehensive()">
+                                <div class="param-unit">kg/cm²</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Gas Generation</div>
+                                <input type="number" class="param-input" id="comp-Gas-Generation" value="264000" onchange="calculateAllComprehensive()">
+                                <div class="param-unit">Nm³/hr</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Pressure Drop</div>
+                                <div class="param-value" id="comp-dp">1.28<span class="param-unit">kg/cm²</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Tuyere Velocity</div>
+                                <div class="param-value" id="comp-tuyereVelocity">220<span class="param-unit">m/s</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Raceway Flame Temp</div>
+                                <div class="param-value" id="comp-flameTemp">2150<span class="param-unit">°C</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">O2 Percentage</div>
+                                <div class="param-value" id="comp-o2Percentage">25.0<span class="param-unit">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Furnace Resistance & Permeability Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-cogs"></i>
+                            Furnace Resistance & Permeability
+                        </h3>
+                        <div class="grid-3">
+                            <div class="param-card">
+                                <div class="param-label">Furnace Resistance</div>
+                                <div class="param-value" id="comp-Furnace-Resistance">0<span class="param-unit"></span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Furnace Permeability</div>
+                                <div class="param-value" id="comp-Furnace-Permeability">0<span class="param-unit"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hearth Status Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-temperature-high"></i>
+                            Hearth Status & Critical Parameters
+                        </h3>
+                        <div class="grid-3">
+                            <div class="param-card">
+                                <div class="param-label">Furnace Production</div>
+                                <input type="number" class="param-input" id="comp-production" value="6600" oninput="calculateAllComprehensive()">
+                                <div class="param-unit">t/day</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Rate</div>
+                                <input type="number" class="param-input" id="comp-slagRate" value="250" oninput="calculateAllComprehensive()">
+                                <div class="param-unit">kg/THM</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Hot Metal Density</div>
+                                <input type="number" class="param-input" id="comp-hmDensity" value="7.2" step="0.1" oninput="calculateAllComprehensive()">
+                                <div class="param-unit">t/m³</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Slag Density</div>
+                                <input type="number" class="param-input" id="comp-slagDensity" value="2.4" step="0.1" oninput="calculateAllComprehensive()">
+                                <div class="param-unit">t/m³</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Hearth Voidage</div>
+                                <input type="number" class="param-input" id="comp-hearthVoidage" value="20" step="0.1" oninput="calculateAllComprehensive()">
+                                <div class="param-unit">%</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Hearth Diameter</div>
+                                <input type="number" class="param-input" id="comp-hearthDiameter" value="10.8" step="0.1" oninput="calculateAllComprehensive()">
+                                <div class="param-unit">m</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Tuyere Height</div>
+                                <input type="number" class="param-input" id="comp-tuyereHeight" value="3.9" step="0.1" oninput="calculateAllComprehensive()">
+                                <div class="param-unit">m</div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Time to Tuyeres</div>
+                                <div class="param-value" id="comp-timeToTuyeres">0<span class="param-unit">minutes</span></div>
+                                <div class="status-indicator status-warning"></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Production Rate</div>
+                                <div class="param-value" id="comp-productionRate">0<span class="param-unit">t/min</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="calculateAllComprehensive()">
+                            <i class="fas fa-calculator"></i> Recalculate All
+                        </button>
+                        <button class="btn btn-secondary" onclick="saveDefaultData()">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                        <button class="btn btn-outline" onclick="resetToDefault()">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                        <button class="btn btn-outline" onclick="exportData()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shift Production View -->
+            <div class="comprehensive-card win11-animation" id="shift-view" style="display: none;">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-clock"></i>
+                        24-Hour Shift Production
+                    </h2>
+                    <p class="card-subtitle">Monitor and analyze production data across all three shifts</p>
+                </div>
+
+                <div class="card-body">
+                    <div class="shift-controls">
+                        <label for="shift-filter">
+                            <i class="fas fa-filter"></i> Filter by Shift:
+                        </label>
+                        <select id="shift-filter" onchange="filterShiftColumns()">
+                            <option value="all">All Shifts</option>
+                            <option value="A">Shift A (7:00-15:00)</option>
+                            <option value="B">Shift B (15:00-23:00)</option>
+                            <option value="C">Shift C (23:00-7:00)</option>
+                        </select>
+
+                        <button class="btn btn-primary" onclick="calculateAllShiftRows()">
+                            <i class="fas fa-calculator"></i> Recalculate All
+                        </button>
+
+                        <button class="btn btn-outline" onclick="generateSampleData()">
+                            <i class="fas fa-database"></i> Generate Sample Data
+                        </button>
+                    </div>
+
+                    <div class="shift-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: rgba(0, 120, 212, 0.3);"></div>
+                            <span>Shift A</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: rgba(16, 124, 16, 0.3);"></div>
+                            <span>Shift B</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: rgba(216, 59, 1, 0.3);"></div>
+                            <span>Shift C</span>
+                        </div>
+                    </div>
+
+                    <div class="table-container" style="overflow-x: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); margin-top: var(--spacing-md);">
+                        <table class="data-table" id="shift-table">
+                            <thead>
+                                <tr>
+                                    <th>Hour</th>
+                                    <th>Shift</th>
+                                    <th>Coke</th>
+                                    <th>Sinter</th>
+                                    <th>Iron Ore</th>
+                                    <th>Pellets</th>
+                                    <th>Scraps</th>
+                                    <th>Nut Coke</th>
+                                    <th>PCI</th>
+                                    <th>CB Vol</th>
+                                    <th>O2 Vol</th>
+                                    <th>Hot Metal</th>
+                                    <th>Coke Rate</th>
+                                    <th>NC Rate</th>
+                                    <th>PCI Rate</th>
+                                    <th>Fuel Rate</th>
+                                    <th>SPO2 Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shift-tbody"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Charts and Trends Section -->
+                    <div class="section">
+                        <h3 class="section-title">
+                            <i class="fas fa-chart-line"></i>
+                            Production Trends & Analysis
+                        </h3>
+
+                        <div class="chart-grid">
+                            <div class="chart-container">
+                                <div class="chart-title">Hot Metal Production by Hour</div>
+                                <canvas id="hotMetalChart"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-title">Material Consumption by Shift</div>
+                                <canvas id="materialConsumptionChart"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-title">Fuel Rate Comparison</div>
+                                <canvas id="fuelRateChart"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-title">Production Efficiency by Shift</div>
+                                <canvas id="efficiencyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons" style="margin-top: var(--spacing-md);">
+                        <button class="btn btn-primary" onclick="exportShiftData()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-outline" onclick="clearShiftData()">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                        <button class="btn btn-outline" onclick="updateCharts()">
+                            <i class="fas fa-sync-alt"></i> Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stock Level Calculator View -->
+            <div class="comprehensive-card win11-animation stock-level-calculator" id="stock-view" style="display: none;">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-calculator"></i>
+                        Blast Furnace Stock Level
+                    </h2>
+                    <p class="card-subtitle">Calculate and analyze stock levels for optimal furnace operation</p>
+                </div>
+
+                <div class="card-body">
+                    <!-- Parameters Section -->
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="bi bi-sliders"></i> Input Parameters
+                        </h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <!-- Basic Parameters Card -->
+                            <div class="win11-card">
+                                <div class="win11-card-header">
+                                    <h5 class="win11-card-title">
+                                        <i class="bi bi-gear-fill"></i> Basic Parameters
+                                    </h5>
+                                </div>
+                                <div class="win11-card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label-win11">
+                                            <i class="bi bi-rulers"></i>Furnace Hearth Diameter
+                                        </label>
+                                        <div class="input-group-win11">
+                                            <input type="number" class="form-control-win11 input-group-field" id="furnaceDiameter" value="10" step="0.1" min="5" max="20">
+                                            <span class="input-group-text-win11">m</span>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Internal diameter of the furnace hearth where burden materials accumulate.
+                                        </div>
+                                        <div class="validation-message-win11" id="furnaceDiameter-error">
+                                            Please enter a value between 5 and 20 meters
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label-win11">
+                                            <i class="bi bi-box-seam"></i>Burden Density
+                                        </label>
+                                        <div class="input-group-win11">
+                                            <input type="number" class="form-control-win11 input-group-field" id="burdenDensity" value="1.6" step="0.1" min="1" max="3">
+                                            <span class="input-group-text-win11">ton/m³</span>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Average bulk density of the burden materials (coke, iron ore, fluxes).
+                                        </div>
+                                        <div class="validation-message-win11" id="burdenDensity-error">
+                                            Please enter a value between 1 and 3 ton/m³
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label-win11">
+                                            <i class="bi bi-speedometer2"></i>Production Rate
+                                        </label>
+                                        <div class="input-group-win11">
+                                            <input type="number" class="form-control-win11 input-group-field" id="productionRate" value="5000" step="100" min="1000" max="15000">
+                                            <span class="input-group-text-win11">ton/day</span>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Daily hot metal production capacity. Directly influences burden consumption rate.
+                                        </div>
+                                        <div class="validation-message-win11" id="productionRate-error">
+                                            Please enter a value between 1000 and 15000 ton/day
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label-win11">
+                                            <i class="bi bi-droplet"></i>Specific Consumption
+                                        </label>
+                                        <div class="input-group-win11">
+                                            <input type="number" class="form-control-win11 input-group-field" id="specificConsumption" value="1.65" step="0.01" min="1" max="3">
+                                            <span class="input-group-text-win11">ton/ton</span>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Ratio of burden materials consumed per ton of hot metal produced.
+                                        </div>
+                                        <div class="validation-message-win11" id="specificConsumption-error">
+                                            Please enter a value between 1 and 3 ton/ton
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label-win11">
+                                            <i class="bi bi-arrow-up-circle"></i>Charging Rate
+                                            <span class="badge-win11 badge-win11-warning ms-2">Editable</span>
+                                        </label>
+                                        <div class="editable-range-group">
+                                            <input type="number" class="editable-range-input" id="chargingRateInput" value="250" min="50" max="500" step="10">
+                                            <input type="range" class="form-range-win11 editable-range-slider" id="chargingRate" value="250" min="50" max="500" step="10">
+                                            <div class="editable-range-value" id="chargingRateValue">250 m³/hr</div>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Volumetric rate at which burden materials are charged into the furnace. Adjustable from 50-500 m³/hr.
+                                        </div>
+                                        <div class="validation-message-win11" id="chargingRate-error">
+                                            Please enter a value between 50 and 500 m³/hr
+                                        </div>
+                                    </div>
+
+                                    <!-- Bidirectional Target Stock Rise / Time to Achieve -->
+                                    <div class="mb-3">
+                                        <div class="toggle-win11">
+                                            <button class="toggle-option-win11 active" id="Mode" onclick="setCalculationMode('')">
+                                                <i class="bi bi-arrows-expand"></i> Stock Rise
+                                            </button>
+                                            <button class="toggle-option-win11" id="timeMode" onclick="setCalculationMode('time')">
+                                                <i class="bi bi-clock"></i> Time to Achieve
+                                            </button>
+                                        </div>
+
+                                        <div id="InputContainer">
+                                            <label class="form-label-win11">
+                                                <i class="bi bi-graph-up-arrow"></i>Target Stock Rise
+                                            </label>
+                                            <div class="input-group-win11">
+                                                <input type="number" class="form-control-win11 input-group-field" id="targetStockRise" value="3" step="0.1" min="0.5" max="10">
+                                                <span class="input-group-text-win11">m</span>
+                                            </div>
+                                            <div class="parameter-description-win11">
+                                                Desired increase in stock level height. Typical range: 0.5-30 meters.
+                                            </div>
+                                            <div class="validation-message-win11" id="targetStockRise-error">
+                                                Please enter a value between 0.5 and 30 meters
+                                            </div>
+                                        </div>
+
+                                        <div id="timeInputContainer" style="display: none;">
+                                            <label class="form-label-win11">
+                                                <i class="bi bi-clock"></i>Target Time to Achieve
+                                            </label>
+                                            <div class="input-group-win11">
+                                                <input type="number" class="form-control-win11 input-group-field" id="targetTime" value="6.7" step="0.1" min="1" max="24">
+                                                <span class="input-group-text-win11">hrs</span>
+                                            </div>
+                                            <div class="parameter-description-win11">
+                                                Available time window for stock level adjustment.
+                                            </div>
+                                            <div class="validation-message-win11" id="targetTime-error">
+                                                Please enter a value between 1 and 24 hours
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn-win11 btn-win11-gradient w-100 pulse" onclick="calculateAllStockLevel()">
+                                        <i class="bi bi-lightning-fill"></i> Calculate Analysis
                                     </button>
-                                    <button class="toggle-option-win11" id="timeMode" onclick="setCalculationMode('time')">
-                                        <i class="bi bi-clock"></i> Time to Achieve
-                                    </button>
-                                </div>
-
-                                <div id="InputContainer">
-                                    <label class="form-label-win11">
-                                        <i class="bi bi-graph-up-arrow"></i>Target Stock Rise
-                                    </label>
-                                    <div class="input-group-win11">
-                                        <input type="number" class="form-control-win11 input-group-field" id="targetStockRise" value="3" step="0.1" min="0.5" max="10">
-                                        <span class="input-group-text-win11">m</span>
-                                    </div>
-                                    <div class="parameter-description-win11">
-                                        Desired increase in stock level height. Typical range: 0.5-30 meters.
-                                    </div>
-                                    <div class="validation-message-win11" id="targetStockRise-error">
-                                        Please enter a value between 0.5 and 30 meters
-                                    </div>
-                                </div>
-
-                                <div id="timeInputContainer" style="display: none;">
-                                    <label class="form-label-win11">
-                                        <i class="bi bi-clock"></i>Target Time to Achieve
-                                    </label>
-                                    <div class="input-group-win11">
-                                        <input type="number" class="form-control-win11 input-group-field" id="targetTime" value="6.7" step="0.1" min="1" max="24">
-                                        <span class="input-group-text-win11">hrs</span>
-                                    </div>
-                                    <div class="parameter-description-win11">
-                                        Available time window for stock level adjustment.
-                                    </div>
-                                    <div class="validation-message-win11" id="targetTime-error">
-                                        Please enter a value between 1 and 24 hours
-                                    </div>
                                 </div>
                             </div>
 
-                            <button class="btn-win11 btn-win11-gradient w-100 pulse" onclick="calculateAllStockLevel()">
-                                <i class="bi bi-lightning-fill"></i> Calculate Analysis
-                            </button>
+                            <!-- Advanced Parameters Card -->
+                            <div class="win11-card">
+                                <div class="win11-card-header">
+                                    <h5 class="win11-card-title">
+                                        <i class="bi bi-cpu"></i> Advanced Operating Parameters
+                                    </h5>
+                                </div>
+                                <div class="win11-card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label-win11">
+                                            <i class="bi bi-wind"></i>Blast Volume
+                                        </label>
+                                        <div class="input-group-win11">
+                                            <input type="number" class="form-control-win11 input-group-field" id="blastVolume" value="155000" step="1000" min="50000" max="300000">
+                                            <span class="input-group-text-win11">Nm³/hr</span>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Volume of hot blast air at standard conditions (0°C, 1 atm).
+                                        </div>
+                                        <div class="validation-message-win11" id="blastVolume-error">
+                                            Please enter a value between 50000 and 300000 Nm³/hr
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label-win11">
+                                            <i class="bi bi-oxygen-tank"></i>Oxygen Enrichment
+                                        </label>
+                                        <div class="input-group-win11">
+                                            <input type="number" class="form-control-win11 input-group-field" id="oxygenVolume" value="10700" step="100" min="0" max="50000">
+                                            <span class="input-group-text-win11">Nm³/hr</span>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Pure oxygen injection to increase blast oxygen content above 21%.
+                                        </div>
+                                        <div class="validation-message-win11" id="oxygenVolume-error">
+                                            Please enter a value between 0 and 50000 Nm³/hr
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-7">
+                            <!-- Baseline Calculations Card -->
+                            <div class="win11-card">
+                                <div class="win11-card-header">
+                                    <h5 class="win11-card-title">
+                                        <i class="bi bi-diagram-3-fill"></i> Real-time Baseline Analysis
+                                    </h5>
+                                </div>
+                                <div class="win11-card-body">
+                                    <!-- Step 1 -->
+                                    <div class="mb-3">
+                                        <h6 class="mb-2">
+                                            <span class="badge bg-primary me-2">1</span>
+                                            Establish Baseline Parameters
+                                        </h6>
+                                        <div class="row g-2">
+                                            <div class="col-md-6">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Furnace Diameter</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="paramDiameter">10.0</span>
+                                                        <span class="metric-unit-win11">m</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Cross-sectional Area</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="paramArea">78.54</span>
+                                                        <span class="metric-unit-win11">m²</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Burden Density</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="paramDensity">1.60</span>
+                                                        <span class="metric-unit-win11">ton/m³</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Production Rate</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="paramProduction">208.3</span>
+                                                        <span class="metric-unit-win11">ton/hr</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="info-box-win11 mt-2">
+                                            <h6>Baseline Configuration</h6>
+                                            <p>Current furnace operating parameters establish the foundation for all stock level calculations.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 2 -->
+                                    <div class="mb-3">
+                                        <h6 class="mb-2">
+                                            <span class="badge bg-primary me-2">2</span>
+                                            Calculate Consumption Rate
+                                        </h6>
+                                        <div class="row g-2">
+                                            <div class="col-md-4">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Burden Consumption</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="burdenConsumption">343.7</span>
+                                                        <span class="metric-unit-win11">ton/hr</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Volumetric Rate</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="volumetricConsumption">214.8</span>
+                                                        <span class="metric-unit-win11">m³/hr</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Linear Rate</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="linearConsumption">2.73</span>
+                                                        <span class="metric-unit-win11">m/hr</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="alert-win11 alert-win11-info">
+                                            <i class="bi bi-info-circle-fill me-2"></i>
+                                            <strong>Stock Depletion:</strong> Current consumption rate of 2.73 m/hr indicates stock level is falling at this velocity.
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 3 -->
+                                    <div class="mb-3">
+                                        <h6 class="mb-2">
+                                            <span class="badge bg-primary me-2">3</span>
+                                            Net Fill Analysis
+                                        </h6>
+                                        <div class="row g-2">
+                                            <div class="col-md-6">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Charging Rate</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="chargingRateDisplay">250</span>
+                                                        <span class="metric-unit-win11">m³/hr</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="metric-card-win11">
+                                                    <div class="metric-label-win11">Net Fill Rate</div>
+                                                    <div class="metric-value-win11">
+                                                        <span class="animate-number" id="netFillRate">0.45</span>
+                                                        <span class="metric-unit-win11">m/hr</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="alert-win11 alert-win11-warning">
+                                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                            <span id="calculationResultText">Time to achieve <span class="badge-win11 badge-win11-gradient">3.0m</span> rise: <strong id="timeToFill">6.7</strong> hours</span>
+                                        </div>
+
+                                        <!-- Progress Bar -->
+                                        <div class="mt-2">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="text-muted">Stock Progress</span>
+                                                <span class="text-muted" id="progressPercent">0%</span>
+                                            </div>
+                                            <div class="progress-win11">
+                                                <div class="progress-bar-win11" id="Progress" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="info-box-win11 mt-2">
+                                            <h6>Operational Implications</h6>
+                                            <p>With a net fill rate of 0.45 m/hr, the current configuration will achieve the target stock rise in 6.7 hours.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Advanced Parameters Card -->
+                    <!-- Scenarios Section -->
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="bi bi-graph-up"></i> Scenarios & Analysis
+                        </h2>
+                    </div>
+
+                    <!-- Summary Dashboard -->
                     <div class="win11-card">
                         <div class="win11-card-header">
                             <h5 class="win11-card-title">
-                                <i class="bi bi-cpu"></i> Advanced Operating Parameters
+                                <i class="bi bi-speedometer2"></i> Scenario Performance Dashboard
                             </h5>
                         </div>
                         <div class="win11-card-body">
-                            <div class="mb-3">
-                                <label class="form-label-win11">
-                                    <i class="bi bi-wind"></i>Blast Volume
-                                </label>
-                                <div class="input-group-win11">
-                                    <input type="number" class="form-control-win11 input-group-field" id="blastVolume" value="155000" step="1000" min="50000" max="300000">
-                                    <span class="input-group-text-win11">Nm³/hr</span>
+                            <div class="stats-grid-win11">
+                                <div class="metric-card-win11">
+                                    <div class="metric-label-win11">Optimal Scenario</div>
+                                    <div class="metric-value-win11" style="font-size: 16px;" id="optimalScenarioName">Scenario 3</div>
                                 </div>
-                                <div class="parameter-description-win11">
-                                    Volume of hot blast air at standard conditions (0°C, 1 atm).
+                                <div class="metric-card-win11">
+                                    <div class="metric-label-win11">Best Time</div>
+                                    <div class="metric-value-win11">
+                                        <span class="animate-number" id="optimalTime">4.4</span>
+                                        <span class="metric-unit-win11">hrs</span>
+                                    </div>
                                 </div>
-                                <div class="validation-message-win11" id="blastVolume-error">
-                                    Please enter a value between 50000 and 300000 Nm³/hr
+                                <div class="metric-card-win11">
+                                    <div class="metric-label-win11">Fill Rate</div>
+                                    <div class="metric-value-win11">
+                                        <span class="animate-number" id="optimalRate">0.68</span>
+                                        <span class="metric-unit-win11">m/hr</span>
+                                    </div>
+                                </div>
+                                <div class="metric-card-win11">
+                                    <div class="metric-label-win11">Production Impact</div>
+                                    <div class="metric-value-win11" style="font-size: 16px;" id="optimalImpact">-25%</div>
                                 </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label class="form-label-win11">
-                                    <i class="bi bi-oxygen-tank"></i>Oxygen Enrichment
-                                </label>
-                                <div class="input-group-win11">
-                                    <input type="number" class="form-control-win11 input-group-field" id="oxygenVolume" value="10700" step="100" min="0" max="50000">
-                                    <span class="input-group-text-win11">Nm³/hr</span>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Pure oxygen injection to increase blast oxygen content above 21%.
-                                </div>
-                                <div class="validation-message-win11" id="oxygenVolume-error">
-                                    Please enter a value between 0 and 50000 Nm³/hr
-                                </div>
+                            <div class="info-box-win11 mt-2">
+                                <h6>Performance Summary</h6>
+                                <p>Scenario 3 achieves the fastest stock rise with a manageable 25% production reduction.</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-7">
-                    <!-- Baseline Calculations Card -->
-                    <div class="win11-card">
-                        <div class="win11-card-header">
-                            <h5 class="win11-card-title">
-                                <i class="bi bi-diagram-3-fill"></i> Real-time Baseline Analysis
-                            </h5>
+                    <!-- Chart Section -->
+                    <div class="chart-container-win11">
+                        <div class="chart-header-win11">
+                            <h3 class="chart-title-win11">Scenario Comparison Analysis</h3>
+                            <div class="chart-options-win11">
+                                <button class="chart-option-btn-win11 active" onclick="updateChartType('bar')">
+                                    <i class="bi bi-bar-chart"></i> Bar
+                                </button>
+                                <button class="chart-option-btn-win11" onclick="updateChartType('line')">
+                                    <i class="bi bi-graph-up"></i> Line
+                                </button>
+                                <button class="chart-option-btn-win11" onclick="updateChartType('radar')">
+                                    <i class="bi bi-pentagon"></i> Radar
+                                </button>
+                            </div>
                         </div>
-                        <div class="win11-card-body">
-                            <!-- Step 1 -->
-                            <div class="mb-3">
-                                <h6 class="mb-2">
-                                    <span class="badge bg-primary me-2">1</span>
-                                    Establish Baseline Parameters
-                                </h6>
-                                <div class="row g-2">
-                                    <div class="col-md-6">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Furnace Diameter</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="paramDiameter">10.0</span>
-                                                <span class="metric-unit-win11">m</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Cross-sectional Area</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="paramArea">78.54</span>
-                                                <span class="metric-unit-win11">m²</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Burden Density</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="paramDensity">1.60</span>
-                                                <span class="metric-unit-win11">ton/m³</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Production Rate</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="paramProduction">208.3</span>
-                                                <span class="metric-unit-win11">ton/hr</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="info-box-win11 mt-2">
-                                    <h6>Baseline Configuration</h6>
-                                    <p>Current furnace operating parameters establish the foundation for all stock level calculations.</p>
-                                </div>
-                            </div>
-
-                            <!-- Step 2 -->
-                            <div class="mb-3">
-                                <h6 class="mb-2">
-                                    <span class="badge bg-primary me-2">2</span>
-                                    Calculate Consumption Rate
-                                </h6>
-                                <div class="row g-2">
-                                    <div class="col-md-4">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Burden Consumption</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="burdenConsumption">343.7</span>
-                                                <span class="metric-unit-win11">ton/hr</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Volumetric Rate</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="volumetricConsumption">214.8</span>
-                                                <span class="metric-unit-win11">m³/hr</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Linear Rate</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="linearConsumption">2.73</span>
-                                                <span class="metric-unit-win11">m/hr</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="alert-win11 alert-win11-info">
-                                    <i class="bi bi-info-circle-fill me-2"></i>
-                                    <strong>Stock Depletion:</strong> Current consumption rate of 2.73 m/hr indicates stock level is falling at this velocity.
-                                </div>
-                            </div>
-
-                            <!-- Step 3 -->
-                            <div class="mb-3">
-                                <h6 class="mb-2">
-                                    <span class="badge bg-primary me-2">3</span>
-                                    Net Fill Analysis
-                                </h6>
-                                <div class="row g-2">
-                                    <div class="col-md-6">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Charging Rate</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="chargingRateDisplay">250</span>
-                                                <span class="metric-unit-win11">m³/hr</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="metric-card-win11">
-                                            <div class="metric-label-win11">Net Fill Rate</div>
-                                            <div class="metric-value-win11">
-                                                <span class="animate-number" id="netFillRate">0.45</span>
-                                                <span class="metric-unit-win11">m/hr</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="alert-win11 alert-win11-warning">
-                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                                    <span id="calculationResultText">Time to achieve <span class="badge-win11 badge-win11-gradient">3.0m</span> rise: <strong id="timeToFill">6.7</strong> hours</span>
-                                </div>
-
-                                <!-- Progress Bar -->
-                                <div class="mt-2">
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span class="text-muted">Stock Progress</span>
-                                        <span class="text-muted" id="progressPercent">0%</span>
-                                    </div>
-                                    <div class="progress-win11">
-                                        <div class="progress-bar-win11" id="Progress" style="width: 0%"></div>
-                                    </div>
-                                </div>
-
-                                <div class="info-box-win11 mt-2">
-                                    <h6>Operational Implications</h6>
-                                    <p>With a net fill rate of 0.45 m/hr, the current configuration will achieve the target stock rise in 6.7 hours.</p>
-                                </div>
-                            </div>
+                        <div style="height: 350px; position: relative;">
+                            <canvas id="resultsChart"></canvas>
+                        </div>
+                        <div class="info-box-win11 mt-2">
+                            <h6>Chart Analysis</h6>
+                            <p>Visual comparison of all scenarios shows the time required to achieve target stock levels.</p>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Scenarios Section -->
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="bi bi-graph-up"></i> Scenarios & Analysis
-                </h2>
-            </div>
+                    <!-- Scenario Cards -->
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="scenario-card-win11">
+                                <div class="scenario-header-win11">
+                                    <input type="text" class="scenario-title-win11" id="scenario1Title" value="Scenario 1: Pressure Reduction">
+                                </div>
+                                <div class="scenario-body-win11">
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">Description</div>
+                                        <div id="scenario1Description" style="font-size: 11px;">
+                                            Reduce blast volume by 15%
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">
+                                            Production Reduction
+                                            <span class="badge-win11 badge-win11-warning ms-2" id="scenario1Badge">15%</span>
+                                        </div>
+                                        <input type="range" class="form-range-win11" id="scenario1Reduction" value="15" min="0" max="100" step="1">
+                                        <div class="d-flex justify-content-between mt-1">
+                                            <small>0%</small>
+                                            <small id="scenario1ReductionValue">15%</small>
+                                            <small>100%</small>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Adjust production reduction from 0% (no change) to 100% (complete shutdown).
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">New Production Rate</div>
+                                        <div class="scenario-metric-value-win11">
+                                            <span class="animate-number" id="scenario1Production">177.1</span>
+                                            <span class="metric-unit-win11">ton/hr</span>
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">Net Fill Rate</div>
+                                        <div class="scenario-metric-value-win11">
+                                            <span class="animate-number" id="scenario1NetFill">0.40</span>
+                                            <span class="metric-unit-win11">m/hr</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert-win11 alert-win11-info">
+                                        <i class="bi bi-clock-fill me-2"></i>
+                                        Time to fill: <strong id="scenario1Time">7.5</strong> hours
+                                    </div>
+                                    <div class="info-box-win11 mt-1">
+                                        <h6>Operational Impact</h6>
+                                        <p>Conservative approach minimizes production disruption while gradually building stock levels.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- Summary Dashboard -->
-            <div class="win11-card">
-                <div class="win11-card-header">
-                    <h5 class="win11-card-title">
-                        <i class="bi bi-speedometer2"></i> Scenario Performance Dashboard
-                    </h5>
-                </div>
-                <div class="win11-card-body">
-                    <div class="stats-grid-win11">
-                        <div class="metric-card-win11">
-                            <div class="metric-label-win11">Optimal Scenario</div>
-                            <div class="metric-value-win11" style="font-size: 16px;" id="optimalScenarioName">Scenario 3</div>
-                        </div>
-                        <div class="metric-card-win11">
-                            <div class="metric-label-win11">Best Time</div>
-                            <div class="metric-value-win11">
-                                <span class="animate-number" id="optimalTime">4.4</span>
-                                <span class="metric-unit-win11">hrs</span>
+                        <div class="col-md-4">
+                            <div class="scenario-card-win11">
+                                <div class="scenario-header-win11">
+                                    <input type="text" class="scenario-title-win11" id="scenario2Title" value="Scenario 2: Oxygen Reduction">
+                                </div>
+                                <div class="scenario-body-win11">
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">Description</div>
+                                        <div id="scenario2Description" style="font-size: 11px;">
+                                            Reduce oxygen by 20%
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">
+                                            Production Reduction
+                                            <span class="badge-win11 badge-win11-warning ms-2" id="scenario2Badge">20%</span>
+                                        </div>
+                                        <input type="range" class="form-range-win11" id="scenario2Reduction" value="20" min="0" max="100" step="1">
+                                        <div class="d-flex justify-content-between mt-1">
+                                            <small>0%</small>
+                                            <small id="scenario2ReductionValue">20%</small>
+                                            <small>100%</small>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Adjust production reduction from 0% (no change) to 100% (complete shutdown).
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">New Production Rate</div>
+                                        <div class="scenario-metric-value-win11">
+                                            <span class="animate-number" id="scenario2Production">166.6</span>
+                                            <span class="metric-unit-win11">ton/hr</span>
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">Net Fill Rate</div>
+                                        <div class="scenario-metric-value-win11">
+                                            <span class="animate-number" id="scenario2NetFill">0.54</span>
+                                            <span class="metric-unit-win11">m/hr</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert-win11 alert-win11-info">
+                                        <i class="bi bi-clock-fill me-2"></i>
+                                        Time to fill: <strong id="scenario2Time">5.6</strong> hours
+                                    </div>
+                                    <div class="info-box-win11 mt-1">
+                                        <h6>Operational Impact</h6>
+                                        <p>Oxygen reduction provides efficient production control with good stock building performance.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="metric-card-win11">
-                            <div class="metric-label-win11">Fill Rate</div>
-                            <div class="metric-value-win11">
-                                <span class="animate-number" id="optimalRate">0.68</span>
-                                <span class="metric-unit-win11">m/hr</span>
-                            </div>
-                        </div>
-                        <div class="metric-card-win11">
-                            <div class="metric-label-win11">Production Impact</div>
-                            <div class="metric-value-win11" style="font-size: 16px;" id="optimalImpact">-25%</div>
-                        </div>
-                    </div>
-                    <div class="info-box-win11 mt-2">
-                        <h6>Performance Summary</h6>
-                        <p>Scenario 3 achieves the fastest stock rise with a manageable 25% production reduction.</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Chart Section -->
-            <div class="chart-container-win11">
-                <div class="chart-header-win11">
-                    <h3 class="chart-title-win11">Scenario Comparison Analysis</h3>
-                    <div class="chart-options-win11">
-                        <button class="chart-option-btn-win11 active" onclick="updateChartType('bar')">
-                            <i class="bi bi-bar-chart"></i> Bar
-                        </button>
-                        <button class="chart-option-btn-win11" onclick="updateChartType('line')">
-                            <i class="bi bi-graph-up"></i> Line
-                        </button>
-                        <button class="chart-option-btn-win11" onclick="updateChartType('radar')">
-                            <i class="bi bi-pentagon"></i> Radar
-                        </button>
-                    </div>
-                </div>
-                <div style="height: 350px; position: relative;">
-                    <canvas id="resultsChart"></canvas>
-                </div>
-                <div class="info-box-win11 mt-2">
-                    <h6>Chart Analysis</h6>
-                    <p>Visual comparison of all scenarios shows the time required to achieve target stock levels.</p>
-                </div>
-            </div>
-
-            <!-- Scenario Cards -->
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <div class="scenario-card-win11">
-                        <div class="scenario-header-win11">
-                            <input type="text" class="scenario-title-win11" id="scenario1Title" value="Scenario 1: Pressure Reduction">
-                        </div>
-                        <div class="scenario-body-win11">
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">Description</div>
-                                <div id="scenario1Description" style="font-size: 11px;">
-                                    Reduce blast volume by 15%
+                        <div class="col-md-4">
+                            <div class="scenario-card-win11">
+                                <div class="scenario-header-win11">
+                                    <input type="text" class="scenario-title-win11" id="scenario3Title" value="Scenario 3: Combined Approach">
                                 </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">
-                                    Production Reduction
-                                    <span class="badge-win11 badge-win11-warning ms-2" id="scenario1Badge">15%</span>
+                                <div class="scenario-body-win11">
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">Description</div>
+                                        <div id="scenario3Description" style="font-size: 11px;">
+                                            Combined 25% reduction
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">
+                                            Production Reduction
+                                            <span class="badge-win11 badge-win11-danger ms-2" id="scenario3Badge">25%</span>
+                                        </div>
+                                        <input type="range" class="form-range-win11" id="scenario3Reduction" value="25" min="0" max="100" step="1">
+                                        <div class="d-flex justify-content-between mt-1">
+                                            <small>0%</small>
+                                            <small id="scenario3ReductionValue">25%</small>
+                                            <small>100%</small>
+                                        </div>
+                                        <div class="parameter-description-win11">
+                                            Adjust production reduction from 0% (no change) to 100% (complete shutdown).
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">New Production Rate</div>
+                                        <div class="scenario-metric-value-win11">
+                                            <span class="animate-number" id="scenario3Production">156.2</span>
+                                            <span class="metric-unit-win11">ton/hr</span>
+                                        </div>
+                                    </div>
+                                    <div class="scenario-metric-win11">
+                                        <div class="scenario-metric-label-win11">Net Fill Rate</div>
+                                        <div class="scenario-metric-value-win11">
+                                            <span class="animate-number" id="scenario3NetFill">0.68</span>
+                                            <span class="metric-unit-win11">m/hr</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert-win11 alert-win11-warning">
+                                        <i class="bi bi-trophy-fill me-2"></i>
+                                        Best option: <strong id="scenario3Time">4.4</strong> hours
+                                    </div>
+                                    <div class="info-box-win11 mt-1">
+                                        <h6>Operational Impact</h6>
+                                        <p>Aggressive approach achieves fastest stock recovery but requires significant production coordination.</p>
+                                    </div>
                                 </div>
-                                <input type="range" class="form-range-win11" id="scenario1Reduction" value="15" min="0" max="100" step="1">
-                                <div class="d-flex justify-content-between mt-1">
-                                    <small>0%</small>
-                                    <small id="scenario1ReductionValue">15%</small>
-                                    <small>100%</small>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Adjust production reduction from 0% (no change) to 100% (complete shutdown).
-                                </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">New Production Rate</div>
-                                <div class="scenario-metric-value-win11">
-                                    <span class="animate-number" id="scenario1Production">177.1</span>
-                                    <span class="metric-unit-win11">ton/hr</span>
-                                </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">Net Fill Rate</div>
-                                <div class="scenario-metric-value-win11">
-                                    <span class="animate-number" id="scenario1NetFill">0.40</span>
-                                    <span class="metric-unit-win11">m/hr</span>
-                                </div>
-                            </div>
-                            <div class="alert-win11 alert-win11-info">
-                                <i class="bi bi-clock-fill me-2"></i>
-                                Time to fill: <strong id="scenario1Time">7.5</strong> hours
-                            </div>
-                            <div class="info-box-win11 mt-1">
-                                <h6>Operational Impact</h6>
-                                <p>Conservative approach minimizes production disruption while gradually building stock levels.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="scenario-card-win11">
-                        <div class="scenario-header-win11">
-                            <input type="text" class="scenario-title-win11" id="scenario2Title" value="Scenario 2: Oxygen Reduction">
-                        </div>
-                        <div class="scenario-body-win11">
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">Description</div>
-                                <div id="scenario2Description" style="font-size: 11px;">
-                                    Reduce oxygen by 20%
-                                </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">
-                                    Production Reduction
-                                    <span class="badge-win11 badge-win11-warning ms-2" id="scenario2Badge">20%</span>
-                                </div>
-                                <input type="range" class="form-range-win11" id="scenario2Reduction" value="20" min="0" max="100" step="1">
-                                <div class="d-flex justify-content-between mt-1">
-                                    <small>0%</small>
-                                    <small id="scenario2ReductionValue">20%</small>
-                                    <small>100%</small>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Adjust production reduction from 0% (no change) to 100% (complete shutdown).
-                                </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">New Production Rate</div>
-                                <div class="scenario-metric-value-win11">
-                                    <span class="animate-number" id="scenario2Production">166.6</span>
-                                    <span class="metric-unit-win11">ton/hr</span>
-                                </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">Net Fill Rate</div>
-                                <div class="scenario-metric-value-win11">
-                                    <span class="animate-number" id="scenario2NetFill">0.54</span>
-                                    <span class="metric-unit-win11">m/hr</span>
-                                </div>
-                            </div>
-                            <div class="alert-win11 alert-win11-info">
-                                <i class="bi bi-clock-fill me-2"></i>
-                                Time to fill: <strong id="scenario2Time">5.6</strong> hours
-                            </div>
-                            <div class="info-box-win11 mt-1">
-                                <h6>Operational Impact</h6>
-                                <p>Oxygen reduction provides efficient production control with good stock building performance.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="scenario-card-win11">
-                        <div class="scenario-header-win11">
-                            <input type="text" class="scenario-title-win11" id="scenario3Title" value="Scenario 3: Combined Approach">
-                        </div>
-                        <div class="scenario-body-win11">
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">Description</div>
-                                <div id="scenario3Description" style="font-size: 11px;">
-                                    Combined 25% reduction
-                                </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">
-                                    Production Reduction
-                                    <span class="badge-win11 badge-win11-danger ms-2" id="scenario3Badge">25%</span>
-                                </div>
-                                <input type="range" class="form-range-win11" id="scenario3Reduction" value="25" min="0" max="100" step="1">
-                                <div class="d-flex justify-content-between mt-1">
-                                    <small>0%</small>
-                                    <small id="scenario3ReductionValue">25%</small>
-                                    <small>100%</small>
-                                </div>
-                                <div class="parameter-description-win11">
-                                    Adjust production reduction from 0% (no change) to 100% (complete shutdown).
-                                </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">New Production Rate</div>
-                                <div class="scenario-metric-value-win11">
-                                    <span class="animate-number" id="scenario3Production">156.2</span>
-                                    <span class="metric-unit-win11">ton/hr</span>
-                                </div>
-                            </div>
-                            <div class="scenario-metric-win11">
-                                <div class="scenario-metric-label-win11">Net Fill Rate</div>
-                                <div class="scenario-metric-value-win11">
-                                    <span class="animate-number" id="scenario3NetFill">0.68</span>
-                                    <span class="metric-unit-win11">m/hr</span>
-                                </div>
-                            </div>
-                            <div class="alert-win11 alert-win11-warning">
-                                <i class="bi bi-trophy-fill me-2"></i>
-                                Best option: <strong id="scenario3Time">4.4</strong> hours
-                            </div>
-                            <div class="info-box-win11 mt-1">
-                                <h6>Operational Impact</h6>
-                                <p>Aggressive approach achieves fastest stock recovery but requires significant production coordination.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 
     <!-- Settings Modal -->
@@ -4959,7 +4957,7 @@
                         name: "C",
                         hours: ["23:00", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00"]
                     }
-                ];
+            ];
 
                 shifts.forEach(shift => {
                     shift.hours.forEach(hour => {
