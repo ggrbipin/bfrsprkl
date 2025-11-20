@@ -6009,10 +6009,232 @@
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            checkAuth();
-            initViewSwitcher();
+                checkAuth();
+                initViewSwitcher();
         });
     </script>
+        <script>
+            (function() {
+                // Persist last-changed values across page loads using localStorage and optionally sync to a server.
+                const STORAGE_KEY = 'blastfurnace_last_values_v1';
+                const SYNC_SERVER = window.SYNC_SERVER_URL || 'http://localhost:3000';
+                const ROOM_ID = window.SYNC_ROOM_ID || localStorage.getItem('blastfurnace_sync_room') || 'blastfurnace_default_room';
+
+                let socket = null;
+                let socketConnected = false;
+
+                function getElementKey(el) {
+                    if (el.name) return `name:${el.name}`;
+                    if (el.id) return `id:${el.id}`;
+                    return null;
+                }
+
+                function readStore() {
+                    try {
+                        const raw = localStorage.getItem(STORAGE_KEY);
+                        return raw ? JSON.parse(raw) : {};
+                    } catch (e) {
+                        return {};
+                    }
+                }
+
+                function writeStore(store) {
+                    try {
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+                    } catch (e) {
+                        console.warn('Could not write store', e);
+                    }
+                }
+
+                function saveEntry(key, entry, options = {}) {
+                    // entry should be {type, value, ts}
+                    try {
+                        const store = readStore();
+                        const existing = store[key];
+                        if (!existing || (entry.ts || 0) >= (existing.ts || 0)) {
+                            store[key] = entry;
+                            writeStore(store);
+                        }
+
+                        // send to server (unless suppressed)
+                        if (!options.suppressRemote) {
+                            sendToServer(key, entry);
+                        }
+                    } catch (e) {
+                        console.warn('Could not save entry', e);
+                    }
+                }
+
+                function saveValue(el, options = {}) {
+                    const key = getElementKey(el);
+                    if (!key) return;
+                    const ts = Date.now();
+
+                    if (el.type === 'checkbox') {
+                        saveEntry(key, {type: 'checkbox', value: !!el.checked, ts}, options);
+                    } else if (el.type === 'radio') {
+                        if (el.checked) saveEntry(key, {type: 'radio', value: el.value, ts}, options);
+                    } else {
+                        saveEntry(key, {type: 'value', value: el.value, ts}, options);
+                    }
+                }
+
+                function applyEntryToElement(key, entry, options = {}) {
+                    try {
+                        // find matching element by name or id
+                        let selector = '';
+                        if (key.startsWith('name:')) selector = `[name="${key.slice(5)}"]`;
+                        else if (key.startsWith('id:')) selector = `#${key.slice(3)}`;
+                        if (!selector) return;
+
+                        const els = document.querySelectorAll(selector);
+                        if (!els || els.length === 0) return;
+
+                        els.forEach(el => {
+                            if (entry.type === 'checkbox') {
+                                if (el.type === 'checkbox') el.checked = !!entry.value;
+                            } else if (entry.type === 'radio') {
+                                if (el.type === 'radio') el.checked = (el.value === entry.value);
+                            } else if (entry.type === 'value') {
+                                if (el.tagName === 'SELECT') el.value = entry.value;
+                                else el.value = entry.value;
+                            }
+                        });
+
+                        // Save locally but do not re-broadcast if this came from remote
+                        saveEntry(key, entry, {suppressRemote: !!options.suppressRemote});
+                    } catch (e) {
+                        console.warn('applyEntryToElement error', e);
+                    }
+                }
+
+                function restoreValues() {
+                    const store = readStore();
+                    const selector = 'input[name], input[id], textarea[name], textarea[id], select[name], select[id]';
+                    document.querySelectorAll(selector).forEach(el => {
+                        const key = getElementKey(el);
+                        if (!key) return;
+                        const entry = store[key];
+                        if (!entry) return;
+                        applyEntryToElement(key, entry, {suppressRemote: true});
+                    });
+                }
+
+                function bindSaveHandlers() {
+                    const selector = 'input[name], input[id], textarea[name], textarea[id], select[name], select[id]';
+                    document.querySelectorAll(selector).forEach(el => {
+                        const ev1 = (el.type === 'text' || el.tagName === 'TEXTAREA' || el.type === 'search' || el.type === 'email' || el.type === 'number' || el.type === 'range' || el.type === 'tel' || el.type === 'url' || el.type === 'password') ? 'input' : 'change';
+                        el.addEventListener(ev1, () => saveValue(el), {passive: true});
+                        if (el.type === 'radio') el.addEventListener('change', () => saveValue(el), {passive: true});
+                    });
+                }
+
+                // --- Server sync ---
+                function ensureSocketIoClient(cb) {
+                    if (window.io) return cb();
+                    const s = document.createElement('script');
+                    s.src = 'https://cdn.socket.io/4.7.2/socket.io.min.js';
+                    s.onload = cb;
+                    s.onerror = () => cb(new Error('Could not load socket.io client'));
+                    document.head.appendChild(s);
+                }
+
+                function connectSocket() {
+                    try {
+                        ensureSocketIoClient((err) => {
+                            if (err) return console.warn(err);
+                            try {
+                                socket = io(SYNC_SERVER, {transports: ['websocket', 'polling']});
+                                socket.on('connect', () => {
+                                    socketConnected = true;
+                                    socket.emit('join', ROOM_ID);
+                                });
+
+                                socket.on('init', (payload) => {
+                                    // payload is key->entry map
+                                    const local = readStore();
+                                    Object.keys(payload || {}).forEach(key => {
+                                        const incoming = payload[key];
+                                        const existing = local[key];
+                                        if (!existing || (incoming.ts || 0) > (existing.ts || 0)) {
+                                            applyEntryToElement(key, incoming, {suppressRemote: true});
+                                        }
+                                    });
+                                });
+
+                                socket.on('remote-update', (payload) => {
+                                    const local = readStore();
+                                    Object.keys(payload || {}).forEach(key => {
+                                        const incoming = payload[key];
+                                        const existing = local[key];
+                                        if (!existing || (incoming.ts || 0) > (existing.ts || 0)) {
+                                            applyEntryToElement(key, incoming, {suppressRemote: true});
+                                        }
+                                    });
+                                });
+                            } catch (e) {
+                                console.warn('socket connect error', e);
+                            }
+                        });
+                    } catch (e) {
+                        console.warn('connectSocket error', e);
+                    }
+                }
+
+                function sendToServerREST(payload) {
+                    try {
+                        fetch(`${SYNC_SERVER}/data/${encodeURIComponent(ROOM_ID)}`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        }).catch(e => console.warn('REST sync failed', e));
+                    } catch (e) {
+                        console.warn('REST send error', e);
+                    }
+                }
+
+                function sendToServer(key, entry) {
+                    const payload = {};
+                    payload[key] = entry;
+                    if (socketConnected && socket) {
+                        try {
+                            socket.emit('update', {roomId: ROOM_ID, payload});
+                        } catch (e) {
+                            // fallback
+                            sendToServerREST(payload);
+                        }
+                    } else {
+                        // try REST
+                        sendToServerREST(payload);
+                    }
+                }
+
+                // public helper
+                window.clearSavedFormValues = function() {
+                    try {
+                        localStorage.removeItem(STORAGE_KEY);
+                        console.info('Saved form values cleared.');
+                        // optionally notify server to clear (not implemented by default)
+                    } catch (e) {
+                        console.warn('Could not clear saved values', e);
+                    }
+                };
+
+                // Initialize
+                document.addEventListener('DOMContentLoaded', function() {
+                    restoreValues();
+                    bindSaveHandlers();
+                    // save before unload
+                    window.addEventListener('beforeunload', function() {
+                        const selector = 'input[name], input[id], textarea[name], textarea[id], select[name], select[id]';
+                        document.querySelectorAll(selector).forEach(el => saveValue(el));
+                    });
+
+                    // attempt to connect to sync server (non-blocking)
+                    connectSocket();
+                });
+            })();
+        </script>
 </body>
 
 </html>
