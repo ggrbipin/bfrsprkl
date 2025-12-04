@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>BLAST FURNACE</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
     <style>
-        /* CSS Variables for Theme Support */
+        /* All CSS styles from the original file */
         :root {
-            /* Light Theme (Default) */
             --primary: #0078d4;
             --primary-dark: #106ebe;
             --primary-light: #60cdff;
@@ -37,8 +37,6 @@
             --border-color: #e1e1e1;
             --input-bg: #ffffff;
             --shadow-color: rgba(0, 0, 0, 0.1);
-
-            /* Additional Vibrant Colors */
             --purple: #8e44ad;
             --pink: #e91e63;
             --teal: #009688;
@@ -48,8 +46,6 @@
             --cyan: #00bcd4;
             --deep-orange: #ff5722;
             --blue-gray: #607d8b;
-
-            /* Multi-Color Gradients */
             --gradient-ocean: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-sunset: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-forest: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -60,44 +56,33 @@
             --gradient-candy: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
             --gradient-midnight: linear-gradient(135deg, #2b1055 0%, #7597de 100%);
             --gradient-dawn: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-
-            /* Typography */
             --font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-size-xs: 1rem;
             --font-size-sm: 1.2rem;
-            --font-size-base: 1.5rem;
+            --font-size-base: 1.4rem;
             --font-size-lg: 1.6rem;
             --font-size-xl: 1.25rem;
             --font-size-2xl: 1.5rem;
             --font-size-3xl: 1.875rem;
             --font-size-4xl: 2.25rem;
-
-            /* Spacing - Reduced sizes */
             --spacing-xs: 0.125rem;
             --spacing-sm: 0.25rem;
             --spacing-md: 0.5rem;
             --spacing-lg: 0.75rem;
             --spacing-xl: 1rem;
             --spacing-2xl: 1.25rem;
-
-            /* Border Radius - Windows 11 rounded corners */
             --radius-sm: 0.45rem;
             --radius-md: 0.5rem;
             --radius-lg: 0.75rem;
             --radius-xl: 1rem;
             --radius-2xl: 1.25rem;
-
-            /* Shadows - Windows 11 subtle shadows */
             --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.06);
             --shadow-xl: 0 8px 10px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.06);
-
-            /* Transitions */
             --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Dark Theme */
         [data-theme="dark"] {
             --primary: #4ca0ff;
             --primary-dark: #3a8ee6;
@@ -123,7 +108,6 @@
             --shadow-color: rgba(0, 0, 0, 0.3);
         }
 
-        /* System Auto Theme (Media Query) */
         @media (prefers-color-scheme: dark) {
             [data-theme="auto"] {
                 --primary: #4ca0ff;
@@ -159,7 +143,7 @@
 
         body {
             font-family: var(--font-family);
-            font-size: var(--font-size-base);
+            font-size: 1em;
             background: var(--bg-color);
             color: var(--text-color);
             line-height: 1.5;
@@ -167,7 +151,6 @@
             transition: var(--transition);
         }
 
-        /* Windows 11 Background with Mica Effect */
         body::before {
             content: '';
             position: fixed;
@@ -175,23 +158,20 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
             z-index: -2;
             transition: var(--transition);
         }
 
         [data-theme="dark"] body::before,
         [data-theme="auto"]:where([data-theme="auto"]) body::before {
-            background:
-                radial-gradient(circle at 20% 80%, rgba(76, 160, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(244, 67, 54, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(3, 169, 244, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 80%, rgba(76, 160, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(244, 67, 54, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(3, 169, 244, 0.1) 0%, transparent 50%);
         }
 
-        /* Animated Background Particles */
         .particles {
             position: fixed;
             top: 0;
@@ -217,22 +197,18 @@
                 transform: translateY(100vh) translateX(0) rotate(0deg);
                 opacity: 0;
             }
-
             10% {
                 opacity: 0.2;
             }
-
             90% {
                 opacity: 0.2;
             }
-
             100% {
                 transform: translateY(-100vh) translateX(100px) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        /* Authentication Container */
         .auth-container {
             position: fixed;
             top: 0;
@@ -339,7 +315,6 @@
             border: 1px solid var(--gray-light);
             border-radius: var(--radius-md);
             font-size: var(--font-size-base);
-            font-weight: 700;
             background: var(--white);
             color: var(--dark);
             transition: var(--transition);
@@ -419,7 +394,6 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -438,7 +412,6 @@
             border: 1px solid rgba(16, 124, 16, 0.2);
         }
 
-        /* Main App Container */
         .app-container {
             display: flex;
             flex-direction: column;
@@ -449,7 +422,6 @@
             display: none;
         }
 
-        /* Top Bar Styles */
         .top-bar {
             background: var(--mica-bg);
             backdrop-filter: blur(10px);
@@ -556,10 +528,9 @@
             justify-content: flex-end;
         }
 
-        /* Settings Button */
         .settings-button {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -575,7 +546,6 @@
             color: var(--primary);
         }
 
-        /* User Dropdown Menu */
         .user-dropdown {
             position: relative;
         }
@@ -595,8 +565,8 @@
         }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary) 0%, var(--info) 100%);
             color: var(--white);
@@ -681,14 +651,12 @@
             margin: var(--spacing-xs) 0;
         }
 
-        /* Main Content */
         .main-content {
             flex: 1;
             padding: var(--spacing-lg);
             overflow-y: auto;
         }
 
-        /* Settings Modal */
         .settings-modal {
             position: fixed;
             top: 0;
@@ -792,7 +760,58 @@
             color: var(--primary);
         }
 
-        /* Settings Form Elements */
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .theme-option-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .theme-option-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .theme-option-card.active {
+            border-color: var(--primary);
+            background: rgba(0, 120, 212, 0.05);
+        }
+
+        .theme-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .theme-info {
+            flex: 1;
+        }
+
+        .theme-name {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .theme-description {
+            font-size: var(--font-size-sm);
+            color: var(--gray);
+        }
+
         .settings-form-group {
             margin-bottom: var(--spacing-lg);
         }
@@ -879,7 +898,6 @@
             background: var(--gray-light);
         }
 
-        /* Comprehensive Card - Consistent sizing */
         .comprehensive-card {
             background: var(--mica-bg);
             backdrop-filter: blur(10px);
@@ -940,7 +958,6 @@
             padding: var(--spacing-lg);
         }
 
-        /* Section Styles */
         .section {
             margin-bottom: var(--spacing-lg);
             padding-bottom: var(--spacing-md);
@@ -967,7 +984,6 @@
             font-size: var(--font-size-lg);
         }
 
-        /* Grid Layouts - Reduced gaps */
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -986,7 +1002,6 @@
             gap: var(--spacing-md);
         }
 
-        /* Parameter Cards - Consistent sizing */
         .param-card {
             background: var(--white);
             border-radius: var(--radius-lg);
@@ -1071,7 +1086,6 @@
             color: var(--gray);
         }
 
-        /* Table Styles */
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -1124,7 +1138,6 @@
             font-weight: 500;
         }
 
-        /* Status Indicators */
         .status-indicator {
             display: inline-block;
             width: 8px;
@@ -1145,7 +1158,6 @@
             background: var(--danger);
         }
 
-        /* Action Buttons */
         .action-buttons {
             display: flex;
             gap: var(--spacing-md);
@@ -1198,7 +1210,6 @@
             background: var(--gray-lighter);
         }
 
-        /* Shift Production Specific Styles */
         .shift-controls {
             display: flex;
             align-items: center;
@@ -1268,7 +1279,6 @@
             background: linear-gradient(90deg, rgba(216, 59, 1, 0.1) 0%, transparent 100%) !important;
         }
 
-        /* Chart Container Styles */
         .chart-container {
             background: var(--white);
             border-radius: var(--radius-lg);
@@ -1283,6 +1293,16 @@
             width: 100% !important;
             height: 100% !important;
         }
+
+            /* Increase size for Production Efficiency by Shift chart */
+            #efficiencyChart {
+                width: 600px !important;
+                height: 380px !important;
+                max-width: 100%;
+                max-height: 100%;
+                display: block;
+                margin: 0 auto;
+            }
 
         .chart-title {
             font-size: var(--font-size-lg);
@@ -1303,7 +1323,6 @@
             grid-column: span 2;
         }
 
-        /* Silicon Calculation Specific Styles */
         .silicon-result {
             background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(0, 183, 195, 0.1) 100%);
             border-radius: var(--radius-lg);
@@ -1335,7 +1354,6 @@
             border-left: 4px solid var(--primary);
         }
 
-        /* Windows 11 specific animations */
         .win11-animation {
             animation: fadeIn 0.3s ease-out;
         }
@@ -1345,16 +1363,10 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        /* Stock Level Calculator Styles */
-        .stock-level-calculator {
-            /* All styles from the second file will be prefixed with this class */
         }
 
         .stock-level-calculator .win11-card {
@@ -1619,7 +1631,6 @@
             0% {
                 transform: translateX(-100%);
             }
-
             100% {
                 transform: translateX(100%);
             }
@@ -2011,12 +2022,10 @@
                 transform: scale(1);
                 box-shadow: 0 0 0 0 rgba(0, 120, 212, 0.7);
             }
-
             70% {
                 transform: scale(1.05);
                 box-shadow: 0 0 0 6px rgba(0, 120, 212, 0);
             }
-
             100% {
                 transform: scale(1);
                 box-shadow: 0 0 0 0 rgba(0, 120, 212, 0);
@@ -2027,82 +2036,99 @@
             animation: pulse 2s infinite;
         }
 
-        /* Responsive */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10001;
+            min-width: 300px;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 1024px) {
             .top-bar-center {
                 padding: 0 var(--spacing-md);
             }
-
             .view-btn span {
                 display: none;
             }
-
             .view-btn {
                 padding: var(--spacing-sm);
             }
-
             .view-btn i {
                 font-size: var(--font-size-lg);
             }
         }
 
         @media (max-width: 768px) {
-
             .grid-2,
             .grid-3,
             .grid-4 {
                 grid-template-columns: 1fr;
             }
-
             .chart-grid {
                 grid-template-columns: 1fr;
             }
-
             .chart-grid-full {
                 grid-column: span 1;
             }
-
             .main-content {
                 padding: var(--spacing-md);
             }
-
             .top-bar {
                 padding: 0 var(--spacing-lg);
             }
-
             .top-bar-left {
                 min-width: auto;
             }
-
             .top-bar-subtitle {
                 display: none;
             }
-
             .top-bar-center {
                 padding: 0 var(--spacing-sm);
             }
-
             .top-bar-right {
                 min-width: auto;
             }
-
             .user-info {
                 display: none;
             }
-
             .dropdown-menu {
                 right: -50px;
             }
-
             .card-body {
                 padding: var(--spacing-md);
             }
-
             .section {
                 margin-bottom: var(--spacing-lg);
                 padding-bottom: var(--spacing-md);
             }
-
             .settings-container {
                 width: 95%;
                 max-height: 95vh;
@@ -2113,11 +2139,9 @@
             .param-value {
                 font-size: var(--font-size-base);
             }
-
             .user-info {
                 display: none;
             }
-
             .dropdown-menu {
                 right: -50px;
             }
@@ -2133,7 +2157,7 @@
     <div class="auth-container" id="authContainer">
         <div class="auth-card" id="loginCard">
             <div class="logo-container">
-                <img src="sail.jpg" alt="SAIL" class="logo-img">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/SAIL_logo.svg/1200px-SAIL_logo.svg.png" alt="SAIL" class="logo-img">
                 <div class="logo-text">
                     <h1 class="auth-title">BLAST FURNACE</h1>
                     <div class="auth-subtitle">ROURKELA STEEL PLANT</div>
@@ -2163,7 +2187,7 @@
 
         <div class="auth-card hidden" id="registerCard">
             <div class="logo-container">
-                <img src="sail.jpg" alt="SAIL" class="logo-img">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/SAIL_logo.svg/1200px-SAIL_logo.svg.png" alt="SAIL" class="logo-img">
                 <div class="logo-text">
                     <h1 class="auth-title">CREATE ACCOUNT</h1>
                     <div class="auth-subtitle">ROURKELA STEEL PLANT</div>
@@ -2202,7 +2226,7 @@
 
         <div class="auth-card hidden" id="forgotPasswordCard">
             <div class="logo-container">
-                <img src="sail.jpg" alt="SAIL" class="logo-img">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/SAIL_logo.svg/1200px-SAIL_logo.svg.png" alt="SAIL" class="logo-img">
                 <div class="logo-text">
                     <h1 class="auth-title">RESET PASSWORD</h1>
                     <div class="auth-subtitle">ROURKELA STEEL PLANT</div>
@@ -2239,8 +2263,10 @@
     <div class="app-container hidden" id="appContainer">
         <!-- Top Bar -->
         <div class="top-bar">
-                <img src="sail.jpg" alt="SAIL" class="logo-img">
-                <div class="logo-text">
+            <div class="top-bar-left">
+                <div class="top-bar-logo">
+                    <i class="fas fa-industry"></i>
+                </div>
                 <div class="top-bar-title-container">
                     <div class="top-bar-title">BLAST FURNACE</div>
                     <div class="top-bar-subtitle">ROURKELA STEEL PLANT</div>
@@ -2297,6 +2323,12 @@
         <div class="main-content">
             <!-- Comprehensive View -->
             <div class="comprehensive-card win11-animation" id="comprehensive-view">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-calculator"></i>
+                        Burden Calculation
+                    </h2>
+                </div>
 
                 <div class="card-body">
                     <!-- Material Properties Section -->
@@ -2463,6 +2495,10 @@
                             <div class="param-card">
                                 <div class="param-label">Total C Input</div>
                                 <div class="param-value" id="comp-Total-C-Input">0<span class="param-unit">Kg</span></div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-label">Total SiO2 Input</div>
+                                <div class="param-value" id="comp-Total-SIO2-Input">0<span class="param-unit">Kg</span></div>
                             </div>
                             <div class="param-card">
                                 <div class="param-label">Slag Weight</div>
@@ -2699,7 +2735,6 @@
                         <i class="fas fa-clock"></i>
                         24-Hour Shift Production
                     </h2>
-                    <p class="card-subtitle">Monitor and analyze production data across all three shifts</p>
                 </div>
 
                 <div class="card-body">
@@ -3411,6 +3446,37 @@
                 </div>
             </div>
             <div class="settings-body">
+                <!-- Theme Settings Section -->
+                <div class="settings-section">
+                    <h3 class="settings-section-title">
+                        <i class="fas fa-palette"></i>
+                        Theme Settings
+                    </h3>
+                    <div class="theme-options">
+                        <div class="theme-option-card active" data-theme="light">
+                            <div class="theme-preview"></div>
+                            <div class="theme-info">
+                                <div class="theme-name">Light</div>
+                                <div class="theme-description">Default light theme</div>
+                            </div>
+                        </div>
+                        <div class="theme-option-card" data-theme="dark">
+                            <div class="theme-preview"></div>
+                            <div class="theme-info">
+                                <div class="theme-name">Dark</div>
+                                <div class="theme-description">Dark theme for low light</div>
+                            </div>
+                        </div>
+                        <div class="theme-option-card" data-theme="auto">
+                            <div class="theme-preview"></div>
+                            <div class="theme-info">
+                                <div class="theme-name">Auto</div>
+                                <div class="theme-description">Follow system preference</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Application Settings Section -->
                 <div class="settings-section">
                     <h3 class="settings-section-title">
@@ -3457,10 +3523,10 @@
                     </div>
                     <div class="settings-button-group">
                         <button class="settings-button settings-button-primary" onclick="exportAllData()">
-                            <i class="fas fa-download"></i> Export
+                            <i class="fas fa-download"></i> Export All Data
                         </button>
                         <button class="settings-button settings-button-secondary" onclick="clearAllData()">
-                            <i class="fas fa-trash-alt"></i> Clear
+                            <i class="fas fa-trash-alt"></i> Clear All Data
                         </button>
                     </div>
                 </div>
@@ -3474,7 +3540,7 @@
                     <div class="settings-form-group">
                         <p style="margin-bottom: var(--spacing-md);">
                             <strong>Blast Furnace Analysis System</strong><br>
-                            Version 1.0.0<br>
+                            Version 2.0.0<br>
                             © 2023 Rourkela Steel Plant
                         </p>
                         <div class="settings-button-group">
@@ -3498,7 +3564,179 @@
     </div>
 
     <script>
-        // Global variables
+        // ============================================
+        // BROWSER COMPATIBILITY CHECK
+        // ============================================
+        (function() {
+            'use strict';
+            
+            // Check for localStorage support
+            if (typeof(Storage) === 'undefined') {
+                document.body.innerHTML = `
+                    <div style="padding: 20px; text-align: center; font-family: sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+                        <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; max-width: 600px;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 20px;">⚠️ Browser Compatibility Issue</h1>
+                            <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.6;">
+                                Your browser does not support <strong>Web Storage</strong> (localStorage), which is required for this application to save your data and settings.
+                            </p>
+                            <div style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                                <h2 style="margin-bottom: 15px;">📱 Compatible Browsers</h2>
+                                <ul style="list-style: none; padding: 0; text-align: left; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                    <li><strong>Chrome:</strong> Version 4+ (2009)</li>
+                                    <li><strong>Firefox:</strong> Version 3.5+ (2009)</li>
+                                    <li><strong>Safari:</strong> Version 4+ (2009)</li>
+                                    <li><strong>Opera:</strong> Version 10.5+ (2010)</li>
+                                    <li><strong>Edge:</strong> All versions</li>
+                                    <li><strong>Internet Explorer:</strong> Version 8+ (2009)</li>
+                                </ul>
+                            </div>
+                            <p style="font-size: 1rem; color: rgba(255, 255, 255, 0.9);">
+                                Please upgrade to one of the browsers listed above to use this application.
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Check for modern JavaScript features
+            try {
+                eval('let test = () => {}; class Test {}; const x = 1;');
+            } catch (e) {
+                document.body.innerHTML = `
+                    <div style="padding: 20px; text-align: center; font-family: sans-serif; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+                        <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; max-width: 600px;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 20px;">⚠️ JavaScript Compatibility Issue</h1>
+                            <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.6;">
+                                Your browser doesn't support modern JavaScript features (ES6+). This application requires features introduced in 2015.
+                            </p>
+                            <div style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                                <h2 style="margin-bottom: 15px;">🚀 How to Fix</h2>
+                                <ul style="list-style: none; padding: 0; text-align: left;">
+                                    <li style="margin-bottom: 10px;"><strong>1.</strong> Update your browser to the latest version</li>
+                                    <li style="margin-bottom: 10px;"><strong>2.</strong> Enable JavaScript in your browser settings</li>
+                                    <li style="margin-bottom: 10px;"><strong>3.</strong> Try using a different browser</li>
+                                </ul>
+                            </div>
+                            <p style="font-size: 1rem; color: rgba(255, 255, 255, 0.9);">
+                                Most browsers automatically update to the latest version. Check for updates in your browser's settings.
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Check for CSS Custom Properties (CSS Variables)
+            if (!window.CSS || !window.CSS.supports || !window.CSS.supports('--test', '0')) {
+                console.warn('CSS Custom Properties not supported - using fallback styles');
+                // Add fallback inline styles for older browsers
+                const style = document.createElement('style');
+                style.textContent = `
+                    body { background: #f3f2f1 !important; color: #323130 !important; }
+                    .comprehensive-card, .auth-card { background: rgba(255, 255, 255, 0.9) !important; }
+                    [data-theme="dark"] body { background: #1e1e1e !important; color: #f0f0f0 !important; }
+                    [data-theme="dark"] .comprehensive-card, [data-theme="dark"] .auth-card { background: rgba(30, 30, 30, 0.9) !important; }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Storage quota management
+            function checkStorageQuota() {
+                try {
+                    // Test if we can write to localStorage
+                    const testKey = '__storage_test__';
+                    const testValue = 'test';
+                    localStorage.setItem(testKey, testValue);
+                    localStorage.removeItem(testKey);
+                    return true;
+                } catch (e) {
+                    if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                        console.warn('Storage quota exceeded');
+                        // Clear old data
+                        const oneWeekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+                        for (let i = 0; i < localStorage.length; i++) {
+                            const key = localStorage.key(i);
+                            if (key && key.includes('_old_')) {
+                                localStorage.removeItem(key);
+                            }
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+            }
+            
+            // Initialize storage check
+            if (!checkStorageQuota()) {
+                console.warn('Storage quota issues detected - some features may be limited');
+            }
+            
+            // Enhanced localStorage with fallback to sessionStorage
+            const safeStorage = {
+                setItem: function(key, value) {
+                    try {
+                        localStorage.setItem(key, value);
+                        return true;
+                    } catch (e) {
+                        console.warn('localStorage failed, falling back to sessionStorage');
+                        try {
+                            sessionStorage.setItem(key, value);
+                            return true;
+                        } catch (e2) {
+                            console.error('Both localStorage and sessionStorage failed');
+                            return false;
+                        }
+                    }
+                },
+                
+                getItem: function(key) {
+                    try {
+                        return localStorage.getItem(key) || sessionStorage.getItem(key);
+                    } catch (e) {
+                        return null;
+                    }
+                },
+                
+                removeItem: function(key) {
+                    try {
+                        localStorage.removeItem(key);
+                        sessionStorage.removeItem(key);
+                    } catch (e) {
+                        // Ignore errors
+                    }
+                },
+                
+                clear: function() {
+                    try {
+                        localStorage.clear();
+                        sessionStorage.clear();
+                    } catch (e) {
+                        // Ignore errors
+                    }
+                },
+                
+                get length() {
+                    try {
+                        return localStorage.length;
+                    } catch (e) {
+                        try {
+                            return sessionStorage.length;
+                        } catch (e2) {
+                            return 0;
+                        }
+                    }
+                }
+            };
+            
+            // Make safeStorage globally available
+            window.safeStorage = safeStorage;
+            
+        })();
+
+        // ============================================
+        // GLOBAL VARIABLES
+        // ============================================
         let currentView = 'comprehensive';
         let hotMetalChart, materialConsumptionChart, fuelRateChart, efficiencyChart;
         let resultsChart = null;
@@ -3506,7 +3744,9 @@
         let calculationData = {};
         let calculationMode = ''; // '' or 'time'
 
-        // Default data
+        // ============================================
+        // DEFAULT DATA CONFIGURATION
+        // ============================================
         const initialDefaultData = {
             materials: {
                 "COKE": {
@@ -3687,7 +3927,9 @@
             siliconData: JSON.parse(JSON.stringify(initialDefaultData.siliconData))
         };
 
-        // Settings management
+        // ============================================
+        // SETTINGS MANAGEMENT
+        // ============================================
         const appSettings = {
             theme: 'light',
             autoSaveData: true,
@@ -3696,71 +3938,80 @@
             dataRetention: 30
         };
 
-        // NEW FUNCTION: Load saved data from localStorage
+        // ============================================
+        // STORAGE MANAGEMENT FUNCTIONS
+        // ============================================
+
+        // Load saved data from storage
         function loadSavedData() {
-            const savedData = localStorage.getItem('blastFurnaceSavedData');
+            const savedData = safeStorage.getItem('blastFurnaceSavedData');
             if (savedData) {
-                const parsedData = JSON.parse(savedData);
-                
-                // Load comprehensive materials data
-                if (parsedData.materials) {
-                    Object.keys(parsedData.materials).forEach(material => {
-                        if (appData.materials[material]) {
-                            Object.keys(parsedData.materials[material]).forEach(property => {
-                                appData.materials[material][property] = parsedData.materials[material][property];
-                            });
-                        }
-                    });
-                }
-                
-                // Load comprehensive inputs data
-                if (parsedData.inputs) {
-                    Object.keys(parsedData.inputs).forEach(material => {
-                        if (appData.inputs[material]) {
-                            appData.inputs[material].Weight = parsedData.inputs[material].Weight;
-                        }
-                    });
-                }
-                
-                // Load blast parameters
-                if (parsedData.blastParams) {
-                    Object.keys(parsedData.blastParams).forEach(param => {
-                        appData.blastParams[param] = parsedData.blastParams[param];
-                    });
-                }
-                
-                // Load hearth data
-                if (parsedData.hearthData) {
-                    Object.keys(parsedData.hearthData).forEach(param => {
-                        appData.hearthData[param] = parsedData.hearthData[param];
-                    });
-                }
-                
-                // Load silicon data
-                if (parsedData.siliconData) {
-                    Object.keys(parsedData.siliconData).forEach(param => {
-                        appData.siliconData[param] = parsedData.siliconData[param];
-                    });
-                }
-                
-                // Load shift data
-                if (parsedData.shiftData) {
-                    appData.shiftData = parsedData.shiftData;
-                }
-                
-                // Load stock level calculator data
-                if (parsedData.stockLevelData) {
-                    Object.keys(parsedData.stockLevelData).forEach(param => {
-                        const element = document.getElementById(param);
-                        if (element) {
-                            element.value = parsedData.stockLevelData[param];
-                        }
-                    });
+                try {
+                    const parsedData = JSON.parse(savedData);
+
+                    // Load comprehensive materials data
+                    if (parsedData.materials) {
+                        Object.keys(parsedData.materials).forEach(material => {
+                            if (appData.materials[material]) {
+                                Object.keys(parsedData.materials[material]).forEach(property => {
+                                    appData.materials[material][property] = parsedData.materials[material][property];
+                                });
+                            }
+                        });
+                    }
+
+                    // Load comprehensive inputs data
+                    if (parsedData.inputs) {
+                        Object.keys(parsedData.inputs).forEach(material => {
+                            if (appData.inputs[material]) {
+                                appData.inputs[material].Weight = parsedData.inputs[material].Weight;
+                            }
+                        });
+                    }
+
+                    // Load blast parameters
+                    if (parsedData.blastParams) {
+                        Object.keys(parsedData.blastParams).forEach(param => {
+                            appData.blastParams[param] = parsedData.blastParams[param];
+                        });
+                    }
+
+                    // Load hearth data
+                    if (parsedData.hearthData) {
+                        Object.keys(parsedData.hearthData).forEach(param => {
+                            appData.hearthData[param] = parsedData.hearthData[param];
+                        });
+                    }
+
+                    // Load silicon data
+                    if (parsedData.siliconData) {
+                        Object.keys(parsedData.siliconData).forEach(param => {
+                            appData.siliconData[param] = parsedData.siliconData[param];
+                        });
+                    }
+
+                    // Load shift data
+                    if (parsedData.shiftData) {
+                        appData.shiftData = parsedData.shiftData;
+                    }
+
+                    // Load stock level calculator data
+                    if (parsedData.stockLevelData) {
+                        Object.keys(parsedData.stockLevelData).forEach(param => {
+                            const element = document.getElementById(param);
+                            if (element) {
+                                element.value = parsedData.stockLevelData[param];
+                            }
+                        });
+                    }
+                } catch (e) {
+                    console.error('Error loading saved data:', e);
+                    showNotification('Error loading saved data. Using defaults.', 'warning');
                 }
             }
         }
 
-        // NEW FUNCTION: Save all current data to localStorage
+        // Save all current data to storage
         function saveAllData() {
             const dataToSave = {
                 materials: JSON.parse(JSON.stringify(appData.materials)),
@@ -3771,43 +4022,119 @@
                 shiftData: JSON.parse(JSON.stringify(appData.shiftData)),
                 stockLevelData: {}
             };
-            
+
             // Save stock level calculator inputs
             const stockLevelInputs = document.querySelectorAll('.stock-level-calculator input[type="number"], .stock-level-calculator input[type="range"]');
             stockLevelInputs.forEach(input => {
                 dataToSave.stockLevelData[input.id] = input.value;
             });
-            
-            localStorage.setItem('blastFurnaceSavedData', JSON.stringify(dataToSave));
-            
+
+            safeStorage.setItem('blastFurnaceSavedData', JSON.stringify(dataToSave));
+
             if (appSettings.showNotifications) {
                 showNotification('All data saved successfully!', 'success');
             }
         }
 
-        // NEW FUNCTION: Initialize auto-save functionality
+        // Initialize auto-save functionality
         function initializeAutoSave() {
-            // Save on input changes
-            document.addEventListener('input', function(e) {
-                if (appSettings.autoSaveData && e.target.type !== 'password' && e.target.type !== 'email') {
-                    clearTimeout(window.autoSaveTimeout);
-                    window.autoSaveTimeout = setTimeout(saveAllData, 1000); // Save after 1 second of inactivity
+            let saveTimeout;
+
+            const saveHandler = function(e) {
+                if (appSettings.autoSaveData &&
+                    e.target.type !== 'password' &&
+                    e.target.type !== 'email' &&
+                    !e.target.classList.contains('no-autosave')) {
+
+                    clearTimeout(saveTimeout);
+                    saveTimeout = setTimeout(() => {
+                        saveAllData();
+                        if (appSettings.showNotifications) {
+                            showNotification('Auto-saved successfully', 'info');
+                        }
+                    }, 2000); // Save after 2 seconds of inactivity
+                }
+            };
+
+            // Listen for input changes
+            document.addEventListener('input', saveHandler);
+
+            // Listen for form submissions
+            document.addEventListener('submit', function(e) {
+                if (appSettings.autoSaveData) {
+                    saveAllData();
                 }
             });
-            
-            // Save on form submissions
-            document.addEventListener('submit', function(e) {
+
+            // Auto-save on page unload
+            window.addEventListener('beforeunload', function() {
                 if (appSettings.autoSaveData) {
                     saveAllData();
                 }
             });
         }
 
-        // Load settings from localStorage
+        // ============================================
+        // SERVER STORAGE FUNCTIONS (REST API)
+        // ============================================
+        const SERVER_URL = window.SYNC_SERVER_URL || 'http://localhost:3000';
+
+        async function loadServerData(roomId = 'default') {
+            try {
+                const res = await fetch(`${SERVER_URL}/data/${roomId}`);
+                if (!res.ok) throw new Error('Server error');
+                const json = await res.json();
+                return json.data || {};
+            } catch (e) {
+                console.warn('loadServerData error', e);
+                return null;
+            }
+        }
+
+        async function saveServerData(roomId = 'default', payload = {}) {
+            try {
+                const res = await fetch(`${SERVER_URL}/data/${roomId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error('Server error');
+                const json = await res.json();
+                return json.merged || {};
+            } catch (e) {
+                console.warn('saveServerData error', e);
+                return null;
+            }
+        }
+
+        // ============================================
+        // VALIDATION FUNCTIONS
+        // ============================================
+
+        // Enhanced email validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Enhanced password validation
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+
+        // ============================================
+        // SETTINGS FUNCTIONS
+        // ============================================
+
+        // Load settings from storage
         function loadSettings() {
-            const savedSettings = localStorage.getItem('blastFurnaceSettings');
+            const savedSettings = safeStorage.getItem('blastFurnaceSettings');
             if (savedSettings) {
-                Object.assign(appSettings, JSON.parse(savedSettings));
+                try {
+                    Object.assign(appSettings, JSON.parse(savedSettings));
+                } catch (e) {
+                    console.error('Error loading settings:', e);
+                }
             }
 
             // Apply theme
@@ -3828,7 +4155,7 @@
             });
         }
 
-        // Save settings to localStorage
+        // Save settings to storage
         function saveSettings() {
             // Get current theme
             const activeThemeCard = document.querySelector('.theme-option-card.active');
@@ -3842,8 +4169,8 @@
             appSettings.showNotifications = document.getElementById('showNotifications').checked;
             appSettings.dataRetention = document.getElementById('dataRetention').value;
 
-            // Save to localStorage
-            localStorage.setItem('blastFurnaceSettings', JSON.stringify(appSettings));
+            // Save to storage
+            safeStorage.setItem('blastFurnaceSettings', JSON.stringify(appSettings));
 
             // Apply theme
             setTheme(appSettings.theme);
@@ -3861,32 +4188,65 @@
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             appSettings.theme = theme;
-            localStorage.setItem('blastFurnaceTheme', theme);
+            safeStorage.setItem('blastFurnaceTheme', theme);
         }
 
-        // Show notification
-        function showNotification(message, type = 'info') {
+        // ============================================
+        // NOTIFICATION SYSTEM
+        // ============================================
+
+        // Enhanced notification system
+        function showNotification(message, type = 'info', duration = 3000) {
             if (!appSettings.showNotifications) return;
 
             const notification = document.createElement('div');
-            notification.className = `alert alert-${type}`;
-            notification.style.position = 'fixed';
-            notification.style.top = '20px';
-            notification.style.right = '20px';
-            notification.style.zIndex = '10001';
-            notification.style.minWidth = '300px';
-            notification.textContent = message;
+            notification.className = `alert alert-${type} notification`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 10001;
+                min-width: 300px;
+                max-width: 500px;
+                box-shadow: var(--shadow-lg);
+                border-radius: var(--radius-lg);
+                padding: var(--spacing-md);
+                animation: slideInRight 0.3s ease-out;
+            `;
+
+            const icon = {
+                success: 'fas fa-check-circle',
+                danger: 'fas fa-exclamation-circle',
+                warning: 'fas fa-exclamation-triangle',
+                info: 'fas fa-info-circle'
+            }[type];
+
+            notification.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: var(--spacing-sm);">
+                    <i class="${icon}" style="color: var(--${type}); font-size: 1.2em; margin-top: 2px;"></i>
+                    <div style="flex: 1;">${message}</div>
+                    <button onclick="this.parentElement.parentElement.remove()"
+                             style="background: none; border: none; cursor: pointer; color: var(--gray);">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
 
             document.body.appendChild(notification);
 
             setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transition = 'opacity 0.5s';
+                notification.style.animation = 'slideOutRight 0.3s ease-in';
                 setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 500);
-            }, 3000);
+                    if (notification.parentElement) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, duration);
         }
+
+        // ============================================
+        // SETTINGS MODAL FUNCTIONS
+        // ============================================
 
         // Settings modal functions
         function openSettings() {
@@ -3898,34 +4258,57 @@
             document.getElementById('settingsModal').classList.remove('show');
         }
 
-        // Export all data
-        function exportAllData() {
+        // Enhanced data export with multiple formats
+        function exportAllData(format = 'json') {
             const data = {
                 appData: appData,
                 defaultData: defaultData,
                 settings: appSettings,
-                timestamp: new Date().toISOString()
+                exportDate: new Date().toISOString(),
+                version: '2.0.0'
             };
 
-            const dataStr = JSON.stringify(data, null, 2);
-            const dataBlob = new Blob([dataStr], {
-                type: 'application/json'
-            });
+            let dataStr, mimeType, fileExtension;
 
+            if (format === 'json') {
+                dataStr = JSON.stringify(data, null, 2);
+                mimeType = 'application/json';
+                fileExtension = 'json';
+            } else if (format === 'csv') {
+                // Convert shift data to CSV
+                dataStr = convertShiftDataToCSV();
+                mimeType = 'text/csv';
+                fileExtension = 'csv';
+            }
+
+            const dataBlob = new Blob([dataStr], { type: mimeType });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(dataBlob);
-            link.download = `blast_furnace_complete_data_${new Date().toISOString().split('T')[0]}.json`;
+            link.download = `blast_furnace_data_${new Date().toISOString().split('T')[0]}.${fileExtension}`;
             link.click();
 
-            showNotification('All data exported successfully!', 'success');
+            showNotification(`Data exported as ${format.toUpperCase()} successfully!`, 'success');
+        }
+
+        // CSV conversion for shift data
+        function convertShiftDataToCSV() {
+            const headers = ['Hour', 'Shift', 'Coke', 'Sinter', 'Iron Ore', 'Pellets', 'Scraps', 'Nut Coke', 'PCI', 'CB Vol', 'O2 Vol', 'Hot Metal', 'Coke Rate', 'NC Rate', 'PCI Rate', 'Fuel Rate', 'SPO2 Rate'];
+            let csv = headers.join(',') + '\n';
+
+            Object.keys(appData.shiftData).forEach(key => {
+                const row = appData.shiftData[key];
+                csv += row.join(',') + '\n';
+            });
+
+            return csv;
         }
 
         // Clear all data
         function clearAllData() {
             if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
-                localStorage.removeItem('blastFurnaceDefaultData');
-                localStorage.removeItem('blastFurnaceShiftData');
-                localStorage.removeItem('blastFurnaceSavedData'); // Clear saved data too
+                safeStorage.removeItem('blastFurnaceDefaultData');
+                safeStorage.removeItem('blastFurnaceShiftData');
+                safeStorage.removeItem('blastFurnaceSavedData'); // Clear saved data too
 
                 // Reset to initial defaults
                 defaultData = JSON.parse(JSON.stringify(initialDefaultData));
@@ -3955,32 +4338,44 @@
             alert('Help documentation would open here. This would typically link to a user guide or documentation page.');
         }
 
-        // Authentication functions
+        // ============================================
+        // AUTHENTICATION FUNCTIONS
+        // ============================================
+
+        // Check authentication status
         function checkAuth() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const currentUser = safeStorage.getItem('currentUser');
             if (currentUser) {
-                document.getElementById('authContainer').classList.add('hidden');
-                document.getElementById('appContainer').classList.remove('hidden');
+                try {
+                    const user = JSON.parse(currentUser);
+                    document.getElementById('authContainer').classList.add('hidden');
+                    document.getElementById('appContainer').classList.remove('hidden');
 
-                // Update user info in header
-                updateUserHeader(currentUser);
+                    // Update user info in header
+                    updateUserHeader(user);
 
-                loadDefaultData();
-                loadSavedData(); // Load saved user data
-                initializeComprehensiveView();
-                initializeShiftProductionView();
-                initializeCharts();
-                initializeSiliconCalculation();
-                initializeStockLevelCalculator();
-                initializeUserDropdown();
-                initializeSettings();
-                initializeAutoSave(); // Initialize auto-save
+                    loadDefaultData();
+                    loadSavedData(); // Load saved user data
+                    initializeComprehensiveView();
+                    initializeShiftProductionView();
+                    initializeCharts();
+                    initializeSiliconCalculation();
+                    initializeStockLevelCalculator();
+                    initializeUserDropdown();
+                    initializeSettings();
+                    initializeAutoSave(); // Initialize auto-save
+                } catch (e) {
+                    console.error('Error parsing user data:', e);
+                    safeStorage.removeItem('currentUser');
+                    checkAuth(); // Retry with no user
+                }
             } else {
                 document.getElementById('authContainer').classList.remove('hidden');
                 document.getElementById('appContainer').classList.add('hidden');
             }
         }
 
+        // Update user header information
         function updateUserHeader(user) {
             const userAvatar = document.getElementById('userAvatar');
             const userName = document.getElementById('userName');
@@ -3995,10 +4390,11 @@
             if (userRole) userRole.textContent = user.role || 'Operator';
         }
 
+        // Logout function
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
                 saveAllData(); // Save data before logging out
-                localStorage.removeItem('currentUser');
+                safeStorage.removeItem('currentUser');
                 document.getElementById('authContainer').classList.remove('hidden');
                 document.getElementById('appContainer').classList.add('hidden');
                 document.getElementById('loginForm').reset();
@@ -4009,6 +4405,7 @@
             }
         }
 
+        // Show alert messages
         function showAlert(alertId, message, type) {
             const alertElement = document.getElementById(alertId);
             alertElement.textContent = message;
@@ -4019,12 +4416,14 @@
             }, 3000);
         }
 
+        // Hide all alerts
         function hideAlerts() {
             document.getElementById('loginAlert').style.display = 'none';
             document.getElementById('registerAlert').style.display = 'none';
             document.getElementById('forgotPasswordAlert').style.display = 'none';
         }
 
+        // Show specific authentication card
         function showAuthCard(cardId) {
             document.getElementById('loginCard').classList.add('hidden');
             document.getElementById('registerCard').classList.add('hidden');
@@ -4032,6 +4431,126 @@
             document.getElementById(cardId).classList.remove('hidden');
             hideAlerts();
         }
+
+        // ============================================
+        // AUTHENTICATION EVENT HANDLERS
+        // ============================================
+
+        // Enhanced authentication with better validation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!validateEmail(email)) {
+                showAlert('loginAlert', 'Please enter a valid email address', 'danger');
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                showAlert('loginAlert', 'Password must be at least 6 characters long', 'danger');
+                return;
+            }
+
+            const users = JSON.parse(safeStorage.getItem('blastFurnaceUsers') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                const currentUser = {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    role: user.role || 'Operator'
+                };
+                safeStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                showAlert('loginAlert', 'Login successful! Redirecting...', 'success');
+                setTimeout(() => checkAuth(), 1000);
+            } else {
+                showAlert('loginAlert', 'Invalid email or password', 'danger');
+            }
+        });
+
+        // Enhanced registration with better validation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validation
+            if (name.length < 2) {
+                showAlert('registerAlert', 'Name must be at least 2 characters long', 'danger');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showAlert('registerAlert', 'Please enter a valid email address', 'danger');
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                showAlert('registerAlert', 'Password must be at least 6 characters long', 'danger');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showAlert('registerAlert', 'Passwords do not match', 'danger');
+                return;
+            }
+
+            const users = JSON.parse(safeStorage.getItem('blastFurnaceUsers') || '[]');
+
+            if (users.find(u => u.email === email)) {
+                showAlert('registerAlert', 'User with this email already exists', 'danger');
+                return;
+            }
+
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                password,
+                role: 'Operator',
+                createdAt: new Date().toISOString(),
+                lastLogin: null
+            };
+
+            users.push(newUser);
+            safeStorage.setItem('blastFurnaceUsers', JSON.stringify(users));
+
+            showAlert('registerAlert', 'Registration successful! Please login.', 'success');
+            document.getElementById('registerForm').reset();
+            setTimeout(() => showAuthCard('loginCard'), 2000);
+        });
+
+        // Forgot password form handler
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+            if (newPassword !== confirmNewPassword) {
+                showAlert('forgotPasswordAlert', 'Passwords do not match', 'danger');
+                return;
+            }
+
+            const users = JSON.parse(safeStorage.getItem('blastFurnaceUsers') || '[]');
+            const userIndex = users.findIndex(u => u.email === email);
+
+            if (userIndex === -1) {
+                showAlert('forgotPasswordAlert', 'No account found with this email address', 'danger');
+                return;
+            }
+
+            users[userIndex].password = newPassword;
+            safeStorage.setItem('blastFurnaceUsers', JSON.stringify(users));
+            showAlert('forgotPasswordAlert', 'Password reset successful! Please login with your new password.', 'success');
+            document.getElementById('forgotPasswordForm').reset();
+            setTimeout(() => showAuthCard('loginCard'), 2000);
+        });
 
         // Auth event listeners
         document.getElementById('showRegister').addEventListener('click', (e) => {
@@ -4054,91 +4573,9 @@
             showAuthCard('loginCard');
         });
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            const users = JSON.parse(localStorage.getItem('blastFurnaceUsers')) || [];
-            const user = users.find(u => u.email === email && u.password === password);
-
-            if (user) {
-                const currentUser = {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role || 'Operator'
-                };
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-                loadDefaultData();
-                showAlert('loginAlert', 'Login successful! Redirecting...', 'success');
-                setTimeout(() => checkAuth(), 1000);
-            } else {
-                showAlert('loginAlert', 'Invalid email or password', 'danger');
-            }
-        });
-
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (password !== confirmPassword) {
-                showAlert('registerAlert', 'Passwords do not match', 'danger');
-                return;
-            }
-
-            const users = JSON.parse(localStorage.getItem('blastFurnaceUsers')) || [];
-
-            if (users.find(u => u.email === email)) {
-                showAlert('registerAlert', 'User with this email already exists', 'danger');
-                return;
-            }
-
-            const newUser = {
-                id: Date.now(),
-                name,
-                email,
-                password,
-                role: 'Operator',
-                createdAt: new Date().toISOString()
-            };
-
-            users.push(newUser);
-            localStorage.setItem('blastFurnaceUsers', JSON.stringify(users));
-            showAlert('registerAlert', 'Registration successful! Please login.', 'success');
-            document.getElementById('registerForm').reset();
-            setTimeout(() => showAuthCard('loginCard'), 2000);
-        });
-
-        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('forgotEmail').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
-
-            if (newPassword !== confirmNewPassword) {
-                showAlert('forgotPasswordAlert', 'Passwords do not match', 'danger');
-                return;
-            }
-
-            const users = JSON.parse(localStorage.getItem('blastFurnaceUsers')) || [];
-            const userIndex = users.findIndex(u => u.email === email);
-
-            if (userIndex === -1) {
-                showAlert('forgotPasswordAlert', 'No account found with this email address', 'danger');
-                return;
-            }
-
-            users[userIndex].password = newPassword;
-            localStorage.setItem('blastFurnaceUsers', JSON.stringify(users));
-            showAlert('forgotPasswordAlert', 'Password reset successful! Please login with your new password.', 'success');
-            document.getElementById('forgotPasswordForm').reset();
-            setTimeout(() => showAuthCard('loginCard'), 2000);
-        });
+        // ============================================
+        // USER DROPDOWN FUNCTIONS
+        // ============================================
 
         // Initialize user dropdown
         function initializeUserDropdown() {
@@ -4185,6 +4622,10 @@
             });
         }
 
+        // ============================================
+        // SETTINGS INITIALIZATION
+        // ============================================
+
         // Initialize settings
         function initializeSettings() {
             const settingsButton = document.getElementById('settingsButton');
@@ -4207,6 +4648,10 @@
             // Load settings
             loadSettings();
         }
+
+        // ============================================
+        // VIEW SWITCHER FUNCTIONS
+        // ============================================
 
         // Initialize view switcher
         function initViewSwitcher() {
@@ -4246,11 +4691,47 @@
             });
         }
 
+        // ============================================
+        // COMPREHENSIVE VIEW FUNCTIONS
+        // ============================================
+
         // Initialize comprehensive view
         function initializeComprehensiveView() {
             initializeComprehensiveMaterials();
             initializeComprehensiveInputs();
             calculateAllComprehensive();
+        }
+
+        // Enhanced data validation for comprehensive calculations
+        function validateMaterialData(material, property, value) {
+            const numValue = parseFloat(value);
+
+            if (isNaN(numValue)) {
+                showNotification(`Invalid value for ${material} ${property}`, 'danger');
+                return false;
+            }
+
+            // Property-specific validation
+            const validations = {
+                'C': { min: 0, max: 100 },
+                'Moisture': { min: 0, max: 100 },
+                'FE': { min: 0, max: 100 },
+                'SiO2': { min: 0, max: 100 },
+                'CAO': { min: 0, max: 100 },
+                'MGO': { min: 0, max: 100 },
+                'AL203': { min: 0, max: 100 },
+                'Density': { min: 100, max: 3000 }
+            };
+
+            if (validations[property]) {
+                const { min, max } = validations[property];
+                if (numValue < min || numValue > max) {
+                    showNotification(`${material} ${property} must be between ${min} and ${max}`, 'warning');
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         // Initialize comprehensive materials table
@@ -4287,10 +4768,18 @@
             });
         }
 
-        // Update comprehensive material property
+        // Update comprehensive material property with validation
         function updateComprehensiveMaterialProperty(material, property, value) {
+            if (!validateMaterialData(material, property, value)) {
+                // Reset to previous value
+                const input = document.querySelector(`#comp-materials-table input[value="${appData.materials[material][property]}"]`);
+                if (input) input.value = appData.materials[material][property];
+                return;
+            }
+
             appData.materials[material][property] = value;
             calculateAllComprehensive();
+            updateCharts();
         }
 
         // Initialize comprehensive inputs table
@@ -4335,14 +4824,40 @@
         function updateComprehensiveInputWeight(material, value) {
             appData.inputs[material].Weight = value;
             calculateAllComprehensive();
+            updateCharts();
         }
 
-        // Calculate all comprehensive data
+        // Calculate all comprehensive data with error handling
         function calculateAllComprehensive() {
-            calculateComprehensiveInputs();
-            calculateComprehensiveResults();
-            calculateComprehensiveBlastParameters();
-            calculateComprehensiveHearth();
+            safeCalculate(() => {
+                calculateComprehensiveInputs();
+                calculateComprehensiveResults();
+                calculateComprehensiveBlastParameters();
+                calculateComprehensiveHearth();
+                calculateSilicon(); // Calculate silicon based on comprehensive data
+            });
+            updateCharts();
+        }
+
+        // Safe calculation with error handling
+        function safeCalculate(fn, fallbackValue = 0) {
+            try {
+                return fn();
+            } catch (error) {
+                console.error('Calculation error:', error);
+                showNotification('Calculation error occurred. Using default value.', 'warning');
+                return fallbackValue;
+            }
+        }
+
+        // Better number parsing with fallbacks
+        function safeParseFloat(value, fallback = 0) {
+            if (value === null || value === undefined || value === '') {
+                return fallback;
+            }
+
+            const parsed = parseFloat(value);
+            return isNaN(parsed) ? fallback : parsed;
         }
 
         // Calculate comprehensive inputs
@@ -4491,6 +5006,7 @@
             updateComprehensiveResult("Total-Weight", totals.weight.toFixed(1));
             updateComprehensiveResult("Total-Fe-Input", totals.fe.toFixed(1));
             updateComprehensiveResult("Total-C-Input", totals.c.toFixed(1));
+            updateComprehensiveResult("Total-SIO2-Input", totals.sio2.toFixed(1)); // Added for silicon calculation
             updateComprehensiveResult("Slag-Weight", slagWeight.toFixed(1));
             updateComprehensiveResult("Slag-Basicity", slagBasicity.toFixed(2));
             updateComprehensiveResult("Alumina-Ratio", aluminaRatio.toFixed(2));
@@ -4623,6 +5139,10 @@
             }
         }
 
+        // ============================================
+        // SILICON CALCULATION FUNCTIONS
+        // ============================================
+
         // Initialize Silicon Calculation
         function initializeSiliconCalculation() {
             // Set initial values from app data
@@ -4639,9 +5159,9 @@
             calculateSilicon();
         }
 
-        // Calculate Silicon Percentage in Hot Metal
+        // Calculate Silicon Percentage in Hot Metal using comprehensive data
         function calculateSilicon() {
-            // Get input values
+            // Get slag composition inputs
             const slagSiO2 = parseFloat(document.getElementById('slag-sio2').value) || 0;
             const slagCaO = parseFloat(document.getElementById('slag-cao').value) || 0;
             const slagMgO = parseFloat(document.getElementById('slag-mgo').value) || 0;
@@ -4665,19 +5185,79 @@
             const basicity = (slagCaO + slagMgO) / Math.max(slagSiO2, 0.01);
             document.getElementById('slag-basicity').innerHTML = basicity.toFixed(2) + '<span class="param-unit"></span>';
 
-            // Calculate temperature factor
-            const tempFactor = (slagTemp - 1400) / 100;
+            // Get comprehensive data for silicon calculation
+            const hotMetalProduction = safeParseFloat(document.getElementById('comp-Hot-Metal-2')?.textContent || 0);
+            const totalSiO2Input = safeParseFloat(document.getElementById('comp-Total-SIO2-Input')?.textContent || 0);
+            const slagWeight = safeParseFloat(document.getElementById('comp-Slag-Weight')?.textContent || 0);
+            const cokeRate = safeParseFloat(document.getElementById('comp-Coke-Rate-2')?.textContent || 0);
 
-            // Calculate silicon percentage using the formula:
-            // Si% = K × (SiO₂ in slag) / (Basicity) × f(T)
-            const siliconPercentage = kFactor * (slagSiO2 / basicity) * tempFactor;
+            // Calculate silicon based on comprehensive data
+            let siliconPercentage = 0;
+
+            if (hotMetalProduction > 0 && totalSiO2Input > 0) {
+                // Formula 1: Based on SiO2 distribution in slag vs hot metal
+                const slagSiO2Mass = slagWeight * (slagSiO2 / 100);
+                const siFromSlag = (slagSiO2Mass * 0.467) / Math.max(hotMetalProduction, 1);
+
+                // Formula 2: Empirical relationship with basicity
+                const siFromBasicity = 1.8 * Math.exp(-0.5 * basicity) * (hmTemp / 1500);
+
+                // Formula 3: Based on coke rate (empirical correlation)
+                const siFromCokeRate = 0.0005 * cokeRate;
+
+                // Formula 4: Based on temperature difference
+                const tempDiff = hmTemp - 1450;
+                const siFromTemp = 0.5 + (tempDiff * 0.001);
+
+                // Weighted average of different methods
+                siliconPercentage = (
+                    siFromSlag * 0.3 +      // 30% weight to slag method
+                    siFromBasicity * 0.3 +  // 30% weight to basicity method
+                    siFromCokeRate * 0.25 + // 25% weight to coke rate method
+                    siFromTemp * 0.15       // 15% weight to temperature method
+                );
+
+                // Apply k-factor adjustment
+                siliconPercentage *= kFactor;
+
+                // Apply Al2O3 correction
+                if (slagAl2O3 > 20) {
+                    siliconPercentage *= 1.05; // Higher Al2O3 increases silicon
+                }
+
+                // Apply MgO correction
+                if (slagMgO > 10) {
+                    siliconPercentage *= 1.03; // Higher MgO slightly increases silicon
+                }
+
+                // Apply temperature correction
+                if (hmTemp > 1550) {
+                    siliconPercentage *= 1.15;
+                } else if (hmTemp < 1450) {
+                    siliconPercentage *= 0.85;
+                }
+
+                // Apply basicity correction
+                if (basicity > 1.2) {
+                    siliconPercentage *= 0.9; // Higher basicity reduces silicon
+                } else if (basicity < 1.0) {
+                    siliconPercentage *= 1.1; // Lower basicity increases silicon
+                }
+            }
+
+            // Ensure silicon is within reasonable limits (0.2% - 2.0%)
+            siliconPercentage = Math.max(0.2, Math.min(2.0, siliconPercentage));
 
             // Display result
             document.getElementById('silicon-result').textContent = siliconPercentage.toFixed(2);
 
             // Update blast params with silicon percentage
-            appData.blastParams["Silicon%"] = siliconPercentage;
+            appData.blastParams["Silicon%"] = siliconPercentage.toFixed(2);
         }
+
+        // ============================================
+        // SHIFT PRODUCTION VIEW FUNCTIONS
+        // ============================================
 
         // Initialize Shift Production View
         function initializeShiftProductionView() {
@@ -4864,6 +5444,7 @@
             Object.keys(appData.shiftData).forEach(key => {
                 calculateShiftRow(key);
             });
+            updateCharts();
         }
 
         // Calculate hot metal production
@@ -4957,7 +5538,7 @@
                         name: "C",
                         hours: ["23:00", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00"]
                     }
-            ];
+                ];
 
                 shifts.forEach(shift => {
                     shift.hours.forEach(hour => {
@@ -5041,11 +5622,19 @@
             }
         }
 
+        // ============================================
+        // DATA MANAGEMENT FUNCTIONS
+        // ============================================
+
         // Load default data
         function loadDefaultData() {
-            const savedDefault = localStorage.getItem('blastFurnaceDefaultData');
+            const savedDefault = safeStorage.getItem('blastFurnaceDefaultData');
             if (savedDefault) {
-                defaultData = JSON.parse(savedDefault);
+                try {
+                    defaultData = JSON.parse(savedDefault);
+                } catch (e) {
+                    defaultData = JSON.parse(JSON.stringify(initialDefaultData));
+                }
             } else {
                 defaultData = JSON.parse(JSON.stringify(initialDefaultData));
             }
@@ -5062,11 +5651,11 @@
             };
 
             defaultData = newDefaults;
-            localStorage.setItem('blastFurnaceDefaultData', JSON.stringify(newDefaults));
+            safeStorage.setItem('blastFurnaceDefaultData', JSON.stringify(newDefaults));
             alert('Default values saved successfully!');
         }
 
-        // MODIFIED: Reset to default - now also clears saved data
+        // Reset to default - now also clears saved data
         function resetToDefault() {
             if (confirm('Are you sure you want to reset all values to default? This will clear all saved data.')) {
                 appData.materials = JSON.parse(JSON.stringify(defaultData.materials));
@@ -5074,9 +5663,9 @@
                 appData.blastParams = JSON.parse(JSON.stringify(defaultData.blastParams));
                 appData.hearthData = JSON.parse(JSON.stringify(defaultData.hearthData));
                 appData.siliconData = JSON.parse(JSON.stringify(defaultData.siliconData));
-                
+
                 // Clear saved data
-                localStorage.removeItem('blastFurnaceSavedData');
+                safeStorage.removeItem('blastFurnaceSavedData');
 
                 initializeComprehensiveMaterials();
                 initializeComprehensiveInputs();
@@ -5112,11 +5701,9 @@
             alert('Data exported successfully!');
         }
 
-        // Safe parse float
-        function safeParseFloat(value) {
-            const parsed = parseFloat(value);
-            return isNaN(parsed) ? 0 : parsed;
-        }
+        // ============================================
+        // CHART FUNCTIONS
+        // ============================================
 
         // Initialize Charts
         function initializeCharts() {
@@ -5428,6 +6015,10 @@
             ];
             efficiencyChart.update();
         }
+
+        // ============================================
+        // STOCK LEVEL CALCULATOR FUNCTIONS
+        // ============================================
 
         // Initialize Stock Level Calculator
         function initializeStockLevelCalculator() {
@@ -6007,234 +6598,50 @@
             calculateAllStockLevel();
         }
 
+        // ============================================
+        // APPLICATION INITIALIZATION
+        // ============================================
+
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-                checkAuth();
-                initViewSwitcher();
+            checkAuth();
+            initViewSwitcher();
+            // Robust chart initialization after DOM is ready
+            setTimeout(() => {
+                initializeCharts();
+                updateCharts();
+            }, 100);
         });
+
+            // GLOBAL INPUT EVENT LISTENER FOR DYNAMIC UPDATES
+            document.addEventListener('input', function(e) {
+                // Only handle input elements
+                if (e.target && e.target.tagName === 'INPUT') {
+                    // Comprehensive view
+                    if (document.getElementById('comprehensive-view')?.style.display !== 'none') {
+                        calculateAllComprehensive();
+                    }
+                    // Shift view
+                    if (document.getElementById('shift-view')?.style.display !== 'none') {
+                        calculateAllShiftRows();
+                    }
+                    // Stock level calculator view
+                    if (document.getElementById('stock-view')?.style.display !== 'none') {
+                        calculateAllStockLevel();
+                    }
+                    // Always update charts after any input change
+                    updateCharts();
+                }
+            });
+
+        // Re-initialize charts after view switch (if chart containers are re-rendered)
+        function robustChartInit() {
+            setTimeout(() => {
+                initializeCharts();
+                updateCharts();
+            }, 100);
+        }
+
     </script>
-        <script>
-            (function() {
-                // Persist last-changed values across page loads using localStorage and optionally sync to a server.
-                const STORAGE_KEY = 'blastfurnace_last_values_v1';
-                const SYNC_SERVER = window.SYNC_SERVER_URL || 'http://localhost:3000';
-                const ROOM_ID = window.SYNC_ROOM_ID || localStorage.getItem('blastfurnace_sync_room') || 'blastfurnace_default_room';
-
-                let socket = null;
-                let socketConnected = false;
-
-                function getElementKey(el) {
-                    if (el.name) return `name:${el.name}`;
-                    if (el.id) return `id:${el.id}`;
-                    return null;
-                }
-
-                function readStore() {
-                    try {
-                        const raw = localStorage.getItem(STORAGE_KEY);
-                        return raw ? JSON.parse(raw) : {};
-                    } catch (e) {
-                        return {};
-                    }
-                }
-
-                function writeStore(store) {
-                    try {
-                        localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
-                    } catch (e) {
-                        console.warn('Could not write store', e);
-                    }
-                }
-
-                function saveEntry(key, entry, options = {}) {
-                    // entry should be {type, value, ts}
-                    try {
-                        const store = readStore();
-                        const existing = store[key];
-                        if (!existing || (entry.ts || 0) >= (existing.ts || 0)) {
-                            store[key] = entry;
-                            writeStore(store);
-                        }
-
-                        // send to server (unless suppressed)
-                        if (!options.suppressRemote) {
-                            sendToServer(key, entry);
-                        }
-                    } catch (e) {
-                        console.warn('Could not save entry', e);
-                    }
-                }
-
-                function saveValue(el, options = {}) {
-                    const key = getElementKey(el);
-                    if (!key) return;
-                    const ts = Date.now();
-
-                    if (el.type === 'checkbox') {
-                        saveEntry(key, {type: 'checkbox', value: !!el.checked, ts}, options);
-                    } else if (el.type === 'radio') {
-                        if (el.checked) saveEntry(key, {type: 'radio', value: el.value, ts}, options);
-                    } else {
-                        saveEntry(key, {type: 'value', value: el.value, ts}, options);
-                    }
-                }
-
-                function applyEntryToElement(key, entry, options = {}) {
-                    try {
-                        // find matching element by name or id
-                        let selector = '';
-                        if (key.startsWith('name:')) selector = `[name="${key.slice(5)}"]`;
-                        else if (key.startsWith('id:')) selector = `#${key.slice(3)}`;
-                        if (!selector) return;
-
-                        const els = document.querySelectorAll(selector);
-                        if (!els || els.length === 0) return;
-
-                        els.forEach(el => {
-                            if (entry.type === 'checkbox') {
-                                if (el.type === 'checkbox') el.checked = !!entry.value;
-                            } else if (entry.type === 'radio') {
-                                if (el.type === 'radio') el.checked = (el.value === entry.value);
-                            } else if (entry.type === 'value') {
-                                if (el.tagName === 'SELECT') el.value = entry.value;
-                                else el.value = entry.value;
-                            }
-                        });
-
-                        // Save locally but do not re-broadcast if this came from remote
-                        saveEntry(key, entry, {suppressRemote: !!options.suppressRemote});
-                    } catch (e) {
-                        console.warn('applyEntryToElement error', e);
-                    }
-                }
-
-                function restoreValues() {
-                    const store = readStore();
-                    const selector = 'input[name], input[id], textarea[name], textarea[id], select[name], select[id]';
-                    document.querySelectorAll(selector).forEach(el => {
-                        const key = getElementKey(el);
-                        if (!key) return;
-                        const entry = store[key];
-                        if (!entry) return;
-                        applyEntryToElement(key, entry, {suppressRemote: true});
-                    });
-                }
-
-                function bindSaveHandlers() {
-                    const selector = 'input[name], input[id], textarea[name], textarea[id], select[name], select[id]';
-                    document.querySelectorAll(selector).forEach(el => {
-                        const ev1 = (el.type === 'text' || el.tagName === 'TEXTAREA' || el.type === 'search' || el.type === 'email' || el.type === 'number' || el.type === 'range' || el.type === 'tel' || el.type === 'url' || el.type === 'password') ? 'input' : 'change';
-                        el.addEventListener(ev1, () => saveValue(el), {passive: true});
-                        if (el.type === 'radio') el.addEventListener('change', () => saveValue(el), {passive: true});
-                    });
-                }
-
-                // --- Server sync ---
-                function ensureSocketIoClient(cb) {
-                    if (window.io) return cb();
-                    const s = document.createElement('script');
-                    s.src = 'https://cdn.socket.io/4.7.2/socket.io.min.js';
-                    s.onload = cb;
-                    s.onerror = () => cb(new Error('Could not load socket.io client'));
-                    document.head.appendChild(s);
-                }
-
-                function connectSocket() {
-                    try {
-                        ensureSocketIoClient((err) => {
-                            if (err) return console.warn(err);
-                            try {
-                                socket = io(SYNC_SERVER, {transports: ['websocket', 'polling']});
-                                socket.on('connect', () => {
-                                    socketConnected = true;
-                                    socket.emit('join', ROOM_ID);
-                                });
-
-                                socket.on('init', (payload) => {
-                                    // payload is key->entry map
-                                    const local = readStore();
-                                    Object.keys(payload || {}).forEach(key => {
-                                        const incoming = payload[key];
-                                        const existing = local[key];
-                                        if (!existing || (incoming.ts || 0) > (existing.ts || 0)) {
-                                            applyEntryToElement(key, incoming, {suppressRemote: true});
-                                        }
-                                    });
-                                });
-
-                                socket.on('remote-update', (payload) => {
-                                    const local = readStore();
-                                    Object.keys(payload || {}).forEach(key => {
-                                        const incoming = payload[key];
-                                        const existing = local[key];
-                                        if (!existing || (incoming.ts || 0) > (existing.ts || 0)) {
-                                            applyEntryToElement(key, incoming, {suppressRemote: true});
-                                        }
-                                    });
-                                });
-                            } catch (e) {
-                                console.warn('socket connect error', e);
-                            }
-                        });
-                    } catch (e) {
-                        console.warn('connectSocket error', e);
-                    }
-                }
-
-                function sendToServerREST(payload) {
-                    try {
-                        fetch(`${SYNC_SERVER}/data/${encodeURIComponent(ROOM_ID)}`, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        }).catch(e => console.warn('REST sync failed', e));
-                    } catch (e) {
-                        console.warn('REST send error', e);
-                    }
-                }
-
-                function sendToServer(key, entry) {
-                    const payload = {};
-                    payload[key] = entry;
-                    if (socketConnected && socket) {
-                        try {
-                            socket.emit('update', {roomId: ROOM_ID, payload});
-                        } catch (e) {
-                            // fallback
-                            sendToServerREST(payload);
-                        }
-                    } else {
-                        // try REST
-                        sendToServerREST(payload);
-                    }
-                }
-
-                // public helper
-                window.clearSavedFormValues = function() {
-                    try {
-                        localStorage.removeItem(STORAGE_KEY);
-                        console.info('Saved form values cleared.');
-                        // optionally notify server to clear (not implemented by default)
-                    } catch (e) {
-                        console.warn('Could not clear saved values', e);
-                    }
-                };
-
-                // Initialize
-                document.addEventListener('DOMContentLoaded', function() {
-                    restoreValues();
-                    bindSaveHandlers();
-                    // save before unload
-                    window.addEventListener('beforeunload', function() {
-                        const selector = 'input[name], input[id], textarea[name], textarea[id], select[name], select[id]';
-                        document.querySelectorAll(selector).forEach(el => saveValue(el));
-                    });
-
-                    // attempt to connect to sync server (non-blocking)
-                    connectSocket();
-                });
-            })();
-        </script>
 </body>
-
 </html>
